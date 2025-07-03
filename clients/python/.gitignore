@@ -1,0 +1,9 @@
+.mypy_cache/
+/.coverage*
+/dist/
+/docs/_build/
+/.nox/
+/.python-version
+__pycache__/
+venv/
+.port-forwards.pid
