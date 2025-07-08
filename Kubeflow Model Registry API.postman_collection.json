@@ -1,0 +1,1340 @@
+{
+	"info": {
+		"_postman_id": "7f610bdf-db53-4458-8785-bf61ff0a0cce",
+		"name": "Kubeflow Model Registry API v1alpha3",
+		"description": "Complete Postman collection for Kubeflow Model Registry v0.2.19 API endpoints including both model-registry and catalog functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2993107"
+	},
+	"item": [
+		{
+			"name": "Registered Models",
+			"item": [
+				{
+					"name": "List All Registered Models",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models?pageSize=100&orderBy=ID&sortOrder=DESC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100",
+									"description": "Number of items per page"
+								},
+								{
+									"key": "orderBy",
+									"value": "ID",
+									"description": "Field to order by"
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC",
+									"description": "Sort order (ASC or DESC)"
+								},
+								{
+									"key": "nextPageToken",
+									"value": "",
+									"description": "Token for pagination",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a list of all registered models with pagination support"
+					},
+					"response": [
+						{
+							"name": "List All Registered Models",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models?pageSize=100&orderBy=ID&sortOrder=DESC",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"model_registry",
+										"v1alpha3",
+										"registered_models"
+									],
+									"query": [
+										{
+											"key": "pageSize",
+											"value": "100",
+											"description": "Number of items per page"
+										},
+										{
+											"key": "orderBy",
+											"value": "ID",
+											"description": "Field to order by"
+										},
+										{
+											"key": "sortOrder",
+											"value": "DESC",
+											"description": "Sort order (ASC or DESC)"
+										},
+										{
+											"key": "nextPageToken",
+											"value": "",
+											"description": "Token for pagination",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jul 2025 11:42:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "463"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": [\n        {\n            \"createTimeSinceEpoch\": \"1751271854963\",\n            \"customProperties\": {},\n            \"description\": \"A sample machine learning model\",\n            \"id\": \"2\",\n            \"lastUpdateTimeSinceEpoch\": \"1751271854963\",\n            \"name\": \"my-model-2\",\n            \"owner\": \"adi\",\n            \"state\": \"LIVE\"\n        },\n        {\n            \"createTimeSinceEpoch\": \"1751271796169\",\n            \"customProperties\": {},\n            \"description\": \"A sample machine learning model\",\n            \"id\": \"1\",\n            \"lastUpdateTimeSinceEpoch\": \"1751271796169\",\n            \"name\": \"my-model\",\n            \"state\": \"LIVE\"\n        }\n    ],\n    \"nextPageToken\": \"\",\n    \"pageSize\": 100,\n    \"size\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Registered Model by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1"
+							]
+						},
+						"description": "Get a specific registered model by its ID"
+					},
+					"response": [
+						{
+							"name": "Get Registered Model by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"model_registry",
+										"v1alpha3",
+										"registered_models",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Jul 2025 11:42:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "196"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createTimeSinceEpoch\": \"1751271796169\",\n    \"customProperties\": {},\n    \"description\": \"A sample machine learning model\",\n    \"id\": \"1\",\n    \"lastUpdateTimeSinceEpoch\": \"1751271796169\",\n    \"name\": \"my-model\",\n    \"state\": \"LIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Registered Model",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"my-model\",\n  \"description\": \"A sample machine learning model\",\n  \"customProperties\": {\n    \"author\": {\n      \"string_value\": \"data-scientist\"\n    },\n    \"framework\": {\n      \"string_value\": \"tensorflow\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models"
+							]
+						},
+						"description": "Create a new registered model"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Registered Model",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"my-updated-model\",\n  \"description\": \"Updated description for the model\",\n  \"customProperties\": {\n    \"author\": {\n      \"string_value\": \"updated-author\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1"
+							]
+						},
+						"description": "Update an existing registered model"
+					},
+					"response": []
+				},
+				{
+					"name": "Archive Registered Model",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"state\": \"ARCHIVED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1"
+							]
+						},
+						"description": "Archive a registered model by setting its state to ARCHIVED"
+					},
+					"response": []
+				}
+			],
+			"description": "Operations for managing registered models"
+		},
+		{
+			"name": "Model Versions",
+			"item": [
+				{
+					"name": "List Model Versions for Registered Model",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1/versions?pageSize=100&orderBy=ID&sortOrder=DESC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "orderBy",
+									"value": "ID"
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC"
+								},
+								{
+									"key": "nextPageToken",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get all versions for a specific registered model"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model Version by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1"
+							]
+						},
+						"description": "Get a specific model version by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Model Version",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"v1.0.0\",\n  \"description\": \"First production version\",\n  \"author\": \"data-scientist\",\n  \"registeredModelId\": \"1\",\n  \"customProperties\": {\n    \"accuracy\": {\n      \"double_value\": 0.95\n    },\n    \"training_dataset\": {\n      \"string_value\": \"training-data-v1\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1/versions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1",
+								"versions"
+							]
+						},
+						"description": "Create a new version for a registered model"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Model Version",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Updated model version description\",\n  \"customProperties\": {\n    \"accuracy\": {\n      \"double_value\": 0.97\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1"
+							]
+						},
+						"description": "Update an existing model version"
+					},
+					"response": []
+				},
+				{
+					"name": "Archive Model Version",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"state\": \"ARCHIVED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1"
+							]
+						},
+						"description": "Archive a model version"
+					},
+					"response": []
+				}
+			],
+			"description": "Operations for managing model versions"
+		},
+		{
+			"name": "Model Artifacts",
+			"item": [
+				{
+					"name": "List All Artifacts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/artifacts?pageSize=100&orderBy=ID&sortOrder=DESC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"artifacts"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "orderBy",
+									"value": "ID"
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC"
+								},
+								{
+									"key": "nextPageToken",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a list of all artifacts"
+					},
+					"response": []
+				},
+				{
+					"name": "List Artifacts for Model Version",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1/artifacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1",
+								"artifacts"
+							]
+						},
+						"description": "Get all artifacts associated with a specific model version"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Artifact by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/artifacts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"artifacts",
+								"1"
+							]
+						},
+						"description": "Get a specific artifact by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Model Artifact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"model-artifact\",\n  \"description\": \"Main model artifact\",\n  \"artifactType\": \"model-artifact\",\n  \"uri\": \"s3://my-bucket/models/model.pkl\",\n  \"storageKey\": \"models/model.pkl\",\n  \"storagePath\": \"my-bucket\",\n  \"modelFormatName\": \"sklearn\",\n  \"modelFormatVersion\": \"1.0\",\n  \"customProperties\": {\n    \"model_size\": {\n      \"string_value\": \"10MB\"\n    },\n    \"framework_version\": {\n      \"string_value\": \"1.2.0\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1/artifacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1",
+								"artifacts"
+							]
+						},
+						"description": "Create a new artifact for a model version"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Artifact",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Updated artifact description\",\n  \"customProperties\": {\n    \"model_size\": {\n      \"string_value\": \"12MB\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/artifacts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"artifacts",
+								"1"
+							]
+						},
+						"description": "Update an existing artifact"
+					},
+					"response": []
+				}
+			],
+			"description": "Operations for managing model artifacts"
+		},
+		{
+			"name": "Serving Environments",
+			"item": [
+				{
+					"name": "List Serving Environments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/serving_environments?pageSize=100&orderBy=ID&sortOrder=DESC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"serving_environments"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "orderBy",
+									"value": "ID"
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "Retrieve a list of all serving environments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Serving Environment by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/serving_environments/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"serving_environments",
+								"1"
+							]
+						},
+						"description": "Get a specific serving environment by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Serving Environment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"production\",\n  \"description\": \"Production serving environment\",\n  \"customProperties\": {\n    \"namespace\": {\n      \"string_value\": \"production\"\n    },\n    \"cluster\": {\n      \"string_value\": \"prod-cluster\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/serving_environments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"serving_environments"
+							]
+						},
+						"description": "Create a new serving environment"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Serving Environment",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Updated production environment\",\n  \"customProperties\": {\n    \"max_replicas\": {\n      \"int_value\": 10\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/serving_environments/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"serving_environments",
+								"1"
+							]
+						},
+						"description": "Update an existing serving environment"
+					},
+					"response": []
+				}
+			],
+			"description": "Operations for managing serving environments"
+		},
+		{
+			"name": "Inference Services",
+			"item": [
+				{
+					"name": "List Inference Services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/inference_services?pageSize=100&orderBy=ID&sortOrder=DESC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"inference_services"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "orderBy",
+									"value": "ID"
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "Retrieve a list of all inference services"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inference Service by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/inference_services/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"inference_services",
+								"1"
+							]
+						},
+						"description": "Get a specific inference service by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inference Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"iris-predictor\",\n  \"description\": \"Iris classification inference service\",\n  \"modelVersionId\": \"1\",\n  \"servingEnvironmentId\": \"1\",\n  \"desiredState\": \"DEPLOYED\",\n  \"customProperties\": {\n    \"replicas\": {\n      \"int_value\": 3\n    },\n    \"resources\": {\n      \"string_value\": \"2CPU-4Gi\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/inference_services",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"inference_services"
+							]
+						},
+						"description": "Create a new inference service"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Inference Service",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"desiredState\": \"UNDEPLOYED\",\n  \"customProperties\": {\n    \"replicas\": {\n      \"int_value\": 1\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/inference_services/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"inference_services",
+								"1"
+							]
+						},
+						"description": "Update an existing inference service"
+					},
+					"response": []
+				}
+			],
+			"description": "Operations for managing inference services"
+		},
+		{
+			"name": "Search and Discovery",
+			"item": [
+				{
+					"name": "Search Registered Models",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models?name=iris&pageSize=50",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "iris",
+									"description": "Filter by model name"
+								},
+								{
+									"key": "pageSize",
+									"value": "50"
+								}
+							]
+						},
+						"description": "Search for registered models by name or other criteria"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Model Versions by State",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions?state=LIVE&pageSize=50",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "LIVE",
+									"description": "Filter by state (LIVE, ARCHIVED)"
+								},
+								{
+									"key": "pageSize",
+									"value": "50"
+								}
+							]
+						},
+						"description": "Filter model versions by their state"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Artifacts by Type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/artifacts?artifactType=model-artifact&pageSize=50",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"artifacts"
+							],
+							"query": [
+								{
+									"key": "artifactType",
+									"value": "model-artifact",
+									"description": "Filter by artifact type"
+								},
+								{
+									"key": "pageSize",
+									"value": "50"
+								}
+							]
+						},
+						"description": "Search for artifacts by type"
+					},
+					"response": []
+				}
+			],
+			"description": "Search and discovery operations across the registry"
+		},
+		{
+			"name": "Health and Status",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/healthz",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthz"
+							]
+						},
+						"description": "Check the health status of the Model Registry service"
+					},
+					"response": []
+				},
+				{
+					"name": "API Version Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"version"
+							]
+						},
+						"description": "Get API version information"
+					},
+					"response": []
+				}
+			],
+			"description": "Health check and system status endpoints"
+		},
+		{
+			"name": "Advanced Operations",
+			"item": [
+				{
+					"name": "Bulk Archive Models",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\"1\", \"2\", \"3\"],\n  \"state\": \"ARCHIVED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models:batchUpdate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models:batchUpdate"
+							]
+						},
+						"description": "Bulk archive multiple registered models"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model Lineage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/registered_models/1/lineage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"registered_models",
+								"1",
+								"lineage"
+							]
+						},
+						"description": "Get the lineage information for a registered model"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model Metrics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/model_versions/1/metrics",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"model_versions",
+								"1",
+								"metrics"
+							]
+						},
+						"description": "Get performance metrics for a model version"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Model Artifact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"artifactId\": \"1\",\n  \"validationType\": \"checksum\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/model_registry/v1alpha3/artifacts/1:validate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"model_registry",
+								"v1alpha3",
+								"artifacts",
+								"1:validate"
+							]
+						},
+						"description": "Validate a model artifact"
+					},
+					"response": []
+				}
+			],
+			"description": "Advanced operations and bulk actions"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set default content-type for POST/PATCH requests",
+					"if (pm.request.method === 'POST' || pm.request.method === 'PATCH') {",
+					"    if (!pm.request.headers.has('Content-Type')) {",
+					"        pm.request.headers.add({",
+					"            key: 'Content-Type',",
+					"            value: 'application/json'",
+					"        });",
+					"    }",
+					"}",
+					"",
+					"// Add timestamp to requests for tracking",
+					"pm.request.headers.add({",
+					"    key: 'X-Request-Timestamp',",
+					"    value: new Date().toISOString()",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Basic response validation",
+					"pm.test('Response status code is successful', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202, 204]);",
+					"});",
+					"",
+					"// Check response time",
+					"pm.test('Response time is less than 5000ms', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+					"});",
+					"",
+					"// Validate JSON response for GET requests",
+					"if (pm.request.method === 'GET' && pm.response.headers.get('Content-Type') && pm.response.headers.get('Content-Type').includes('application/json')) {",
+					"    pm.test('Response is valid JSON', function () {",
+					"        pm.expect(pm.response.json()).to.be.an('object');",
+					"    });",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://kubeflow.example.com"
+		},
+		{
+			"key": "apiPath",
+			"value": "/api/model_registry/v1alpha3"
+		},
+		{
+			"key": "authToken",
+			"value": ""
+		}
+	]
+}
