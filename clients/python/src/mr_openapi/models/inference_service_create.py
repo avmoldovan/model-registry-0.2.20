@@ -40,6 +40,14 @@ class InferenceServiceCreate(BaseModel):
         default=None,
         description="The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     model_version_id: StrictStr | None = Field(
         default=None,
         description="ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.",
@@ -59,6 +67,8 @@ class InferenceServiceCreate(BaseModel):
         "description",
         "externalId",
         "name",
+        "owner",
+        "userId",
         "modelVersionId",
         "runtime",
         "desiredState",
@@ -131,6 +141,8 @@ class InferenceServiceCreate(BaseModel):
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "modelVersionId": obj.get("modelVersionId"),
                 "runtime": obj.get("runtime"),
                 "desiredState": obj.get("desiredState"),

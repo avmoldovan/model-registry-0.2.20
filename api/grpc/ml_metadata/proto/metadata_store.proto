@@ -69,7 +69,7 @@ message Artifact {
   // The owner of the artifact.
   optional string owner = 101;
   // The userId of the artifact.
-  optional string userId = 102;
+  optional string user_id = 102;
 
   enum State {
     UNKNOWN = 0;

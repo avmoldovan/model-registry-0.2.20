@@ -269,6 +269,44 @@ func TestMapEmbedMDOwner(t *testing.T) {
 	}
 }
 
+func TestMapEmbedMDUserId(t *testing.T) {
+	stringValue := "test"
+
+	testCases := []struct {
+		name     string
+		source   *[]models.Properties
+		expected *string
+	}{
+		{
+			name: "test userId",
+			source: &[]models.Properties{
+				{
+					Name:        "userId",
+					StringValue: &stringValue,
+				},
+			},
+			expected: &stringValue,
+		},
+		{
+			name: "test userId with nil",
+			source: &[]models.Properties{
+				{
+					Name:        "userId",
+					StringValue: nil,
+				},
+			},
+			expected: nil,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			actual := MapEmbedMDUserId(tc.source)
+			assert.Equal(t, tc.expected, actual)
+		})
+	}
+}
+
 func TestMapEmbedMDAuthor(t *testing.T) {
 	stringValue := "test"
 

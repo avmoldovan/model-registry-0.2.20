@@ -6,6 +6,8 @@ type InferenceServiceListOptions struct {
 	ExternalID       *string
 	ParentResourceID *int32
 	Runtime          *string
+	Owner            *string
+	UserId           *string
 }
 
 type InferenceServiceAttributes struct {

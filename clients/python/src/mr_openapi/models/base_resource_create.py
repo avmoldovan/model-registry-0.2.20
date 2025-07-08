@@ -39,7 +39,15 @@ class BaseResourceCreate(BaseModel):
         default=None,
         description="The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.",
     )
-    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "name"]
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
+    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "name", "owner", "userId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,5 +114,7 @@ class BaseResourceCreate(BaseModel):
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
             }
         )

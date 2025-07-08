@@ -40,6 +40,12 @@ class RegisteredModel(BaseModel):
         description="The client provided name of the model. It must be unique among all the RegisteredModels of the same type within a Model Registry instance and cannot be changed once set."
     )
     id: StrictStr | None = Field(default=None, description="The unique server generated id of the resource.")
+    owner: StrictStr | None = None
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     create_time_since_epoch: StrictStr | None = Field(
         default=None,
         description="Output only. Create time of the resource in millisecond since epoch.",
@@ -67,7 +73,6 @@ class RegisteredModel(BaseModel):
     license: StrictStr | None = Field(default=None, description="Short name of the model's license.")
     license_link: StrictStr | None = Field(default=None, description="URL to the license text.", alias="licenseLink")
     library_name: StrictStr | None = Field(default=None, alias="libraryName")
-    owner: StrictStr | None = None
     state: RegisteredModelState | None = None
     __properties: ClassVar[list[str]] = [
         "customProperties",
@@ -75,6 +80,8 @@ class RegisteredModel(BaseModel):
         "externalId",
         "name",
         "id",
+        "owner",
+        "userId",
         "createTimeSinceEpoch",
         "lastUpdateTimeSinceEpoch",
         "readme",
@@ -86,7 +93,6 @@ class RegisteredModel(BaseModel):
         "license",
         "licenseLink",
         "libraryName",
-        "owner",
         "state",
     ]
 
@@ -161,6 +167,8 @@ class RegisteredModel(BaseModel):
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
                 "id": obj.get("id"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "createTimeSinceEpoch": obj.get("createTimeSinceEpoch"),
                 "lastUpdateTimeSinceEpoch": obj.get("lastUpdateTimeSinceEpoch"),
                 "readme": obj.get("readme"),
@@ -172,7 +180,6 @@ class RegisteredModel(BaseModel):
                 "license": obj.get("license"),
                 "licenseLink": obj.get("licenseLink"),
                 "libraryName": obj.get("libraryName"),
-                "owner": obj.get("owner"),
                 "state": obj.get("state"),
             }
         )

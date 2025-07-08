@@ -837,22 +837,7 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForArtifact(source converter.O
 }
 func (c *OpenAPIConverterImpl) OverrideNotEditableForDocArtifact(source converter.OpenapiUpdateWrapper[openapi.DocArtifact]) (openapi.DocArtifact, error) {
 	openapiDocArtifact := converter.InitWithUpdate(source)
-	var pString *string
-	if source.Existing != nil {
-		pString = source.Existing.Owner
-	}
-	if pString != nil {
-		xstring := *pString
-		openapiDocArtifact.Owner = &xstring
-	}
-	var pString2 *string
-	if source.Existing != nil {
-		pString2 = source.Existing.UserId
-	}
-	if pString2 != nil {
-		xstring2 := *pString2
-		openapiDocArtifact.UserId = &xstring2
-	}
+	_ = source
 	return openapiDocArtifact, nil
 }
 func (c *OpenAPIConverterImpl) OverrideNotEditableForInferenceService(source converter.OpenapiUpdateWrapper[openapi.InferenceService]) (openapi.InferenceService, error) {
@@ -867,33 +852,17 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForInferenceService(source con
 	}
 	var pString2 *string
 	if source.Existing != nil {
-		pString2 = source.Existing.Owner
+		pString2 = &source.Existing.RegisteredModelId
 	}
 	if pString2 != nil {
-		xstring2 := *pString2
-		openapiInferenceService.Owner = &xstring2
+		openapiInferenceService.RegisteredModelId = *pString2
 	}
 	var pString3 *string
 	if source.Existing != nil {
-		pString3 = source.Existing.UserId
+		pString3 = &source.Existing.ServingEnvironmentId
 	}
 	if pString3 != nil {
-		xstring3 := *pString3
-		openapiInferenceService.UserId = &xstring3
-	}
-	var pString4 *string
-	if source.Existing != nil {
-		pString4 = &source.Existing.RegisteredModelId
-	}
-	if pString4 != nil {
-		openapiInferenceService.RegisteredModelId = *pString4
-	}
-	var pString5 *string
-	if source.Existing != nil {
-		pString5 = &source.Existing.ServingEnvironmentId
-	}
-	if pString5 != nil {
-		openapiInferenceService.ServingEnvironmentId = *pString5
+		openapiInferenceService.ServingEnvironmentId = *pString3
 	}
 	return openapiInferenceService, nil
 }
@@ -909,27 +878,11 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForModelArtifact(source conver
 	}
 	var pString2 *string
 	if source.Existing != nil {
-		pString2 = source.Existing.Owner
+		pString2 = source.Existing.ArtifactType
 	}
 	if pString2 != nil {
 		xstring2 := *pString2
-		openapiModelArtifact.Owner = &xstring2
-	}
-	var pString3 *string
-	if source.Existing != nil {
-		pString3 = source.Existing.UserId
-	}
-	if pString3 != nil {
-		xstring3 := *pString3
-		openapiModelArtifact.UserId = &xstring3
-	}
-	var pString4 *string
-	if source.Existing != nil {
-		pString4 = source.Existing.ArtifactType
-	}
-	if pString4 != nil {
-		xstring4 := *pString4
-		openapiModelArtifact.ArtifactType = &xstring4
+		openapiModelArtifact.ArtifactType = &xstring2
 	}
 	return openapiModelArtifact, nil
 }
@@ -944,26 +897,10 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForModelVersion(source convert
 	}
 	var pString2 *string
 	if source.Existing != nil {
-		pString2 = source.Existing.Owner
+		pString2 = &source.Existing.RegisteredModelId
 	}
 	if pString2 != nil {
-		xstring := *pString2
-		openapiModelVersion.Owner = &xstring
-	}
-	var pString3 *string
-	if source.Existing != nil {
-		pString3 = source.Existing.UserId
-	}
-	if pString3 != nil {
-		xstring2 := *pString3
-		openapiModelVersion.UserId = &xstring2
-	}
-	var pString4 *string
-	if source.Existing != nil {
-		pString4 = &source.Existing.RegisteredModelId
-	}
-	if pString4 != nil {
-		openapiModelVersion.RegisteredModelId = *pString4
+		openapiModelVersion.RegisteredModelId = *pString2
 	}
 	return openapiModelVersion, nil
 }
@@ -975,14 +912,6 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForRegisteredModel(source conv
 	}
 	if pString != nil {
 		openapiRegisteredModel.Name = *pString
-	}
-	var pString2 *string
-	if source.Existing != nil {
-		pString2 = source.Existing.UserId
-	}
-	if pString2 != nil {
-		xstring := *pString2
-		openapiRegisteredModel.UserId = &xstring
 	}
 	return openapiRegisteredModel, nil
 }
@@ -998,26 +927,10 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForServeModel(source converter
 	}
 	var pString2 *string
 	if source.Existing != nil {
-		pString2 = source.Existing.Owner
+		pString2 = &source.Existing.ModelVersionId
 	}
 	if pString2 != nil {
-		xstring2 := *pString2
-		openapiServeModel.Owner = &xstring2
-	}
-	var pString3 *string
-	if source.Existing != nil {
-		pString3 = source.Existing.UserId
-	}
-	if pString3 != nil {
-		xstring3 := *pString3
-		openapiServeModel.UserId = &xstring3
-	}
-	var pString4 *string
-	if source.Existing != nil {
-		pString4 = &source.Existing.ModelVersionId
-	}
-	if pString4 != nil {
-		openapiServeModel.ModelVersionId = *pString4
+		openapiServeModel.ModelVersionId = *pString2
 	}
 	return openapiServeModel, nil
 }
@@ -1029,22 +942,6 @@ func (c *OpenAPIConverterImpl) OverrideNotEditableForServingEnvironment(source c
 	}
 	if pString != nil {
 		openapiServingEnvironment.Name = *pString
-	}
-	var pString2 *string
-	if source.Existing != nil {
-		pString2 = source.Existing.Owner
-	}
-	if pString2 != nil {
-		xstring := *pString2
-		openapiServingEnvironment.Owner = &xstring
-	}
-	var pString3 *string
-	if source.Existing != nil {
-		pString3 = source.Existing.UserId
-	}
-	if pString3 != nil {
-		xstring2 := *pString3
-		openapiServingEnvironment.UserId = &xstring2
 	}
 	return openapiServingEnvironment, nil
 }

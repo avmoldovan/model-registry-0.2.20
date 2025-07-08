@@ -136,6 +136,14 @@ func MapRegisteredModelProperties(source *openapi.RegisteredModel) (map[string]*
 			}
 		}
 
+		if source.UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.UserId,
+				},
+			}
+		}
+
 		if source.Description != nil {
 			props["description"] = &proto.Value{
 				Value: &proto.Value_StringValue{
@@ -292,6 +300,22 @@ func MapModelVersionProperties(source *OpenAPIModelWrapper[openapi.ModelVersion]
 				},
 			}
 		}
+
+		if (*source.Model).Owner != nil {
+			props["owner"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *(*source.Model).Owner,
+				},
+			}
+		}
+
+		if (*source.Model).UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *(*source.Model).UserId,
+				},
+			}
+		}
 	}
 	return props, nil
 }
@@ -338,6 +362,22 @@ func MapDocArtifactProperties(source *openapi.DocArtifact) (map[string]*proto.Va
 		props["description"] = &proto.Value{
 			Value: &proto.Value_StringValue{
 				StringValue: *source.Description,
+			},
+		}
+	}
+
+	if source.Owner != nil {
+		props["owner"] = &proto.Value{
+			Value: &proto.Value_StringValue{
+				StringValue: *source.Owner,
+			},
+		}
+	}
+
+	if source.UserId != nil {
+		props["userId"] = &proto.Value{
+			Value: &proto.Value_StringValue{
+				StringValue: *source.UserId,
 			},
 		}
 	}
@@ -440,6 +480,20 @@ func MapModelArtifactProperties(source *openapi.ModelArtifact) (map[string]*prot
 				},
 			}
 		}
+		if source.Owner != nil {
+			props["owner"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.Owner,
+				},
+			}
+		}
+		if source.UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.UserId,
+				},
+			}
+		}
 
 	}
 	return props, nil
@@ -482,6 +536,20 @@ func MapServingEnvironmentProperties(source *openapi.ServingEnvironment) (map[st
 				},
 			}
 		}
+		if source.Owner != nil {
+			props["owner"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.Owner,
+				},
+			}
+		}
+		if source.UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.UserId,
+				},
+			}
+		}
 	}
 	return props, nil
 }
@@ -517,6 +585,22 @@ func MapInferenceServiceProperties(source *openapi.InferenceService) (map[string
 			props["desired_state"] = &proto.Value{
 				Value: &proto.Value_StringValue{
 					StringValue: string(*source.DesiredState),
+				},
+			}
+		}
+
+		if source.Owner != nil {
+			props["owner"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: string(*source.Owner),
+				},
+			}
+		}
+
+		if source.UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: string(*source.UserId),
 				},
 			}
 		}
@@ -587,6 +671,20 @@ func MapServeModelProperties(source *openapi.ServeModel) (map[string]*proto.Valu
 			props["description"] = &proto.Value{
 				Value: &proto.Value_StringValue{
 					StringValue: *source.Description,
+				},
+			}
+		}
+		if source.Owner != nil {
+			props["owner"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.Owner,
+				},
+			}
+		}
+		if source.UserId != nil {
+			props["userId"] = &proto.Value{
+				Value: &proto.Value_StringValue{
+					StringValue: *source.UserId,
 				},
 			}
 		}

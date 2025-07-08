@@ -98,7 +98,7 @@ type ModelRegistryServiceAPIServicer interface {
 	GetModelVersions(context.Context, string, model.OrderByField, model.SortOrder, string) (ImplResponse, error)
 	GetRegisteredModel(context.Context, string) (ImplResponse, error)
 	GetRegisteredModelVersions(context.Context, string, string, string, string, model.OrderByField, model.SortOrder, string) (ImplResponse, error)
-	GetRegisteredModels(context.Context, string, model.OrderByField, model.SortOrder, string) (ImplResponse, error)
+	GetRegisteredModels(context.Context, string, model.OrderByField, model.SortOrder, string, string, string) (ImplResponse, error)
 	GetServingEnvironment(context.Context, string) (ImplResponse, error)
 	GetServingEnvironments(context.Context, string, model.OrderByField, model.SortOrder, string) (ImplResponse, error)
 	UpdateArtifact(context.Context, string, model.ArtifactUpdate) (ImplResponse, error)

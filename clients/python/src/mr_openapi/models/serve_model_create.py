@@ -40,6 +40,14 @@ class ServeModelCreate(BaseModel):
         default=None,
         description="The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     last_known_state: ExecutionState | None = Field(default=None, alias="lastKnownState")
     model_version_id: StrictStr = Field(
         description="ID of the `ModelVersion` that was served in `InferenceService`.", alias="modelVersionId"
@@ -49,6 +57,8 @@ class ServeModelCreate(BaseModel):
         "description",
         "externalId",
         "name",
+        "owner",
+        "userId",
         "lastKnownState",
         "modelVersionId",
     ]
@@ -118,6 +128,8 @@ class ServeModelCreate(BaseModel):
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "lastKnownState": obj.get("lastKnownState"),
                 "modelVersionId": obj.get("modelVersionId"),
             }

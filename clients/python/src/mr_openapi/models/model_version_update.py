@@ -36,9 +36,25 @@ class ModelVersionUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     state: ModelVersionState | None = None
     author: StrictStr | None = Field(default=None, description="Name of the author.")
-    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "state", "author"]
+    __properties: ClassVar[list[str]] = [
+        "customProperties",
+        "description",
+        "externalId",
+        "owner",
+        "userId",
+        "state",
+        "author",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,6 +120,8 @@ class ModelVersionUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "state": obj.get("state"),
                 "author": obj.get("author"),
             }

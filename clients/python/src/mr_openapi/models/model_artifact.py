@@ -41,6 +41,14 @@ class ModelArtifact(BaseModel):
         description="The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.",
     )
     id: StrictStr | None = Field(default=None, description="The unique server generated id of the resource.")
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     create_time_since_epoch: StrictStr | None = Field(
         default=None,
         description="Output only. Create time of the resource in millisecond since epoch.",
@@ -101,6 +109,8 @@ class ModelArtifact(BaseModel):
         "externalId",
         "name",
         "id",
+        "owner",
+        "userId",
         "createTimeSinceEpoch",
         "lastUpdateTimeSinceEpoch",
         "artifactType",
@@ -180,7 +190,6 @@ class ModelArtifact(BaseModel):
 
         return cls.model_validate(
             {
-                "artifactType": "model-artifact",
                 "customProperties": (
                     {_k: MetadataValue.from_dict(_v) for _k, _v in obj["customProperties"].items()}
                     if obj.get("customProperties") is not None
@@ -190,6 +199,8 @@ class ModelArtifact(BaseModel):
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
                 "id": obj.get("id"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "createTimeSinceEpoch": obj.get("createTimeSinceEpoch"),
                 "lastUpdateTimeSinceEpoch": obj.get("lastUpdateTimeSinceEpoch"),
                 "artifactType": obj.get("artifactType") if obj.get("artifactType") is not None else "model-artifact",

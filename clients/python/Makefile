@@ -7,7 +7,7 @@ IMG ?= ghcr.io/kubeflow/model-registry/server:${IMG_VERSION}
 install:
 	../../bin/openapi-generator-cli generate -i ../../api/openapi/model-registry.yaml -g python -o src/ --package-name mr_openapi --additional-properties=library=asyncio,generateSourceCodeOnly=true,useOneOfDiscriminatorLookup=true --template-dir templates/
 	mv src/mr_openapi_README.md src/mr_openapi/README.md
-	git apply patches/*
+    # git apply patches/*
 	poetry install
 
 .PHONY: clean

@@ -5261,6 +5261,8 @@ type ApiGetRegisteredModelsRequest struct {
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	owner         *string
+	userId        *string
 }
 
 // Number of entities in each page.
@@ -5284,6 +5286,18 @@ func (r ApiGetRegisteredModelsRequest) SortOrder(sortOrder SortOrder) ApiGetRegi
 // Token to use to retrieve next page of results.
 func (r ApiGetRegisteredModelsRequest) NextPageToken(nextPageToken string) ApiGetRegisteredModelsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// Owner of the resource.
+func (r ApiGetRegisteredModelsRequest) Owner(owner string) ApiGetRegisteredModelsRequest {
+	r.owner = &owner
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetRegisteredModelsRequest) UserId(userId string) ApiGetRegisteredModelsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -5339,6 +5353,12 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelsExecute(r ApiGetRegi
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	if r.owner != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	}
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

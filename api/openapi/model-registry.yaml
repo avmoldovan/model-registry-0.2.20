@@ -769,6 +769,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/RegisteredModelListResponse"
@@ -2212,6 +2214,20 @@ components:
       description: "Specifies the sort order for listing entities, defaults to ASC."
       schema:
         $ref: "#/components/schemas/SortOrder"
+      in: query
+      required: false
+    owner:
+      name: owner
+      description: Owner of the resource.
+      schema:
+        type: string
+      in: query
+      required: false
+    userId:
+      name: userId
+      description: User ID of the resource owner.
+      schema:
+        type: string
       in: query
       required: false
   securitySchemes:

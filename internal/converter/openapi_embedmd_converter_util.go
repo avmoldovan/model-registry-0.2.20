@@ -128,6 +128,14 @@ func MapRegisteredModelPropertiesEmbedMD(source *openapi.RegisteredModel) (*[]mo
 			})
 		}
 
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
+			})
+		}
+
 		if source.Description != nil {
 			props = append(props, models.Properties{
 				Name:             "description",
@@ -297,6 +305,22 @@ func MapModelVersionPropertiesEmbedMD(source *openapi.ModelVersion) (*[]models.P
 			})
 		}
 
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
+			})
+		}
+
 		if source.RegisteredModelId != "" {
 			registeredModelId, err := StringToInt32(source.RegisteredModelId)
 			if err != nil {
@@ -355,6 +379,20 @@ func MapServingEnvironmentPropertiesEmbedMD(source *openapi.ServingEnvironment) 
 				Name:             "description",
 				IsCustomProperty: false,
 				StringValue:      source.Description,
+			})
+		}
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
 			})
 		}
 	}
@@ -416,6 +454,22 @@ func MapInferenceServicePropertiesEmbedMD(source *openapi.InferenceService) (*[]
 				Name:             "desired_state",
 				IsCustomProperty: false,
 				StringValue:      of(string(*source.DesiredState)),
+			})
+		}
+
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
 			})
 		}
 
@@ -572,6 +626,20 @@ func MapModelArtifactPropertiesEmbedMD(source *openapi.ModelArtifact) (*[]models
 				StringValue:      source.ModelSourceName,
 			})
 		}
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
+			})
+		}
 
 	}
 
@@ -628,6 +696,20 @@ func MapDocArtifactPropertiesEmbedMD(source *openapi.DocArtifact) (*[]models.Pro
 				StringValue:      source.Description,
 			})
 		}
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
+			})
+		}
 	}
 
 	return &props, nil
@@ -682,6 +764,20 @@ func MapServeModelPropertiesEmbedMD(source *openapi.ServeModel) (*[]models.Prope
 				Name:             "description",
 				IsCustomProperty: false,
 				StringValue:      source.Description,
+			})
+		}
+		if source.Owner != nil {
+			props = append(props, models.Properties{
+				Name:             "owner",
+				IsCustomProperty: false,
+				StringValue:      source.Owner,
+			})
+		}
+		if source.UserId != nil {
+			props = append(props, models.Properties{
+				Name:             "userId",
+				IsCustomProperty: false,
+				StringValue:      source.UserId,
 			})
 		}
 

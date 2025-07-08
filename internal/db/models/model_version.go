@@ -5,6 +5,8 @@ type ModelVersionListOptions struct {
 	Name             *string
 	ExternalID       *string
 	ParentResourceID *int32
+	Owner            *string
+	UserId           *string
 }
 
 type ModelVersionAttributes struct {

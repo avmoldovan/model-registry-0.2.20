@@ -36,6 +36,14 @@ class InferenceServiceUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     model_version_id: StrictStr | None = Field(
         default=None,
         description="ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.",
@@ -47,6 +55,8 @@ class InferenceServiceUpdate(BaseModel):
         "customProperties",
         "description",
         "externalId",
+        "owner",
+        "userId",
         "modelVersionId",
         "runtime",
         "desiredState",
@@ -116,6 +126,8 @@ class InferenceServiceUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "modelVersionId": obj.get("modelVersionId"),
                 "runtime": obj.get("runtime"),
                 "desiredState": obj.get("desiredState"),

@@ -45,27 +45,11 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingDocArtifact(source converter.Opena
 	}
 	var pString3 *string
 	if source.Update != nil {
-		pString3 = source.Update.Owner
+		pString3 = source.Update.Uri
 	}
 	if pString3 != nil {
 		xstring3 := *pString3
-		openapiDocArtifact.Owner = &xstring3
-	}
-	var pString4 *string
-	if source.Update != nil {
-		pString4 = source.Update.UserId
-	}
-	if pString4 != nil {
-		xstring4 := *pString4
-		openapiDocArtifact.UserId = &xstring4
-	}
-	var pString5 *string
-	if source.Update != nil {
-		pString5 = source.Update.Uri
-	}
-	if pString5 != nil {
-		xstring5 := *pString5
-		openapiDocArtifact.Uri = &xstring5
+		openapiDocArtifact.Uri = &xstring3
 	}
 	var pOpenapiArtifactState *openapi.ArtifactState
 	if source.Update != nil {
@@ -114,35 +98,19 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingInferenceService(source converter.
 	}
 	var pString3 *string
 	if source.Update != nil {
-		pString3 = source.Update.Owner
+		pString3 = source.Update.ModelVersionId
 	}
 	if pString3 != nil {
 		xstring3 := *pString3
-		openapiInferenceService.Owner = &xstring3
+		openapiInferenceService.ModelVersionId = &xstring3
 	}
 	var pString4 *string
 	if source.Update != nil {
-		pString4 = source.Update.UserId
+		pString4 = source.Update.Runtime
 	}
 	if pString4 != nil {
 		xstring4 := *pString4
-		openapiInferenceService.UserId = &xstring4
-	}
-	var pString5 *string
-	if source.Update != nil {
-		pString5 = source.Update.ModelVersionId
-	}
-	if pString5 != nil {
-		xstring5 := *pString5
-		openapiInferenceService.ModelVersionId = &xstring5
-	}
-	var pString6 *string
-	if source.Update != nil {
-		pString6 = source.Update.Runtime
-	}
-	if pString6 != nil {
-		xstring6 := *pString6
-		openapiInferenceService.Runtime = &xstring6
+		openapiInferenceService.Runtime = &xstring4
 	}
 	var pOpenapiInferenceServiceState *openapi.InferenceServiceState
 	if source.Update != nil {
@@ -191,107 +159,91 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingModelArtifact(source converter.Ope
 	}
 	var pString3 *string
 	if source.Update != nil {
-		pString3 = source.Update.Owner
+		pString3 = source.Update.ModelFormatName
 	}
 	if pString3 != nil {
 		xstring3 := *pString3
-		openapiModelArtifact.Owner = &xstring3
+		openapiModelArtifact.ModelFormatName = &xstring3
 	}
 	var pString4 *string
 	if source.Update != nil {
-		pString4 = source.Update.UserId
+		pString4 = source.Update.StorageKey
 	}
 	if pString4 != nil {
 		xstring4 := *pString4
-		openapiModelArtifact.UserId = &xstring4
+		openapiModelArtifact.StorageKey = &xstring4
 	}
 	var pString5 *string
 	if source.Update != nil {
-		pString5 = source.Update.ModelFormatName
+		pString5 = source.Update.StoragePath
 	}
 	if pString5 != nil {
 		xstring5 := *pString5
-		openapiModelArtifact.ModelFormatName = &xstring5
+		openapiModelArtifact.StoragePath = &xstring5
 	}
 	var pString6 *string
 	if source.Update != nil {
-		pString6 = source.Update.StorageKey
+		pString6 = source.Update.ModelFormatVersion
 	}
 	if pString6 != nil {
 		xstring6 := *pString6
-		openapiModelArtifact.StorageKey = &xstring6
+		openapiModelArtifact.ModelFormatVersion = &xstring6
 	}
 	var pString7 *string
 	if source.Update != nil {
-		pString7 = source.Update.StoragePath
+		pString7 = source.Update.ServiceAccountName
 	}
 	if pString7 != nil {
 		xstring7 := *pString7
-		openapiModelArtifact.StoragePath = &xstring7
+		openapiModelArtifact.ServiceAccountName = &xstring7
 	}
 	var pString8 *string
 	if source.Update != nil {
-		pString8 = source.Update.ModelFormatVersion
+		pString8 = source.Update.ModelSourceKind
 	}
 	if pString8 != nil {
 		xstring8 := *pString8
-		openapiModelArtifact.ModelFormatVersion = &xstring8
+		openapiModelArtifact.ModelSourceKind = &xstring8
 	}
 	var pString9 *string
 	if source.Update != nil {
-		pString9 = source.Update.ServiceAccountName
+		pString9 = source.Update.ModelSourceClass
 	}
 	if pString9 != nil {
 		xstring9 := *pString9
-		openapiModelArtifact.ServiceAccountName = &xstring9
+		openapiModelArtifact.ModelSourceClass = &xstring9
 	}
 	var pString10 *string
 	if source.Update != nil {
-		pString10 = source.Update.ModelSourceKind
+		pString10 = source.Update.ModelSourceGroup
 	}
 	if pString10 != nil {
 		xstring10 := *pString10
-		openapiModelArtifact.ModelSourceKind = &xstring10
+		openapiModelArtifact.ModelSourceGroup = &xstring10
 	}
 	var pString11 *string
 	if source.Update != nil {
-		pString11 = source.Update.ModelSourceClass
+		pString11 = source.Update.ModelSourceId
 	}
 	if pString11 != nil {
 		xstring11 := *pString11
-		openapiModelArtifact.ModelSourceClass = &xstring11
+		openapiModelArtifact.ModelSourceId = &xstring11
 	}
 	var pString12 *string
 	if source.Update != nil {
-		pString12 = source.Update.ModelSourceGroup
+		pString12 = source.Update.ModelSourceName
 	}
 	if pString12 != nil {
 		xstring12 := *pString12
-		openapiModelArtifact.ModelSourceGroup = &xstring12
+		openapiModelArtifact.ModelSourceName = &xstring12
 	}
 	var pString13 *string
 	if source.Update != nil {
-		pString13 = source.Update.ModelSourceId
+		pString13 = source.Update.Uri
 	}
 	if pString13 != nil {
 		xstring13 := *pString13
-		openapiModelArtifact.ModelSourceId = &xstring13
-	}
-	var pString14 *string
-	if source.Update != nil {
-		pString14 = source.Update.ModelSourceName
-	}
-	if pString14 != nil {
-		xstring14 := *pString14
-		openapiModelArtifact.ModelSourceName = &xstring14
-	}
-	var pString15 *string
-	if source.Update != nil {
-		pString15 = source.Update.Uri
-	}
-	if pString15 != nil {
-		xstring15 := *pString15
-		openapiModelArtifact.Uri = &xstring15
+		openapiModelArtifact.Uri = &xstring13
 	}
 	var pOpenapiArtifactState *openapi.ArtifactState
 	if source.Update != nil {
@@ -338,22 +290,6 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingModelVersion(source converter.Open
 		xstring2 := *pString2
 		openapiModelVersion.ExternalId = &xstring2
 	}
-	var pString3 *string
-	if source.Update != nil {
-		pString3 = source.Update.Owner
-	}
-	if pString3 != nil {
-		xstring3 := *pString3
-		openapiModelVersion.Owner = &xstring3
-	}
-	var pString4 *string
-	if source.Update != nil {
-		pString4 = source.Update.UserId
-	}
-	if pString4 != nil {
-		xstring4 := *pString4
-		openapiModelVersion.UserId = &xstring4
-	}
 	var pOpenapiModelVersionState *openapi.ModelVersionState
 	if source.Update != nil {
 		pOpenapiModelVersionState = source.Update.State
@@ -365,13 +301,13 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingModelVersion(source converter.Open
 		}
 		openapiModelVersion.State = &openapiModelVersionState
 	}
-	var pString5 *string
+	var pString3 *string
 	if source.Update != nil {
-		pString5 = source.Update.Author
+		pString3 = source.Update.Author
 	}
-	if pString5 != nil {
-		xstring5 := *pString5
-		openapiModelVersion.Author = &xstring5
+	if pString3 != nil {
+		xstring3 := *pString3
+		openapiModelVersion.Author = &xstring3
 	}
 	return openapiModelVersion, nil
 }
@@ -409,35 +345,19 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingRegisteredModel(source converter.O
 	}
 	var pString3 *string
 	if source.Update != nil {
-		pString3 = source.Update.Owner
+		pString3 = source.Update.Readme
 	}
 	if pString3 != nil {
 		xstring3 := *pString3
-		openapiRegisteredModel.Owner = &xstring3
+		openapiRegisteredModel.Readme = &xstring3
 	}
 	var pString4 *string
 	if source.Update != nil {
-		pString4 = source.Update.UserId
+		pString4 = source.Update.Maturity
 	}
 	if pString4 != nil {
 		xstring4 := *pString4
-		openapiRegisteredModel.UserId = &xstring4
-	}
-	var pString5 *string
-	if source.Update != nil {
-		pString5 = source.Update.Readme
-	}
-	if pString5 != nil {
-		xstring5 := *pString5
-		openapiRegisteredModel.Readme = &xstring5
-	}
-	var pString6 *string
-	if source.Update != nil {
-		pString6 = source.Update.Maturity
-	}
-	if pString6 != nil {
-		xstring6 := *pString6
-		openapiRegisteredModel.Maturity = &xstring6
+		openapiRegisteredModel.Maturity = &xstring4
 	}
 	var pStringList *[]string
 	if source.Update != nil {
@@ -467,45 +387,45 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingRegisteredModel(source converter.O
 		}
 		openapiRegisteredModel.Tasks = stringList2
 	}
+	var pString5 *string
+	if source.Update != nil {
+		pString5 = source.Update.Provider
+	}
+	if pString5 != nil {
+		xstring5 := *pString5
+		openapiRegisteredModel.Provider = &xstring5
+	}
+	var pString6 *string
+	if source.Update != nil {
+		pString6 = source.Update.Logo
+	}
+	if pString6 != nil {
+		xstring6 := *pString6
+		openapiRegisteredModel.Logo = &xstring6
+	}
 	var pString7 *string
 	if source.Update != nil {
-		pString7 = source.Update.Provider
+		pString7 = source.Update.License
 	}
 	if pString7 != nil {
 		xstring7 := *pString7
-		openapiRegisteredModel.Provider = &xstring7
+		openapiRegisteredModel.License = &xstring7
 	}
 	var pString8 *string
 	if source.Update != nil {
-		pString8 = source.Update.Logo
+		pString8 = source.Update.LicenseLink
 	}
 	if pString8 != nil {
 		xstring8 := *pString8
-		openapiRegisteredModel.Logo = &xstring8
+		openapiRegisteredModel.LicenseLink = &xstring8
 	}
 	var pString9 *string
 	if source.Update != nil {
-		pString9 = source.Update.License
+		pString9 = source.Update.LibraryName
 	}
 	if pString9 != nil {
 		xstring9 := *pString9
-		openapiRegisteredModel.License = &xstring9
-	}
-	var pString10 *string
-	if source.Update != nil {
-		pString10 = source.Update.LicenseLink
-	}
-	if pString10 != nil {
-		xstring10 := *pString10
-		openapiRegisteredModel.LicenseLink = &xstring10
-	}
-	var pString11 *string
-	if source.Update != nil {
-		pString11 = source.Update.LibraryName
-	}
-	if pString11 != nil {
-		xstring11 := *pString11
-		openapiRegisteredModel.LibraryName = &xstring11
+		openapiRegisteredModel.LibraryName = &xstring9
 	}
 	var pOpenapiRegisteredModelState *openapi.RegisteredModelState
 	if source.Update != nil {
@@ -552,22 +472,6 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingServeModel(source converter.Openap
 		xstring2 := *pString2
 		openapiServeModel.ExternalId = &xstring2
 	}
-	var pString3 *string
-	if source.Update != nil {
-		pString3 = source.Update.Owner
-	}
-	if pString3 != nil {
-		xstring3 := *pString3
-		openapiServeModel.Owner = &xstring3
-	}
-	var pString4 *string
-	if source.Update != nil {
-		pString4 = source.Update.UserId
-	}
-	if pString4 != nil {
-		xstring4 := *pString4
-		openapiServeModel.UserId = &xstring4
-	}
 	var pOpenapiExecutionState *openapi.ExecutionState
 	if source.Update != nil {
 		pOpenapiExecutionState = source.Update.LastKnownState
@@ -612,22 +516,6 @@ func (c *OpenAPIReconcilerImpl) UpdateExistingServingEnvironment(source converte
 	if pString2 != nil {
 		xstring2 := *pString2
 		openapiServingEnvironment.ExternalId = &xstring2
-	}
-	var pString3 *string
-	if source.Update != nil {
-		pString3 = source.Update.Owner
-	}
-	if pString3 != nil {
-		xstring3 := *pString3
-		openapiServingEnvironment.Owner = &xstring3
-	}
-	var pString4 *string
-	if source.Update != nil {
-		pString4 = source.Update.UserId
-	}
-	if pString4 != nil {
-		xstring4 := *pString4
-		openapiServingEnvironment.UserId = &xstring4
 	}
 	return openapiServingEnvironment, nil
 }

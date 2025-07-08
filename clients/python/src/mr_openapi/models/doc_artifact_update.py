@@ -36,6 +36,14 @@ class DocArtifactUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     artifact_type: StrictStr | None = Field(default="doc-artifact", alias="artifactType")
     uri: StrictStr | None = Field(
         default=None,
@@ -46,6 +54,8 @@ class DocArtifactUpdate(BaseModel):
         "customProperties",
         "description",
         "externalId",
+        "owner",
+        "userId",
         "artifactType",
         "uri",
         "state",
@@ -115,6 +125,8 @@ class DocArtifactUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "artifactType": obj.get("artifactType") if obj.get("artifactType") is not None else "doc-artifact",
                 "uri": obj.get("uri"),
                 "state": obj.get("state"),

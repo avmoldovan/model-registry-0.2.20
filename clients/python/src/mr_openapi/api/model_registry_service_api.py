@@ -8268,6 +8268,8 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8290,6 +8292,10 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param owner: Owner of the resource.
+        :type owner: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8316,6 +8322,8 @@ class ModelRegistryServiceApi:
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8348,6 +8356,8 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8370,6 +8380,10 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param owner: Owner of the resource.
+        :type owner: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8396,6 +8410,8 @@ class ModelRegistryServiceApi:
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8428,6 +8444,8 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8450,6 +8468,10 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param owner: Owner of the resource.
+        :type owner: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8476,6 +8498,8 @@ class ModelRegistryServiceApi:
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8497,6 +8521,8 @@ class ModelRegistryServiceApi:
         order_by,
         sort_order,
         next_page_token,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -8531,6 +8557,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters

@@ -769,6 +769,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/RegisteredModelListResponse"

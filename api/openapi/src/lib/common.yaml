@@ -324,6 +324,20 @@ components:
         $ref: "#/components/schemas/SortOrder"
       in: query
       required: false
+    owner:
+      name: owner
+      description: Owner of the resource.
+      schema:
+        type: string
+      in: query
+      required: false
+    userId:
+      name: userId
+      description: User ID of the resource owner.
+      schema:
+        type: string
+      in: query
+      required: false
   securitySchemes:
     Bearer:
       scheme: bearer

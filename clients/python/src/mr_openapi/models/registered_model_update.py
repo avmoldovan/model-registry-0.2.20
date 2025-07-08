@@ -36,6 +36,12 @@ class RegisteredModelUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
+    owner: StrictStr | None = None
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     readme: StrictStr | None = Field(default=None, description="Model documentation in Markdown.")
     maturity: StrictStr | None = Field(default=None, description="Maturity level of the model.")
     language: list[StrictStr] | None = Field(
@@ -53,12 +59,13 @@ class RegisteredModelUpdate(BaseModel):
     license: StrictStr | None = Field(default=None, description="Short name of the model's license.")
     license_link: StrictStr | None = Field(default=None, description="URL to the license text.", alias="licenseLink")
     library_name: StrictStr | None = Field(default=None, alias="libraryName")
-    owner: StrictStr | None = None
     state: RegisteredModelState | None = None
     __properties: ClassVar[list[str]] = [
         "customProperties",
         "description",
         "externalId",
+        "owner",
+        "userId",
         "readme",
         "maturity",
         "language",
@@ -68,7 +75,6 @@ class RegisteredModelUpdate(BaseModel):
         "license",
         "licenseLink",
         "libraryName",
-        "owner",
         "state",
     ]
 
@@ -136,6 +142,8 @@ class RegisteredModelUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "readme": obj.get("readme"),
                 "maturity": obj.get("maturity"),
                 "language": obj.get("language"),
@@ -145,7 +153,6 @@ class RegisteredModelUpdate(BaseModel):
                 "license": obj.get("license"),
                 "licenseLink": obj.get("licenseLink"),
                 "libraryName": obj.get("libraryName"),
-                "owner": obj.get("owner"),
                 "state": obj.get("state"),
             }
         )

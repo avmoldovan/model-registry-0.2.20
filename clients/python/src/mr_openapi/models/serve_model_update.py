@@ -36,8 +36,23 @@ class ServeModelUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     last_known_state: ExecutionState | None = Field(default=None, alias="lastKnownState")
-    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "lastKnownState"]
+    __properties: ClassVar[list[str]] = [
+        "customProperties",
+        "description",
+        "externalId",
+        "owner",
+        "userId",
+        "lastKnownState",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +118,8 @@ class ServeModelUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "lastKnownState": obj.get("lastKnownState"),
             }
         )

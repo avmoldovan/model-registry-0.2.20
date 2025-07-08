@@ -7,6 +7,8 @@ type ModelArtifactListOptions struct {
 	Name           *string
 	ExternalID     *string
 	ModelVersionID *int32
+	Owner          *string
+	UserId         *string
 }
 
 type ModelArtifactAttributes struct {

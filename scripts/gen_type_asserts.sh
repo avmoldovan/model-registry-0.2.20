@@ -11,4 +11,5 @@ python3 "${PROJECT_ROOT}/scripts/gen_type_asserts.py" >"$ASSERT_FILE_PATH"
 
 gofmt -w "$ASSERT_FILE_PATH"
 
+# echo "git apply $PATCH already applied, skipping"
 git apply "$PATCH"

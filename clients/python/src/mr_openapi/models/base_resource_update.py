@@ -35,7 +35,15 @@ class BaseResourceUpdate(BaseModel):
         description="The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.",
         alias="externalId",
     )
-    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId"]
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
+    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "owner", "userId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,5 +109,7 @@ class BaseResourceUpdate(BaseModel):
                 ),
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
             }
         )

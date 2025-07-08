@@ -59,7 +59,7 @@ func StrPtr(notEmpty string) *string {
 	return &notEmpty
 }
 
-func BuildListOption(pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string) (api.ListOptions, error) {
+func BuildListOption(pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (api.ListOptions, error) {
 	var pageSizeInt32 *int32
 	if pageSize != "" {
 		conv, err := converter.StringToInt32(pageSize)
@@ -80,10 +80,21 @@ func BuildListOption(pageSize string, orderBy model.OrderByField, sortOrder mode
 	if nextPageToken != "" {
 		nextPageTokenParam = &nextPageToken
 	}
+	var ownerParam *string
+	if owner != "" {
+		ownerParam = &owner
+	}
+	var userIdParam *string
+	if userId != "" {
+		userIdParam = &userId
+	}
+
 	return api.ListOptions{
 		PageSize:      pageSizeInt32,
 		OrderBy:       orderByString,
 		SortOrder:     sortOrderString,
 		NextPageToken: nextPageTokenParam,
+		Owner:         ownerParam,
+		UserId:        userIdParam,
 	}, nil
 }

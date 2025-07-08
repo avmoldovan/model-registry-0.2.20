@@ -26,6 +26,8 @@ type ServeModelListOptions struct {
 	Name               *string
 	ExternalID         *string
 	InferenceServiceID *int32
+	Owner              *string
+	UserId             *string
 }
 
 type ServeModelAttributes struct {

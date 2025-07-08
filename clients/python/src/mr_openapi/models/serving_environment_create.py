@@ -36,7 +36,15 @@ class ServingEnvironmentCreate(BaseModel):
         alias="externalId",
     )
     name: StrictStr = Field(description="The name of the ServingEnvironment.")
-    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "name"]
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
+    __properties: ClassVar[list[str]] = ["customProperties", "description", "externalId", "name", "owner", "userId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,5 +111,7 @@ class ServingEnvironmentCreate(BaseModel):
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
             }
         )

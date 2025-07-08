@@ -39,6 +39,12 @@ class RegisteredModelCreate(BaseModel):
     name: StrictStr = Field(
         description="The client provided name of the model. It must be unique among all the RegisteredModels of the same type within a Model Registry instance and cannot be changed once set."
     )
+    owner: StrictStr | None = None
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     readme: StrictStr | None = Field(default=None, description="Model documentation in Markdown.")
     maturity: StrictStr | None = Field(default=None, description="Maturity level of the model.")
     language: list[StrictStr] | None = Field(
@@ -56,13 +62,14 @@ class RegisteredModelCreate(BaseModel):
     license: StrictStr | None = Field(default=None, description="Short name of the model's license.")
     license_link: StrictStr | None = Field(default=None, description="URL to the license text.", alias="licenseLink")
     library_name: StrictStr | None = Field(default=None, alias="libraryName")
-    owner: StrictStr | None = None
     state: RegisteredModelState | None = None
     __properties: ClassVar[list[str]] = [
         "customProperties",
         "description",
         "externalId",
         "name",
+        "owner",
+        "userId",
         "readme",
         "maturity",
         "language",
@@ -72,7 +79,6 @@ class RegisteredModelCreate(BaseModel):
         "license",
         "licenseLink",
         "libraryName",
-        "owner",
         "state",
     ]
 
@@ -141,6 +147,8 @@ class RegisteredModelCreate(BaseModel):
                 "description": obj.get("description"),
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
                 "readme": obj.get("readme"),
                 "maturity": obj.get("maturity"),
                 "language": obj.get("language"),
@@ -150,7 +158,6 @@ class RegisteredModelCreate(BaseModel):
                 "license": obj.get("license"),
                 "licenseLink": obj.get("licenseLink"),
                 "libraryName": obj.get("libraryName"),
-                "owner": obj.get("owner"),
                 "state": obj.get("state"),
             }
         )

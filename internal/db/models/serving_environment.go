@@ -4,6 +4,8 @@ type ServingEnvironmentListOptions struct {
 	Pagination
 	Name       *string
 	ExternalID *string
+	Owner      *string
+	UserId     *string
 }
 
 type ServingEnvironmentAttributes struct {

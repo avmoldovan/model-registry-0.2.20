@@ -50,6 +50,14 @@ class BaseResource(BaseModel):
         description="The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.",
     )
     id: StrictStr | None = Field(default=None, description="The unique server generated id of the resource.")
+    owner: StrictStr | None = Field(
+        default=None, description="The client provided owner of the artifact. This field is required."
+    )
+    user_id: StrictStr | None = Field(
+        default=None,
+        description="The client provided user identifier of the artifact. This field is required.",
+        alias="userId",
+    )
     __properties: ClassVar[list[str]] = [
         "createTimeSinceEpoch",
         "lastUpdateTimeSinceEpoch",
@@ -58,6 +66,8 @@ class BaseResource(BaseModel):
         "externalId",
         "name",
         "id",
+        "owner",
+        "userId",
     ]
 
     model_config = ConfigDict(
@@ -133,5 +143,7 @@ class BaseResource(BaseModel):
                 "externalId": obj.get("externalId"),
                 "name": obj.get("name"),
                 "id": obj.get("id"),
+                "owner": obj.get("owner"),
+                "userId": obj.get("userId"),
             }
         )

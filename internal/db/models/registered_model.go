@@ -4,6 +4,8 @@ type RegisteredModelListOptions struct {
 	Pagination
 	Name       *string
 	ExternalID *string
+	Owner      *string
+	UserId     *string
 }
 
 type Properties struct {
