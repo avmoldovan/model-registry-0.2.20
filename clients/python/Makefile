@@ -7,7 +7,7 @@ IMG ?= ghcr.io/kubeflow/model-registry/server:${IMG_VERSION}
 install:
 	../../bin/openapi-generator-cli generate -i ../../api/openapi/model-registry.yaml -g python -o src/ --package-name mr_openapi --additional-properties=library=asyncio,generateSourceCodeOnly=true,useOneOfDiscriminatorLookup=true --template-dir templates/
 	mv src/mr_openapi_README.md src/mr_openapi/README.md
-    # git apply patches/*
+	git apply patches/*
 	poetry install
 
 .PHONY: clean
@@ -36,6 +36,16 @@ test-e2e: deploy-latest-mr deploy-local-registry deploy-test-minio
 	$(MAKE) test-e2e-cleanup
 	@exit $$STATUS
 
+.PHONY: test-fuzz
+test-fuzz: deploy-latest-mr deploy-local-registry deploy-test-minio
+	@echo "Starting test-fuzz"
+	poetry install --all-extras
+	@set -a; . ../../scripts/manifests/minio/.env; set +a; \
+	poetry run pytest --fuzz -v -s --hypothesis-show-statistics
+	@rm -f ../../scripts/manifests/minio/.env
+	$(MAKE) test-e2e-cleanup
+	@exit $$STATUS
+
 .PHONY: test-e2e-run
 test-e2e-run:
 	@echo "Ensuring all extras are installed..."
@@ -47,6 +57,8 @@ test-e2e-run:
 
 .PHONY: test-e2e-cleanup
 test-e2e-cleanup:
+	@echo "Cleaning up database..."
+	cd ../../ && ./scripts/cleanup.sh
 	@echo "Cleaning up port-forward processes..."
 	@if [ -f .port-forwards.pid ]; then \
 		kill $$(cat .port-forwards.pid) || true; \
