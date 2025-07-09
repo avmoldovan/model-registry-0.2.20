@@ -57,6 +57,9 @@ func MapMLMDCustomProperties(source map[string]*proto.Value) (map[string]openapi
 	data := make(map[string]openapi.MetadataValue)
 
 	for key, v := range source {
+		if key == "owner" || key == "userId" {
+			continue
+		}
 		// data[key] = v.Value
 		customValue := openapi.MetadataValue{}
 
