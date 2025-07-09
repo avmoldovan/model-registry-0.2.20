@@ -7,6 +7,8 @@ services:
       - "9090:8080"
     environment:
       - METADATA_STORE_SERVER_CONFIG_FILE=/tmp/shared/conn_config.pb
+      - GLOG_logtostderr=true
+      - GLOG_v=2
     volumes:
       - ./test/config/ml-metadata:/tmp/shared
   model-registry:
@@ -19,3 +21,6 @@ services:
       - "8081:8080"
     depends_on:
       - mlmd-server
+    environment:
+      - GLOG_logtostderr=true
+      - GLOG_v=2

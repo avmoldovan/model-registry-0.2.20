@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang/glog"
 	"math"
 	"strconv"
 
@@ -38,6 +39,7 @@ func Int64ToInt32(id *int64) (*int32, error) {
 
 // MapOpenAPICustomPropertiesEmbedMD maps OpenAPI custom properties model to embedmd one
 func MapOpenAPICustomPropertiesEmbedMD(source *map[string]openapi.MetadataValue) (*[]models.Properties, error) {
+	glog.V(2).Info("In the openapi_embedmd_converter_util.MapOpenAPICustomPropertiesEmbedMD")
 	props := make([]models.Properties, 0)
 
 	if source != nil {

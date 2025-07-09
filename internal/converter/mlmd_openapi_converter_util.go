@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang/glog"
 	"strconv"
 	"strings"
 
@@ -52,6 +53,7 @@ func NewMetadataProtoValue(typeDef string, value string) *openapi.MetadataProtoV
 
 // MapMLMDCustomProperties maps MLMD custom properties model to OpenAPI one
 func MapMLMDCustomProperties(source map[string]*proto.Value) (map[string]openapi.MetadataValue, error) {
+	glog.V(2).Info("In the mlmd_openapi_converter_util.MapMLMDCustomProperties")
 	data := make(map[string]openapi.MetadataValue)
 
 	for key, v := range source {

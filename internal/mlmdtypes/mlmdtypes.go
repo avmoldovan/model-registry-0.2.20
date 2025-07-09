@@ -51,6 +51,7 @@ func CreateMLMDTypes(cc grpc.ClientConnInterface, nameConfig MLMDTypeNamesConfig
 				"logo":         proto.PropertyType_STRING,
 				"maturity":     proto.PropertyType_STRING,
 				"owner":        proto.PropertyType_STRING,
+				"userId":       proto.PropertyType_STRING,
 				"provider":     proto.PropertyType_STRING,
 				"readme":       proto.PropertyType_STRING,
 				"state":        proto.PropertyType_STRING,

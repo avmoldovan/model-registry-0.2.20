@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang/glog"
 	"strconv"
 
 	"github.com/google/uuid"
@@ -52,6 +53,7 @@ func StringToInt32(idString string) (int32, error) {
 
 // MapOpenAPICustomProperties maps OpenAPI custom properties model to MLMD one
 func MapOpenAPICustomProperties(source *map[string]openapi.MetadataValue) (map[string]*proto.Value, error) {
+	glog.V(2).Info("In the openapi_mlmd_converter_util.MapOpenAPICustomProperties")
 	props := make(map[string]*proto.Value)
 
 	if source != nil {

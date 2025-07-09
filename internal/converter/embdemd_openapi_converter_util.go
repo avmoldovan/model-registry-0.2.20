@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/golang/glog"
 	"strconv"
 	"strings"
 
@@ -18,6 +19,7 @@ const mlmdStructPrefix = "mlmd-struct::"
 
 // MapEmbedMDCustomProperties maps EmbedMD custom properties model to OpenAPI one
 func MapEmbedMDCustomProperties(source []models.Properties) (map[string]openapi.MetadataValue, error) {
+	glog.V(2).Info("In the embdemd_openapi_converter_util.MapEmbedMDCustomProperties")
 	data := make(map[string]openapi.MetadataValue)
 
 	for _, v := range source {
