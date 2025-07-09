@@ -162,37 +162,3 @@ func (b *ModelRegistryService) GetRegisteredModels(listOptions api.ListOptions) 
 
 	return registeredModelList, nil
 }
-
-func (b *ModelRegistryService) GetRegisteredModelsByOwner(listOptions api.ListOptions, owner *string, userid *string) (*openapi.RegisteredModelList, error) {
-	modelsList, err := b.registeredModelRepository.List(models.RegisteredModelListOptions{
-		Pagination: models.Pagination{
-			PageSize:      listOptions.PageSize,
-			OrderBy:       listOptions.OrderBy,
-			SortOrder:     listOptions.SortOrder,
-			NextPageToken: listOptions.NextPageToken,
-		},
-		Owner:  owner,
-		UserId: userid,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	registeredModelList := &openapi.RegisteredModelList{
-		Items: []openapi.RegisteredModel{},
-	}
-
-	for _, model := range modelsList.Items {
-		registeredModel, err := b.mapper.MapToRegisteredModel(model)
-		if err != nil {
-			return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
-		}
-		registeredModelList.Items = append(registeredModelList.Items, *registeredModel)
-	}
-
-	registeredModelList.NextPageToken = modelsList.NextPageToken
-	registeredModelList.PageSize = modelsList.PageSize
-	registeredModelList.Size = int32(modelsList.Size)
-
-	return registeredModelList, nil
-}
