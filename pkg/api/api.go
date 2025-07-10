@@ -28,7 +28,7 @@ type ModelRegistryApi interface {
 	GetRegisteredModelByInferenceService(inferenceServiceId string) (*openapi.RegisteredModel, error)
 
 	// GetRegisteredModelByParams find RegisteredModel instances that match the provided optional params
-	GetRegisteredModelByParams(name *string, externalId *string) (*openapi.RegisteredModel, error)
+	GetRegisteredModelByParams(name *string, externalId *string, owner *string, userId *string) (*openapi.RegisteredModel, error)
 
 	// GetRegisteredModels return all ModelArtifact properly ordered and sized based on listOptions param.
 	GetRegisteredModels(listOptions ListOptions) (*openapi.RegisteredModelList, error)

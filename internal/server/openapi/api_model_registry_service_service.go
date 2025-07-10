@@ -206,7 +206,8 @@ func (s *ModelRegistryServiceAPIService) FindModelVersion(ctx context.Context, n
 
 // FindRegisteredModel - Get a RegisteredModel that matches search parameters.
 func (s *ModelRegistryServiceAPIService) FindRegisteredModel(ctx context.Context, name string, externalID string) (ImplResponse, error) {
-	result, err := s.coreApi.GetRegisteredModelByParams(apiutils.StrPtr(name), apiutils.StrPtr(externalID))
+	//TODO: need to collect owner and userid from somewhere
+	result, err := s.coreApi.GetRegisteredModelByParams(apiutils.StrPtr(name), apiutils.StrPtr(externalID), apiutils.StrPtr(""), apiutils.StrPtr(""))
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}

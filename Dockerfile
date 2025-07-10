@@ -58,7 +58,6 @@ RUN make deps
 # It ensures consitent repeatable Dockerfile builds
 
 # prepare the build in a separate layer
-# clean fails
 RUN make clean build/prepare
 # compile separately to optimize multi-platform builds
 RUN CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} make build/compile

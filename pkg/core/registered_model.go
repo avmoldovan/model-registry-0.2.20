@@ -134,7 +134,7 @@ func (serv *ModelRegistryService) getRegisteredModelByVersionId(id string) (*ope
 
 // GetRegisteredModelByParams retrieves a registered model based on specified parameters, such as name or external ID.
 // If multiple or no registered models are found, an error is returned accordingly.
-func (serv *ModelRegistryService) GetRegisteredModelByParams(name *string, externalId *string) (*openapi.RegisteredModel, error) {
+func (serv *ModelRegistryService) GetRegisteredModelByParams(name *string, externalId *string, owner *string, userId *string) (*openapi.RegisteredModel, error) {
 	glog.Infof("Getting registered model by params name=%v, externalId=%v", name, externalId)
 
 	filterQuery := ""
@@ -142,6 +142,10 @@ func (serv *ModelRegistryService) GetRegisteredModelByParams(name *string, exter
 		filterQuery = fmt.Sprintf("name = \"%s\"", *name)
 	} else if externalId != nil {
 		filterQuery = fmt.Sprintf("external_id = \"%s\"", *externalId)
+	} else if owner != nil {
+		filterQuery = fmt.Sprintf("owner = \"%s\"", *owner)
+	} else if userId != nil {
+		filterQuery = fmt.Sprintf("userId = \"%s\"", *userId)
 	} else {
 		return nil, fmt.Errorf("invalid parameters call, supply either name or externalId: %w", api.ErrBadRequest)
 	}
@@ -174,6 +178,7 @@ func (serv *ModelRegistryService) GetRegisteredModelByParams(name *string, exter
 
 // GetRegisteredModels retrieves a list of registered models based on the provided list options.
 func (serv *ModelRegistryService) GetRegisteredModels(listOptions api.ListOptions) (*openapi.RegisteredModelList, error) {
+	// TODO: need to pass the owner and userId to the list options
 	listOperationOptions, err := apiutils.BuildListOperationOptions(listOptions)
 	if err != nil {
 		return nil, err

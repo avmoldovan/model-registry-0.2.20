@@ -435,7 +435,7 @@ func TestGetRegisteredModelByParams(t *testing.T) {
 
 		// Get by name
 		modelName := "params-test-model"
-		result, err := service.GetRegisteredModelByParams(&modelName, nil)
+		result, err := service.GetRegisteredModelByParams(&modelName, nil, nil, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -453,7 +453,7 @@ func TestGetRegisteredModelByParams(t *testing.T) {
 
 		// Get by external ID
 		externalId := "params-unique-ext-456"
-		result, err := service.GetRegisteredModelByParams(nil, &externalId)
+		result, err := service.GetRegisteredModelByParams(nil, &externalId, nil, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -462,7 +462,7 @@ func TestGetRegisteredModelByParams(t *testing.T) {
 	})
 
 	t.Run("invalid parameters", func(t *testing.T) {
-		result, err := service.GetRegisteredModelByParams(nil, nil)
+		result, err := service.GetRegisteredModelByParams(nil, nil, nil, nil)
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -471,7 +471,7 @@ func TestGetRegisteredModelByParams(t *testing.T) {
 
 	t.Run("no model found", func(t *testing.T) {
 		modelName := "nonexistent-model"
-		result, err := service.GetRegisteredModelByParams(&modelName, nil)
+		result, err := service.GetRegisteredModelByParams(&modelName, nil, nil, nil)
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -486,7 +486,7 @@ func TestGetRegisteredModelByParams(t *testing.T) {
 		created, err := service.UpsertRegisteredModel(input)
 		require.NoError(t, err)
 
-		result, err := service.GetRegisteredModelByParams(&modelName, nil)
+		result, err := service.GetRegisteredModelByParams(&modelName, nil, nil, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)

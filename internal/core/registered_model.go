@@ -100,25 +100,27 @@ func (b *ModelRegistryService) GetRegisteredModelByInferenceService(inferenceSer
 	return b.mapper.MapToRegisteredModel(model)
 }
 
-func (b *ModelRegistryService) GetRegisteredModelByParams(name *string, externalId *string) (*openapi.RegisteredModel, error) {
-	if name == nil && externalId == nil {
-		return nil, fmt.Errorf("invalid parameters call, supply either name or externalId: %w", api.ErrBadRequest)
+func (b *ModelRegistryService) GetRegisteredModelByParams(name *string, externalId *string, owner *string, userId *string) (*openapi.RegisteredModel, error) {
+	if name == nil && externalId == nil && owner == nil && userId == nil {
+		return nil, fmt.Errorf("invalid parameters call, supply either name, externalId, owner or userId: %w", api.ErrBadRequest)
 	}
 
 	modelsList, err := b.registeredModelRepository.List(models.RegisteredModelListOptions{
 		Name:       name,
 		ExternalID: externalId,
+		Owner:      owner,
+		UserId:     userId,
 	})
 	if err != nil {
 		return nil, err
 	}
 
 	if len(modelsList.Items) == 0 {
-		return nil, fmt.Errorf("no registered models found for name=%v, externalId=%v: %w", apiutils.ZeroIfNil(name), apiutils.ZeroIfNil(externalId), api.ErrNotFound)
+		return nil, fmt.Errorf("no registered models found for name=%v, externalId=%v, owner=%v, userId=%v: %w", apiutils.ZeroIfNil(name), apiutils.ZeroIfNil(externalId), apiutils.ZeroIfNil(owner), apiutils.ZeroIfNil(userId), api.ErrNotFound)
 	}
 
 	if len(modelsList.Items) > 1 {
-		return nil, fmt.Errorf("multiple registered models found for name=%v, externalId=%v: %w", apiutils.ZeroIfNil(name), apiutils.ZeroIfNil(externalId), api.ErrNotFound)
+		return nil, fmt.Errorf("multiple registered models found for name=%v, externalId=%v, owner=%v, userId=%v: %w", apiutils.ZeroIfNil(name), apiutils.ZeroIfNil(externalId), apiutils.ZeroIfNil(owner), apiutils.ZeroIfNil(userId), api.ErrNotFound)
 	}
 
 	registeredModel, err := b.mapper.MapToRegisteredModel(modelsList.Items[0])

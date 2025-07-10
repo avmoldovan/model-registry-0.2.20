@@ -220,7 +220,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByParamsWithNoResults() {
 	// create mode registry service
 	service := suite.setupModelRegistryService()
 
-	_, err := service.GetRegisteredModelByParams(apiutils.Of("not-present"), nil)
+	_, err := service.GetRegisteredModelByParams(apiutils.Of("not-present"), nil, nil, nil)
 	suite.NotNil(err)
 	suite.Equal("no registered models found for name=not-present, externalId=: not found", err.Error())
 }
@@ -238,7 +238,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByParamsName() {
 	createdModel, err := service.UpsertRegisteredModel(registeredModel)
 	suite.Nilf(err, "error creating registered model: %v", err)
 
-	byName, err := service.GetRegisteredModelByParams(&modelName, nil)
+	byName, err := service.GetRegisteredModelByParams(&modelName, nil, nil, nil)
 	suite.Nilf(err, "error getting registered model by name: %v", err)
 
 	suite.Equalf(*createdModel.Id, *byName.Id, "the returned model id should match the retrieved by name")
@@ -260,7 +260,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByParamsInvalid() {
 
 	invalidName := "\xFF"
 
-	_, err = service.GetRegisteredModelByParams(&invalidName, nil)
+	_, err = service.GetRegisteredModelByParams(&invalidName, nil, nil, nil)
 	statusResp := api.ErrToStatus(err)
 	suite.NotNilf(err, "invalid parameter used to retreive registered model")
 	suite.Equal(400, statusResp, "invalid parameter used to retreive registered model")
@@ -279,7 +279,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByParamsExternalId() {
 	createdModel, err := service.UpsertRegisteredModel(registeredModel)
 	suite.Nilf(err, "error creating registered model: %v", err)
 
-	byName, err := service.GetRegisteredModelByParams(nil, &modelExternalId)
+	byName, err := service.GetRegisteredModelByParams(nil, &modelExternalId, nil, nil)
 	suite.Nilf(err, "error getting registered model by external id: %v", err)
 
 	suite.Equalf(*createdModel.Id, *byName.Id, "the returned model id should match the retrieved by name")
@@ -298,7 +298,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByEmptyParams() {
 	_, err := service.UpsertRegisteredModel(registeredModel)
 	suite.Nilf(err, "error creating registered model: %v", err)
 
-	_, err = service.GetRegisteredModelByParams(nil, nil)
+	_, err = service.GetRegisteredModelByParams(nil, nil, nil, nil)
 	suite.NotNil(err)
 	suite.Equal("invalid parameters call, supply either name or externalId: bad request", err.Error())
 }
