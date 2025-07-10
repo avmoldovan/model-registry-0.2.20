@@ -2,6 +2,7 @@ package apiutils
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/kubeflow/model-registry/internal/converter"
 	"github.com/kubeflow/model-registry/internal/ml_metadata/proto"
@@ -36,6 +37,21 @@ func BuildListOperationOptions(listOptions api.ListOptions) (*proto.ListOperatio
 			IsAsc: &isAsc,
 		}
 	}
+	queries := []string{}
+	if listOptions.Owner != nil {
+		q := fmt.Sprintf("properties.owner.string_value = \"%s\"", *listOptions.Owner)
+		queries = append(queries, q)
+	}
+
+	if listOptions.UserId != nil {
+		q := fmt.Sprintf("properties.user_id.string_value = \"%s\"", *listOptions.UserId)
+		queries = append(queries, q)
+	}
+	if len(queries) > 0 {
+		query := strings.Join(queries, " and ")
+		result.FilterQuery = &query
+	}
+
 	return &result, nil
 }
 

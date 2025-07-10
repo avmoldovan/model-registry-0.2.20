@@ -3,6 +3,7 @@ package core
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/golang/glog"
 	"github.com/kubeflow/model-registry/internal/apiutils"
@@ -357,7 +358,13 @@ func (serv *ModelRegistryService) GetModelArtifacts(listOptions api.ListOptions,
 			return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
 		}
 		typeQuery := fmt.Sprintf("type = '%v'", serv.nameConfig.ModelArtifactTypeName)
-		listOperationOptions.FilterQuery = &typeQuery
+		queries := []string{}
+		if listOperationOptions.FilterQuery != nil {
+			queries = append(queries, *listOperationOptions.FilterQuery)
+		}
+		queries = append(queries, typeQuery)
+		query := strings.Join(queries, " and ")
+		listOperationOptions.FilterQuery = &query
 		artifactsResp, err := serv.mlmdClient.GetArtifactsByContext(context.Background(), &proto.GetArtifactsByContextRequest{
 			ContextId: ctxId,
 			Options:   listOperationOptions,

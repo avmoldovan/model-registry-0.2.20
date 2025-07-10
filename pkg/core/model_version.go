@@ -3,6 +3,7 @@ package core
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/golang/glog"
 	"github.com/kubeflow/model-registry/internal/apiutils"
@@ -226,7 +227,13 @@ func (serv *ModelRegistryService) GetModelVersions(listOptions api.ListOptions, 
 
 	if registeredModelId != nil {
 		queryParentCtxId := fmt.Sprintf("parent_contexts_a.id = %s", *registeredModelId)
-		listOperationOptions.FilterQuery = &queryParentCtxId
+		queries := []string{}
+		if listOperationOptions.FilterQuery != nil {
+			queries = append(queries, *listOperationOptions.FilterQuery)
+		}
+		queries = append(queries, queryParentCtxId)
+		query := strings.Join(queries, " and ")
+		listOperationOptions.FilterQuery = &query
 	}
 
 	contextsResp, err := serv.mlmdClient.GetContextsByType(context.Background(), &proto.GetContextsByTypeRequest{

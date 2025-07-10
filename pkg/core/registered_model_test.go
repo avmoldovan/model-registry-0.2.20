@@ -485,3 +485,39 @@ func (suite *CoreTestSuite) TestCreateRegisteredModelWithCustomPropFailure() {
 	suite.NotNilf(err, "error creating registered model: %v", err)
 	suite.Equal(400, statusResp, "customProperties must include metadataType")
 }
+
+func (suite *CoreTestSuite) TestGetRegisteredModelsFilterByOwnerAndUserId() {
+	service := suite.setupModelRegistryService()
+
+	_, err := service.UpsertRegisteredModel(&openapi.RegisteredModel{
+		Name:   "Model1",
+		Owner:  apiutils.Of("owner1"),
+		UserId: apiutils.Of("user1"),
+	})
+	suite.Nilf(err, "error creating registered model: %v", err)
+
+	_, err = service.UpsertRegisteredModel(&openapi.RegisteredModel{
+		Name:   "Model2",
+		Owner:  apiutils.Of("owner2"),
+		UserId: apiutils.Of("user2"),
+	})
+	suite.Nilf(err, "error creating registered model: %v", err)
+
+	_, err = service.UpsertRegisteredModel(&openapi.RegisteredModel{
+		Name:   "Model3",
+		Owner:  apiutils.Of("owner1"),
+		UserId: apiutils.Of("user3"),
+	})
+	suite.Nilf(err, "error creating registered model: %v", err)
+
+	owner := "owner1"
+	list, err := service.GetRegisteredModels(api.ListOptions{Owner: &owner})
+	suite.Nilf(err, "error getting registered models: %v", err)
+	suite.Equal(int32(2), list.Size)
+
+	userId := "user2"
+	list, err = service.GetRegisteredModels(api.ListOptions{UserId: &userId})
+	suite.Nilf(err, "error getting registered models: %v", err)
+	suite.Equal(int32(1), list.Size)
+	suite.Equal("Model2", list.Items[0].Name)
+}
