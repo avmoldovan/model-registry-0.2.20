@@ -284,7 +284,7 @@ func (b *ModelRegistryService) GetArtifactByParams(artifactName *string, modelVe
 	return b.getArtifactsByParams(artifactName, modelVersionId, externalId, "")
 }
 
-func (b *ModelRegistryService) GetArtifacts(listOptions api.ListOptions, modelVersionId *string, owner *string, userId *string) (*openapi.ArtifactList, error) {
+func (b *ModelRegistryService) GetArtifacts(listOptions api.ListOptions, modelVersionId *string) (*openapi.ArtifactList, error) {
 	var modelVersionIDPtr *int32
 
 	if modelVersionId != nil {
@@ -306,8 +306,8 @@ func (b *ModelRegistryService) GetArtifacts(listOptions api.ListOptions, modelVe
 			NextPageToken: listOptions.NextPageToken,
 		},
 		ModelVersionID: modelVersionIDPtr,
-		Owner:          owner,
-		UserId:         userId,
+		Owner:          listOptions.Owner,
+		UserId:         listOptions.UserId,
 	})
 	if err != nil {
 		return nil, err
@@ -374,7 +374,7 @@ func (b *ModelRegistryService) GetModelArtifactByInferenceService(inferenceServi
 		return nil, err
 	}
 
-	artifactList, err := b.GetArtifacts(api.ListOptions{}, mv.Id, nil, nil)
+	artifactList, err := b.GetArtifacts(api.ListOptions{}, mv.Id)
 	if err != nil {
 		return nil, err
 	}
