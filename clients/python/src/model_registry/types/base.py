@@ -36,6 +36,9 @@ class BaseResourceModel(BaseModel, ABC):
     create_time_since_epoch: str | None = None
     last_update_time_since_epoch: str | None = None
     custom_properties: Mapping[str, SupportedTypes] | None = None
+    owner: str | None = None
+    userId: str | None = None
+
 
     @abstractmethod
     def create(self, **kwargs) -> Any:

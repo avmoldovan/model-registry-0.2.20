@@ -133,7 +133,7 @@ func (r *RegisteredModelRepositoryImpl) List(listOptions models.RegisteredModelL
 	} else if listOptions.Owner != nil {
 		query = query.Where("owner = ?", listOptions.Owner)
 	} else if listOptions.UserId != nil {
-		query = query.Where("user_id = ?", listOptions.UserId)
+		query = query.Where("userId = ?", listOptions.UserId)
 	}
 
 	query = query.Scopes(scopes.Paginate(models, &listOptions.Pagination, r.db))

@@ -44,7 +44,7 @@ func BuildListOperationOptions(listOptions api.ListOptions) (*proto.ListOperatio
 	}
 
 	if listOptions.UserId != nil {
-		q := fmt.Sprintf("properties.user_id.string_value = \"%s\"", *listOptions.UserId)
+		q := fmt.Sprintf("properties.userId.string_value = \"%s\"", *listOptions.UserId)
 		queries = append(queries, q)
 	}
 	if len(queries) > 0 {

@@ -7,7 +7,11 @@ IMG ?= ghcr.io/kubeflow/model-registry/server:${IMG_VERSION}
 install:
 	../../bin/openapi-generator-cli generate -i ../../api/openapi/model-registry.yaml -g python -o src/ --package-name mr_openapi --additional-properties=library=asyncio,generateSourceCodeOnly=true,useOneOfDiscriminatorLookup=true --template-dir templates/
 	mv src/mr_openapi_README.md src/mr_openapi/README.md
-	git apply patches/*
+	dos2unix ./patches/fix-validators.patch
+	git apply ./patches/fix-validators.patch
+	#git diff ./src/mr_openapi/configuration.py > ./patches/asyncio-only.patch
+	dos2unix ./patches/asyncio-only.patch
+	#git apply ./patches/asyncio-only.patch
 	poetry install
 
 .PHONY: clean

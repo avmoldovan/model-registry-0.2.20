@@ -20,12 +20,26 @@ class ListOptions:
         order_by: Field to order by.
         is_asc: Whether to order in ascending order. Defaults to True.
         next_page_token: Token to use to retrieve next page of results.
+        owner: This field is used to filter the list by the tenant.
+        userId: This field is used to filter the list by the user identifier.
     """
 
     limit: int | None = None
     order_by: OrderByField | None = None
     is_asc: bool = True
     next_page_token: str | None = None
+    owner: str | None = None
+    userId: str | None = None
+
+    @classmethod
+    def filter_by_owner(cls, owner: str, **kwargs) -> ListOptions:
+        """Return options to filter by owner."""
+        return cls(owner=owner, **kwargs)
+
+    @classmethod
+    def filter_by_user_id(cls, user_id: str, **kwargs) -> ListOptions:
+        """Return options to filter by user ID."""
+        return cls(userId=user_id, **kwargs)
 
     @classmethod
     def order_by_creation_time(cls, **kwargs) -> ListOptions:
@@ -53,4 +67,8 @@ class ListOptions:
             options["sort_order"] = SortOrder.ASC if self.is_asc else SortOrder.DESC
         if self.next_page_token is not None:
             options["next_page_token"] = self.next_page_token
+        if self.owner is not None:
+            options["owner"] = self.owner
+        if self.userId is not None:
+            options["user_id"] = self.userId
         return options
