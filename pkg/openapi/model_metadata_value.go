@@ -77,8 +77,28 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
+	var discriminator string
+	if mt, ok := jsonDict["metadataType"].(string); ok {
+		discriminator = mt
+	} else {
+		switch {
+		case jsonDict["bool_value"] != nil:
+			discriminator = "MetadataBoolValue"
+		case jsonDict["double_value"] != nil:
+			discriminator = "MetadataDoubleValue"
+		case jsonDict["int_value"] != nil:
+			discriminator = "MetadataIntValue"
+		case jsonDict["proto_value"] != nil:
+			discriminator = "MetadataProtoValue"
+		case jsonDict["string_value"] != nil:
+			discriminator = "MetadataStringValue"
+		case jsonDict["struct_value"] != nil:
+			discriminator = "MetadataStructValue"
+		}
+	}
+
 	// check if the discriminator value is 'MetadataBoolValue'
-	if jsonDict["metadataType"] == "MetadataBoolValue" {
+	if discriminator == "MetadataBoolValue" {
 		// try to unmarshal JSON data into MetadataBoolValue
 		err = json.Unmarshal(data, &dst.MetadataBoolValue)
 		if err == nil {
@@ -90,7 +110,7 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// check if the discriminator value is 'MetadataDoubleValue'
-	if jsonDict["metadataType"] == "MetadataDoubleValue" {
+	if discriminator == "MetadataDoubleValue" {
 		// try to unmarshal JSON data into MetadataDoubleValue
 		err = json.Unmarshal(data, &dst.MetadataDoubleValue)
 		if err == nil {
@@ -102,7 +122,7 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// check if the discriminator value is 'MetadataIntValue'
-	if jsonDict["metadataType"] == "MetadataIntValue" {
+	if discriminator == "MetadataIntValue" {
 		// try to unmarshal JSON data into MetadataIntValue
 		err = json.Unmarshal(data, &dst.MetadataIntValue)
 		if err == nil {
@@ -114,7 +134,7 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// check if the discriminator value is 'MetadataProtoValue'
-	if jsonDict["metadataType"] == "MetadataProtoValue" {
+	if discriminator == "MetadataProtoValue" {
 		// try to unmarshal JSON data into MetadataProtoValue
 		err = json.Unmarshal(data, &dst.MetadataProtoValue)
 		if err == nil {
@@ -126,7 +146,7 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// check if the discriminator value is 'MetadataStringValue'
-	if jsonDict["metadataType"] == "MetadataStringValue" {
+	if discriminator == "MetadataStringValue" {
 		// try to unmarshal JSON data into MetadataStringValue
 		err = json.Unmarshal(data, &dst.MetadataStringValue)
 		if err == nil {
@@ -138,7 +158,7 @@ func (dst *MetadataValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// check if the discriminator value is 'MetadataStructValue'
-	if jsonDict["metadataType"] == "MetadataStructValue" {
+	if discriminator == "MetadataStructValue" {
 		// try to unmarshal JSON data into MetadataStructValue
 		err = json.Unmarshal(data, &dst.MetadataStructValue)
 		if err == nil {

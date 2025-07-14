@@ -158,6 +158,10 @@ func (r *ModelArtifactRepositoryImpl) List(listOptions models.ModelArtifactListO
 		query = query.Where("name = ?", listOptions.Name)
 	} else if listOptions.ExternalID != nil {
 		query = query.Where("external_id = ?", listOptions.ExternalID)
+	} else if listOptions.Owner != nil {
+		query = query.Where("owner = ?", listOptions.Owner)
+	} else if listOptions.UserId != nil {
+		query = query.Where("userId = ?", listOptions.UserId)
 	}
 
 	if listOptions.ModelVersionID != nil {
