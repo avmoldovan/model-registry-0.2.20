@@ -127,6 +127,22 @@ func (c *OpenAPIToMLMDConverterImpl) ConvertInferenceService(source *converter.O
 			return nil, fmt.Errorf("error setting field CustomProperties: %w", err)
 		}
 		protoContext.CustomProperties = mapStringPProtoValue2
+		var pString3 *string
+		if (*source).Model != nil {
+			pString3 = (*source).Model.Owner
+		}
+		if pString3 != nil {
+			xstring2 := *pString3
+			protoContext.Owner = &xstring2
+		}
+		var pString4 *string
+		if (*source).Model != nil {
+			pString4 = (*source).Model.UserId
+		}
+		if pString4 != nil {
+			xstring3 := *pString4
+			protoContext.UserId = &xstring3
+		}
 		pProtoContext = &protoContext
 	}
 	return pProtoContext, nil
@@ -246,6 +262,22 @@ func (c *OpenAPIToMLMDConverterImpl) ConvertModelVersion(source *converter.OpenA
 			return nil, fmt.Errorf("error setting field CustomProperties: %w", err)
 		}
 		protoContext.CustomProperties = mapStringPProtoValue2
+		var pString3 *string
+		if (*source).Model != nil {
+			pString3 = (*source).Model.Owner
+		}
+		if pString3 != nil {
+			xstring2 := *pString3
+			protoContext.Owner = &xstring2
+		}
+		var pString4 *string
+		if (*source).Model != nil {
+			pString4 = (*source).Model.UserId
+		}
+		if pString4 != nil {
+			xstring3 := *pString4
+			protoContext.UserId = &xstring3
+		}
 		pProtoContext = &protoContext
 	}
 	return pProtoContext, nil
@@ -296,6 +328,22 @@ func (c *OpenAPIToMLMDConverterImpl) ConvertRegisteredModel(source *converter.Op
 			return nil, fmt.Errorf("error setting field CustomProperties: %w", err)
 		}
 		protoContext.CustomProperties = mapStringPProtoValue2
+		var pString4 *string
+		if (*source).Model != nil {
+			pString4 = (*source).Model.Owner
+		}
+		if pString4 != nil {
+			xstring3 := *pString4
+			protoContext.Owner = &xstring3
+		}
+		var pString5 *string
+		if (*source).Model != nil {
+			pString5 = (*source).Model.UserId
+		}
+		if pString5 != nil {
+			xstring4 := *pString5
+			protoContext.UserId = &xstring4
+		}
 		pProtoContext = &protoContext
 	}
 	return pProtoContext, nil
@@ -398,6 +446,22 @@ func (c *OpenAPIToMLMDConverterImpl) ConvertServingEnvironment(source *converter
 			return nil, fmt.Errorf("error setting field CustomProperties: %w", err)
 		}
 		protoContext.CustomProperties = mapStringPProtoValue2
+		var pString4 *string
+		if (*source).Model != nil {
+			pString4 = (*source).Model.Owner
+		}
+		if pString4 != nil {
+			xstring3 := *pString4
+			protoContext.Owner = &xstring3
+		}
+		var pString5 *string
+		if (*source).Model != nil {
+			pString5 = (*source).Model.UserId
+		}
+		if pString5 != nil {
+			xstring4 := *pString5
+			protoContext.UserId = &xstring4
+		}
 		pProtoContext = &protoContext
 	}
 	return pProtoContext, nil

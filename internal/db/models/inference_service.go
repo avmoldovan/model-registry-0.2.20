@@ -15,6 +15,8 @@ type InferenceServiceAttributes struct {
 	ExternalID               *string
 	CreateTimeSinceEpoch     *int64
 	LastUpdateTimeSinceEpoch *int64
+	Owner                    *string
+	UserId                   *string
 }
 
 type InferenceService interface {

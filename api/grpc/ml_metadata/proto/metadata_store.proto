@@ -403,6 +403,10 @@ message ContextType {
   // If set, it must be unique among all context types within a database
   // instance.
   optional string external_id = 7;
+  // The owner of the artifact.
+  optional string owner = 101;
+  // The userId of the artifact.
+  optional string userId = 102;
   // The schema of the type, e.g., name: string, owner: string
   // Properties are always optional in the context.
   // Properties of an context type can be expanded but not contracted (i.e.,
@@ -446,6 +450,10 @@ message Context {
 
   // Output only system metadata.
   optional google.protobuf.Any system_metadata = 10;
+  // The owner of the Context.
+  optional string owner = 101;
+  // The userId of the Context.
+  optional string userId = 102;
 }
 
 // the Attribution edges between Context and Artifact instances.

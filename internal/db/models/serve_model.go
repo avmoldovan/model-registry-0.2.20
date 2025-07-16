@@ -36,6 +36,8 @@ type ServeModelAttributes struct {
 	LastKnownState           *string
 	CreateTimeSinceEpoch     *int64
 	LastUpdateTimeSinceEpoch *int64
+	Owner                    *string
+	UserId                   *string
 }
 
 type ServeModel interface {

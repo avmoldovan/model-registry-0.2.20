@@ -8,6 +8,8 @@ type TypeAttributes struct {
 	InputType   *string
 	OutputType  *string
 	ExternalID  *string
+	Owner       *string
+	UserId      *string
 }
 
 type Type interface {
