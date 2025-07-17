@@ -115,7 +115,7 @@ class ModelRegistryAPIClient:
 
         return RegisteredModel.from_basemodel(rm)
 
-    async def get_registered_model_by_id(self, id: str) -> RegisteredModel | None:
+    async def get_registered_model_by_id(self, id: str, owner: str | None = None) -> RegisteredModel | None:
         """Fetch a registered model by its ID.
 
         Args:
@@ -126,7 +126,7 @@ class ModelRegistryAPIClient:
         """
         async with self.get_client() as client:
             try:
-                rm = await client.get_registered_model(id)
+                rm = await client.get_registered_model(id, owner)
             except mr_exceptions.NotFoundException:
                 return None
 
@@ -140,7 +140,7 @@ class ModelRegistryAPIClient:
 
     @required_args(("name",), ("external_id",))
     async def get_registered_model_by_params(
-        self, name: str | None = None, external_id: str | None = None
+        self, name: str | None = None, external_id: str | None = None, owner: str | None = None
     ) -> RegisteredModel | None:
         """Fetch a registered model by its name or external ID.
 
@@ -154,7 +154,7 @@ class ModelRegistryAPIClient:
         async with self.get_client() as client:
             try:
                 rm = await client.find_registered_model(
-                    name=name, external_id=external_id
+                    name=name, external_id=external_id, owner=owner
                 )
             except mr_exceptions.NotFoundException:
                 return None
@@ -212,7 +212,7 @@ class ModelRegistryAPIClient:
         return ModelVersion.from_basemodel(mv)
 
     async def get_model_version_by_id(
-        self, model_version_id: str
+        self, model_version_id: str, owner: str | None = None
     ) -> ModelVersion | None:
         """Fetch a model version by its ID.
 
@@ -224,7 +224,7 @@ class ModelRegistryAPIClient:
         """
         async with self.get_client() as client:
             try:
-                mv = await client.get_model_version(model_version_id)
+                mv = await client.get_model_version(model_version_id, owner)
             except mr_exceptions.NotFoundException:
                 return None
 
@@ -272,6 +272,7 @@ class ModelRegistryAPIClient:
         registered_model_id: str | None = None,
         name: str | None = None,
         external_id: str | None = None,
+        owner: str | None = None
     ) -> ModelVersion | None:
         """Fetch a model version by associated parameters.
 
@@ -291,6 +292,7 @@ class ModelRegistryAPIClient:
                     name=name,
                     external_id=external_id,
                     parent_resource_id=registered_model_id,
+                    owner=owner,
                 )
             except mr_exceptions.NotFoundException:
                 return None
@@ -344,7 +346,7 @@ class ModelRegistryAPIClient:
                 ),
             )
 
-    async def get_model_artifact_by_id(self, id: str) -> ModelArtifact | None:
+    async def get_model_artifact_by_id(self, id: str, owner: str | None = None) -> ModelArtifact | None:
         """Fetch a model artifact by its ID.
 
         Args:
@@ -355,7 +357,7 @@ class ModelRegistryAPIClient:
         """
         async with self.get_client() as client:
             try:
-                ma = await client.get_model_artifact(id)
+                ma = await client.get_model_artifact(id, owner)
             except mr_exceptions.NotFoundException:
                 return None
 
@@ -383,6 +385,7 @@ class ModelRegistryAPIClient:
         name: str | None = None,
         model_version_id: str | None = None,
         external_id: str | None = None,
+        owner: str | None = None
     ) -> ModelArtifact | None:
         """Fetch a model artifact either by external ID or by its name and the ID of its associated model version.
 
@@ -400,6 +403,7 @@ class ModelRegistryAPIClient:
                     name=name,
                     parent_resource_id=model_version_id,
                     external_id=external_id,
+                    owner=owner,
                 )
             except mr_exceptions.NotFoundException:
                 return None
