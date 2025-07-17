@@ -78,13 +78,15 @@ func (c *ModelCatalogServiceAPIController) Routes() Routes {
 // FindModels - Search catalog models across sources.
 func (c *ModelCatalogServiceAPIController) FindModels(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
+	ownerParam := query.Get("owner")
 	sourceParam := query.Get("source")
 	qParam := query.Get("q")
 	pageSizeParam := query.Get("pageSize")
 	orderByParam := query.Get("orderBy")
 	sortOrderParam := query.Get("sortOrder")
 	nextPageTokenParam := query.Get("nextPageToken")
-	result, err := c.service.FindModels(r.Context(), sourceParam, qParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam)
+	userIdParam := query.Get("userId")
+	result, err := c.service.FindModels(r.Context(), ownerParam, sourceParam, qParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam, userIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -97,12 +99,14 @@ func (c *ModelCatalogServiceAPIController) FindModels(w http.ResponseWriter, r *
 // FindSources - List All CatalogSources
 func (c *ModelCatalogServiceAPIController) FindSources(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
+	ownerParam := query.Get("owner")
 	nameParam := query.Get("name")
 	pageSizeParam := query.Get("pageSize")
 	orderByParam := query.Get("orderBy")
 	sortOrderParam := query.Get("sortOrder")
 	nextPageTokenParam := query.Get("nextPageToken")
-	result, err := c.service.FindSources(r.Context(), nameParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam)
+	userIdParam := query.Get("userId")
+	result, err := c.service.FindSources(r.Context(), ownerParam, nameParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam, userIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -114,9 +118,12 @@ func (c *ModelCatalogServiceAPIController) FindSources(w http.ResponseWriter, r 
 
 // GetModel - Get a `CatalogModel`.
 func (c *ModelCatalogServiceAPIController) GetModel(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
 	sourceIdParam := chi.URLParam(r, "source_id")
 	modelNameParam := chi.URLParam(r, "*")
-	result, err := c.service.GetModel(r.Context(), sourceIdParam, modelNameParam)
+	ownerParam := query.Get("owner")
+	userIdParam := query.Get("userId")
+	result, err := c.service.GetModel(r.Context(), sourceIdParam, modelNameParam, ownerParam, userIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -128,9 +135,12 @@ func (c *ModelCatalogServiceAPIController) GetModel(w http.ResponseWriter, r *ht
 
 // GetAllModelArtifacts - List CatalogModelArtifacts.
 func (c *ModelCatalogServiceAPIController) GetAllModelArtifacts(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
 	sourceIdParam := chi.URLParam(r, "source_id")
 	modelNameParam := chi.URLParam(r, "model_name")
-	result, err := c.service.GetAllModelArtifacts(r.Context(), sourceIdParam, modelNameParam)
+	ownerParam := query.Get("owner")
+	userIdParam := query.Get("userId")
+	result, err := c.service.GetAllModelArtifacts(r.Context(), sourceIdParam, modelNameParam, ownerParam, userIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

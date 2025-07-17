@@ -22,10 +22,10 @@ type ModelRegistryApi interface {
 	UpsertRegisteredModel(registeredModel *openapi.RegisteredModel) (*openapi.RegisteredModel, error)
 
 	// GetRegisteredModelById retrieve RegisteredModel by id
-	GetRegisteredModelById(id string) (*openapi.RegisteredModel, error)
+	GetRegisteredModelById(id string, owner string, userId string) (*openapi.RegisteredModel, error)
 
 	// GetRegisteredModelByInferenceService retrieve a RegisteredModel by inference service id
-	GetRegisteredModelByInferenceService(inferenceServiceId string) (*openapi.RegisteredModel, error)
+	GetRegisteredModelByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.RegisteredModel, error)
 
 	// GetRegisteredModelByParams find RegisteredModel instances that match the provided optional params
 	GetRegisteredModelByParams(name *string, externalId *string, owner *string, userId *string) (*openapi.RegisteredModel, error)
@@ -40,7 +40,7 @@ type ModelRegistryApi interface {
 	UpsertModelVersion(modelVersion *openapi.ModelVersion, registeredModelId *string) (*openapi.ModelVersion, error)
 
 	// GetModelVersionById retrieve ModelVersion by id
-	GetModelVersionById(id string) (*openapi.ModelVersion, error)
+	GetModelVersionById(id string, owner string, userId string) (*openapi.ModelVersion, error)
 
 	// GetModelVersionByInferenceService retrieve a ModelVersion by inference service id
 	GetModelVersionByInferenceService(inferenceServiceId string) (*openapi.ModelVersion, error)
@@ -58,7 +58,7 @@ type ModelRegistryApi interface {
 
 	UpsertArtifact(artifact *openapi.Artifact) (*openapi.Artifact, error)
 
-	GetArtifactById(id string) (*openapi.Artifact, error)
+	GetArtifactById(id string, owner string, userId string) (*openapi.Artifact, error)
 
 	GetArtifactByParams(artifactName *string, modelVersionId *string, externalId *string) (*openapi.Artifact, error)
 
@@ -70,10 +70,10 @@ type ModelRegistryApi interface {
 	UpsertModelArtifact(modelArtifact *openapi.ModelArtifact) (*openapi.ModelArtifact, error)
 
 	// GetModelArtifactById retrieve ModelArtifact by id
-	GetModelArtifactById(id string) (*openapi.ModelArtifact, error)
+	GetModelArtifactById(id string, owner string, userId string) (*openapi.ModelArtifact, error)
 
 	// GetModelArtifactByInferenceService retrieve a ModelArtifact by inference service id
-	GetModelArtifactByInferenceService(inferenceServiceId string) (*openapi.ModelArtifact, error)
+	GetModelArtifactByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelArtifact, error)
 
 	// GetModelArtifactByParams find ModelArtifact instances that match the provided optional params
 	GetModelArtifactByParams(artifactName *string, modelVersionId *string, externalId *string) (*openapi.ModelArtifact, error)
@@ -89,7 +89,7 @@ type ModelRegistryApi interface {
 	UpsertServingEnvironment(registeredModel *openapi.ServingEnvironment) (*openapi.ServingEnvironment, error)
 
 	// GetInferenceServiceById retrieve ServingEnvironment by id
-	GetServingEnvironmentById(id string) (*openapi.ServingEnvironment, error)
+	GetServingEnvironmentById(id string, owner string, userId string) (*openapi.ServingEnvironment, error)
 
 	// GetServingEnvironmentByParams find ServingEnvironment instances that match the provided optional params
 	GetServingEnvironmentByParams(name *string, externalId *string) (*openapi.ServingEnvironment, error)
@@ -106,7 +106,7 @@ type ModelRegistryApi interface {
 	UpsertInferenceService(inferenceService *openapi.InferenceService) (*openapi.InferenceService, error)
 
 	// GetInferenceServiceById retrieve InferenceService by id
-	GetInferenceServiceById(id string) (*openapi.InferenceService, error)
+	GetInferenceServiceById(id string, owner string, userId string) (*openapi.InferenceService, error)
 
 	// GetInferenceServiceByParams find InferenceService instances that match the provided optional params
 	GetInferenceServiceByParams(name *string, parentResourceId *string, externalId *string) (*openapi.InferenceService, error)

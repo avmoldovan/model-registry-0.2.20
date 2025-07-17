@@ -78,7 +78,7 @@ func (b *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, modelV
 
 	if ma := artifact.ModelArtifact; ma != nil {
 		if ma.Id != nil {
-			existing, err := b.getArtifact(*ma.Id, true)
+			existing, err := b.getArtifact(*ma.Id, true, "", "")
 			if err != nil {
 				return nil, fmt.Errorf("mismatched types, artifact with id %s is not a model artifact: %w", *ma.Id, api.ErrBadRequest)
 			}
@@ -128,7 +128,7 @@ func (b *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, modelV
 		return artToReturn, nil
 	} else if da := artifact.DocArtifact; da != nil {
 		if da.Id != nil {
-			existing, err := b.getArtifact(*da.Id, true)
+			existing, err := b.getArtifact(*da.Id, true, "", "")
 			if err != nil {
 				return nil, fmt.Errorf("mismatched types, artifact with id %s is not a doc artifact: %w", *da.Id, api.ErrBadRequest)
 			}
@@ -189,7 +189,7 @@ func (b *ModelRegistryService) UpsertArtifact(artifact *openapi.Artifact) (*open
 	return b.upsertArtifact(artifact, nil)
 }
 
-func (b *ModelRegistryService) getArtifact(id string, preserveName bool) (*openapi.Artifact, error) {
+func (b *ModelRegistryService) getArtifact(id string, preserveName bool, owner string, userId string) (*openapi.Artifact, error) {
 	artToReturn := &openapi.Artifact{}
 	convertedId, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
@@ -227,8 +227,8 @@ func (b *ModelRegistryService) getArtifact(id string, preserveName bool) (*opena
 	return artToReturn, nil
 }
 
-func (b *ModelRegistryService) GetArtifactById(id string) (*openapi.Artifact, error) {
-	return b.getArtifact(id, false)
+func (b *ModelRegistryService) GetArtifactById(id string, owner string, userId string) (*openapi.Artifact, error) {
+	return b.getArtifact(id, false, owner, userId)
 }
 
 func (b *ModelRegistryService) getArtifactsByParams(artifactName *string, modelVersionId *string, externalId *string, artifactType string) (*openapi.Artifact, error) {
@@ -355,8 +355,8 @@ func (b *ModelRegistryService) UpsertModelArtifact(modelArtifact *openapi.ModelA
 	return art.ModelArtifact, nil
 }
 
-func (b *ModelRegistryService) GetModelArtifactById(id string) (*openapi.ModelArtifact, error) {
-	art, err := b.GetArtifactById(id)
+func (b *ModelRegistryService) GetModelArtifactById(id string, owner string, userId string) (*openapi.ModelArtifact, error) {
+	art, err := b.GetArtifactById(id, owner, userId)
 	if err != nil {
 		return nil, err
 	}

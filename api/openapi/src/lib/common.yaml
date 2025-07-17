@@ -330,7 +330,7 @@ components:
       schema:
         type: string
       in: query
-      required: false
+      required: true
     userId:
       name: userId
       description: User ID of the resource owner.

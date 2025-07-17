@@ -14,7 +14,7 @@ ENVTEST ?= $(PROJECT_BIN)/setup-envtest
 # add tools bin directory
 PATH := $(PROJECT_BIN):$(PATH)
 
-MLMD_VERSION ?= 1.14.0
+MLMD_VERSION ?= 1.15.0
 
 # docker executable
 DOCKER ?= docker

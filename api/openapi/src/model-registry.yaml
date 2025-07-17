@@ -37,6 +37,8 @@ paths:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
       - $ref: "#/components/parameters/parentResourceId"
+      - $ref: "#/components/parameters/owner"
+      - $ref: "#/components/parameters/userId"
   /api/model_registry/v1alpha3/artifacts:
     summary: Path used to manage the list of artifacts.
     description: >-
@@ -49,6 +51,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ArtifactListResponse"
@@ -98,6 +102,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/ArtifactResponse"
@@ -174,6 +191,8 @@ paths:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
       - $ref: "#/components/parameters/parentResourceId"
+      - $ref: "#/components/parameters/owner"
+      - $ref: "#/components/parameters/userId"
   /api/model_registry/v1alpha3/inference_services:
     summary: Path used to manage the list of inferenceservices.
     description: >-
@@ -186,6 +205,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/InferenceServiceListResponse"
@@ -235,6 +256,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/InferenceServiceResponse"
@@ -310,6 +344,18 @@ paths:
           type: string
         in: path
         required: true
+      - name: owner
+        description: The owner of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: true
+      - name: userId
+        description: The userId of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: false
   "/api/model_registry/v1alpha3/inference_services/{inferenceserviceId}/serves":
     summary: Path used to manage the list of `ServeModels` for a `InferenceService`.
     description: >-
@@ -324,6 +370,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ServeModelListResponse"
@@ -401,6 +449,18 @@ paths:
           type: string
         in: path
         required: true
+      - name: owner
+        description: The owner of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: true
+      - name: userId
+        description: The userId of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: false
   /api/model_registry/v1alpha3/model_artifact:
     summary: Path used to search for a modelartifact.
     description: >-
@@ -428,6 +488,8 @@ paths:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
       - $ref: "#/components/parameters/parentResourceId"
+      - $ref: "#/components/parameters/owner"
+      - $ref: "#/components/parameters/userId"
   /api/model_registry/v1alpha3/model_artifacts:
     summary: Path used to manage the list of modelartifacts.
     description: >-
@@ -440,6 +502,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ModelArtifactListResponse"
@@ -489,6 +553,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/ModelArtifactResponse"
@@ -563,6 +640,8 @@ paths:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
       - $ref: "#/components/parameters/parentResourceId"
+      - $ref: "#/components/parameters/owner"
+      - $ref: "#/components/parameters/userId"
   /api/model_registry/v1alpha3/model_versions:
     summary: Path used to manage the list of modelversions.
     description: >-
@@ -575,6 +654,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ModelVersionListResponse"
@@ -622,6 +703,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/ModelVersionResponse"
@@ -683,6 +777,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ArtifactListResponse"
@@ -757,6 +853,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
+      - $ref: "#/components/parameters/owner"
+      - $ref: "#/components/parameters/userId"
   /api/model_registry/v1alpha3/registered_models:
     summary: Path used to manage the list of registeredmodels.
     description: >-
@@ -816,6 +914,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/RegisteredModelResponse"
@@ -877,6 +988,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/ModelVersionListResponse"
@@ -950,6 +1063,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/name"
       - $ref: "#/components/parameters/externalId"
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/userId'
   /api/model_registry/v1alpha3/serving_environments:
     summary: Path used to manage the list of servingenvironments.
     description: >-
@@ -962,6 +1077,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: '#/components/parameters/owner'
+        - $ref: '#/components/parameters/userId'
       responses:
         "200":
           $ref: "#/components/responses/ServingEnvironmentListResponse"
@@ -1007,6 +1124,19 @@ paths:
     get:
       tags:
         - ModelRegistryService
+      parameters:
+        - name: owner
+          description: The owner of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: userId
+          description: The userId of the `RegisteredModel`.
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           $ref: "#/components/responses/ServingEnvironmentResponse"
@@ -1068,6 +1198,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/InferenceServiceListResponse"

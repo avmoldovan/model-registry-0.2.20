@@ -2365,11 +2365,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_artifact(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2384,12 +2386,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of an `Artifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2412,9 +2418,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2439,11 +2447,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_artifact_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2458,12 +2468,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of an `Artifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2486,9 +2500,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2513,11 +2529,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_artifact_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2532,12 +2550,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of an `Artifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2560,9 +2582,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2582,9 +2606,11 @@ class ModelRegistryServiceApi:
 
     def _find_artifact_serialize(
         self,
+        owner,
         name,
         external_id,
         parent_resource_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2615,6 +2641,14 @@ class ModelRegistryServiceApi:
         if parent_resource_id is not None:
 
             _query_params.append(("parentResourceId", parent_resource_id))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -2644,11 +2678,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_inference_service(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2663,12 +2699,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of `InferenceService` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2691,9 +2731,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_inference_service_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2718,11 +2760,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_inference_service_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2737,12 +2781,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of `InferenceService` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2765,9 +2813,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_inference_service_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2792,11 +2842,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_inference_service_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2811,12 +2863,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of `InferenceService` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2839,9 +2895,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_inference_service_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2861,9 +2919,11 @@ class ModelRegistryServiceApi:
 
     def _find_inference_service_serialize(
         self,
+        owner,
         name,
         external_id,
         parent_resource_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2894,6 +2954,14 @@ class ModelRegistryServiceApi:
         if parent_resource_id is not None:
 
             _query_params.append(("parentResourceId", parent_resource_id))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -2923,11 +2991,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_artifact(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2942,12 +3012,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelArtifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2970,9 +3044,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2997,11 +3073,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_artifact_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3016,12 +3094,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelArtifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3044,9 +3126,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3071,11 +3155,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_artifact_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3090,12 +3176,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelArtifact` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3118,9 +3208,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_artifact_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3140,9 +3232,11 @@ class ModelRegistryServiceApi:
 
     def _find_model_artifact_serialize(
         self,
+        owner,
         name,
         external_id,
         parent_resource_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3173,6 +3267,14 @@ class ModelRegistryServiceApi:
         if parent_resource_id is not None:
 
             _query_params.append(("parentResourceId", parent_resource_id))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -3202,11 +3304,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_version(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3221,12 +3325,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelVersion` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3249,9 +3357,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_version_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3276,11 +3386,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_version_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3295,12 +3407,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelVersion` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3323,9 +3439,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_version_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3350,11 +3468,13 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_model_version_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         parent_resource_id: Annotated[
             Optional[StrictStr], Field(description="ID of the parent resource to use for search.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3369,12 +3489,16 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `ModelVersion` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
         :param parent_resource_id: ID of the parent resource to use for search.
         :type parent_resource_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3397,9 +3521,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_model_version_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
             parent_resource_id=parent_resource_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3419,9 +3545,11 @@ class ModelRegistryServiceApi:
 
     def _find_model_version_serialize(
         self,
+        owner,
         name,
         external_id,
         parent_resource_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3453,6 +3581,14 @@ class ModelRegistryServiceApi:
 
             _query_params.append(("parentResourceId", parent_resource_id))
 
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3481,8 +3617,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_registered_model(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3497,10 +3635,14 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `RegisteredModel` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3523,8 +3665,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_registered_model_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3548,8 +3692,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_registered_model_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3564,10 +3710,14 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `RegisteredModel` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3590,8 +3740,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_registered_model_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3615,8 +3767,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_registered_model_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3631,10 +3785,14 @@ class ModelRegistryServiceApi:
 
         Gets the details of a single instance of a `RegisteredModel` that matches search parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3657,8 +3815,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_registered_model_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3677,8 +3837,10 @@ class ModelRegistryServiceApi:
 
     def _find_registered_model_serialize(
         self,
+        owner,
         name,
         external_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3705,6 +3867,14 @@ class ModelRegistryServiceApi:
         if external_id is not None:
 
             _query_params.append(("externalId", external_id))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -3734,8 +3904,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_serving_environment(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3750,10 +3922,14 @@ class ModelRegistryServiceApi:
 
         Finds a `ServingEnvironment` entity that matches query parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3776,8 +3952,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_serving_environment_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3801,8 +3979,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_serving_environment_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3817,10 +3997,14 @@ class ModelRegistryServiceApi:
 
         Finds a `ServingEnvironment` entity that matches query parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3843,8 +4027,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_serving_environment_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3868,8 +4054,10 @@ class ModelRegistryServiceApi:
     @validate_call
     async def find_serving_environment_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3884,10 +4072,14 @@ class ModelRegistryServiceApi:
 
         Finds a `ServingEnvironment` entity that matches query parameters.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
         :type external_id: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3910,8 +4102,10 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._find_serving_environment_serialize(
+            owner=owner,
             name=name,
             external_id=external_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3930,8 +4124,10 @@ class ModelRegistryServiceApi:
 
     def _find_serving_environment_serialize(
         self,
+        owner,
         name,
         external_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3958,6 +4154,14 @@ class ModelRegistryServiceApi:
         if external_id is not None:
 
             _query_params.append(("externalId", external_id))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -3988,6 +4192,8 @@ class ModelRegistryServiceApi:
     async def get_artifact(
         self,
         id: Annotated[StrictStr, Field(description="A unique identifier for an `Artifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4004,6 +4210,10 @@ class ModelRegistryServiceApi:
 
         :param id: A unique identifier for an `Artifact`. (required)
         :type id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4026,7 +4236,13 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifact_serialize(
-            id=id, _request_auth=_request_auth, _content_type=_content_type, _headers=_headers, _host_index=_host_index
+            id=id,
+            owner=owner,
+            user_id=user_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
         )
 
         _response_types_map: dict[str, Optional[str]] = {
@@ -4048,6 +4264,8 @@ class ModelRegistryServiceApi:
     async def get_artifact_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="A unique identifier for an `Artifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4064,6 +4282,10 @@ class ModelRegistryServiceApi:
 
         :param id: A unique identifier for an `Artifact`. (required)
         :type id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4086,7 +4308,13 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifact_serialize(
-            id=id, _request_auth=_request_auth, _content_type=_content_type, _headers=_headers, _host_index=_host_index
+            id=id,
+            owner=owner,
+            user_id=user_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
         )
 
         _response_types_map: dict[str, Optional[str]] = {
@@ -4108,6 +4336,8 @@ class ModelRegistryServiceApi:
     async def get_artifact_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="A unique identifier for an `Artifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4124,6 +4354,10 @@ class ModelRegistryServiceApi:
 
         :param id: A unique identifier for an `Artifact`. (required)
         :type id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4146,7 +4380,13 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifact_serialize(
-            id=id, _request_auth=_request_auth, _content_type=_content_type, _headers=_headers, _host_index=_host_index
+            id=id,
+            owner=owner,
+            user_id=user_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
         )
 
         _response_types_map: dict[str, Optional[str]] = {
@@ -4163,6 +4403,8 @@ class ModelRegistryServiceApi:
     def _get_artifact_serialize(
         self,
         id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -4184,6 +4426,14 @@ class ModelRegistryServiceApi:
         if id is not None:
             _path_params["id"] = id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -4212,6 +4462,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_artifacts(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -4222,6 +4473,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4236,6 +4488,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `Artifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -4244,6 +4498,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4266,10 +4522,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4294,6 +4552,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_artifacts_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -4304,6 +4563,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4318,6 +4578,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `Artifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -4326,6 +4588,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4348,10 +4612,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4376,6 +4642,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_artifacts_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -4386,6 +4653,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4400,6 +4668,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `Artifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -4408,6 +4678,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4430,10 +4702,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4453,10 +4727,12 @@ class ModelRegistryServiceApi:
 
     def _get_artifacts_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -4492,6 +4768,14 @@ class ModelRegistryServiceApi:
 
             _query_params.append(("nextPageToken", next_page_token))
 
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -4523,6 +4807,7 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -4535,6 +4820,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4551,6 +4837,8 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -4563,6 +4851,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4586,12 +4876,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_environment_inference_services_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4618,6 +4910,7 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -4630,6 +4923,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4646,6 +4940,8 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -4658,6 +4954,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4681,12 +4979,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_environment_inference_services_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4713,6 +5013,7 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -4725,6 +5026,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4741,6 +5043,8 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -4753,6 +5057,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4776,12 +5082,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_environment_inference_services_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4801,12 +5109,14 @@ class ModelRegistryServiceApi:
     def _get_environment_inference_services_serialize(
         self,
         servingenvironment_id,
+        owner,
         name,
         external_id,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -4852,6 +5162,14 @@ class ModelRegistryServiceApi:
 
             _query_params.append(("nextPageToken", next_page_token))
 
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -4881,6 +5199,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4897,6 +5217,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4920,6 +5244,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4944,6 +5270,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_with_http_info(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4960,6 +5288,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4983,6 +5315,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5007,6 +5341,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_without_preload_content(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5023,6 +5359,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5046,6 +5386,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5065,6 +5407,8 @@ class ModelRegistryServiceApi:
     def _get_inference_service_serialize(
         self,
         inferenceservice_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5086,6 +5430,14 @@ class ModelRegistryServiceApi:
         if inferenceservice_id is not None:
             _path_params["inferenceserviceId"] = inferenceservice_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -5115,6 +5467,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_model(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5131,6 +5485,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5154,6 +5512,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_model_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5178,6 +5538,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_model_with_http_info(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5194,6 +5556,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5217,6 +5583,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_model_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5241,6 +5609,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_model_without_preload_content(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5257,6 +5627,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5280,6 +5654,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_model_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5299,6 +5675,8 @@ class ModelRegistryServiceApi:
     def _get_inference_service_model_serialize(
         self,
         inferenceservice_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5320,6 +5698,14 @@ class ModelRegistryServiceApi:
         if inferenceservice_id is not None:
             _path_params["inferenceserviceId"] = inferenceservice_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -5349,6 +5735,7 @@ class ModelRegistryServiceApi:
     async def get_inference_service_serves(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -5361,6 +5748,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5377,6 +5765,8 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -5389,6 +5779,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5412,12 +5804,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serves_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5442,6 +5836,7 @@ class ModelRegistryServiceApi:
     async def get_inference_service_serves_with_http_info(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -5454,6 +5849,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5470,6 +5866,8 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -5482,6 +5880,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5505,12 +5905,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serves_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5535,6 +5937,7 @@ class ModelRegistryServiceApi:
     async def get_inference_service_serves_without_preload_content(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -5547,6 +5950,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5563,6 +5967,8 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -5575,6 +5981,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5598,12 +6006,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_serves_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5623,12 +6033,14 @@ class ModelRegistryServiceApi:
     def _get_inference_service_serves_serialize(
         self,
         inferenceservice_id,
+        owner,
         name,
         external_id,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5673,6 +6085,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -5703,6 +6123,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_version(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5719,6 +6141,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5742,6 +6168,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_version_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5766,6 +6194,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_version_with_http_info(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5782,6 +6212,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5805,6 +6239,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_version_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5829,6 +6265,8 @@ class ModelRegistryServiceApi:
     async def get_inference_service_version_without_preload_content(
         self,
         inferenceservice_id: Annotated[StrictStr, Field(description="A unique identifier for a `InferenceService`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5845,6 +6283,10 @@ class ModelRegistryServiceApi:
 
         :param inferenceservice_id: A unique identifier for a `InferenceService`. (required)
         :type inferenceservice_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5868,6 +6310,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_inference_service_version_serialize(
             inferenceservice_id=inferenceservice_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5887,6 +6331,8 @@ class ModelRegistryServiceApi:
     def _get_inference_service_version_serialize(
         self,
         inferenceservice_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5908,6 +6354,14 @@ class ModelRegistryServiceApi:
         if inferenceservice_id is not None:
             _path_params["inferenceserviceId"] = inferenceservice_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -5936,6 +6390,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_inference_services(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -5946,6 +6401,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5960,6 +6416,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `InferenceService` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -5968,6 +6426,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5990,10 +6450,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_inference_services_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6018,6 +6480,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_inference_services_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -6028,6 +6491,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6042,6 +6506,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `InferenceService` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -6050,6 +6516,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6072,10 +6540,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_inference_services_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6100,6 +6570,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_inference_services_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -6110,6 +6581,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6124,6 +6596,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `InferenceService` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -6132,6 +6606,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6154,10 +6630,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_inference_services_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6177,10 +6655,12 @@ class ModelRegistryServiceApi:
 
     def _get_inference_services_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6215,6 +6695,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -6245,6 +6733,8 @@ class ModelRegistryServiceApi:
     async def get_model_artifact(
         self,
         modelartifact_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelArtifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6261,6 +6751,10 @@ class ModelRegistryServiceApi:
 
         :param modelartifact_id: A unique identifier for a `ModelArtifact`. (required)
         :type modelartifact_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6284,6 +6778,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_artifact_serialize(
             modelartifact_id=modelartifact_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6308,6 +6804,8 @@ class ModelRegistryServiceApi:
     async def get_model_artifact_with_http_info(
         self,
         modelartifact_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelArtifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6324,6 +6822,10 @@ class ModelRegistryServiceApi:
 
         :param modelartifact_id: A unique identifier for a `ModelArtifact`. (required)
         :type modelartifact_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6347,6 +6849,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_artifact_serialize(
             modelartifact_id=modelartifact_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6371,6 +6875,8 @@ class ModelRegistryServiceApi:
     async def get_model_artifact_without_preload_content(
         self,
         modelartifact_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelArtifact`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6387,6 +6893,10 @@ class ModelRegistryServiceApi:
 
         :param modelartifact_id: A unique identifier for a `ModelArtifact`. (required)
         :type modelartifact_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6410,6 +6920,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_artifact_serialize(
             modelartifact_id=modelartifact_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6429,6 +6941,8 @@ class ModelRegistryServiceApi:
     def _get_model_artifact_serialize(
         self,
         modelartifact_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6450,6 +6964,14 @@ class ModelRegistryServiceApi:
         if modelartifact_id is not None:
             _path_params["modelartifactId"] = modelartifact_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6478,6 +7000,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_artifacts(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -6488,6 +7011,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6502,6 +7026,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelArtifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -6510,6 +7036,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6532,10 +7060,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6560,6 +7090,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_artifacts_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -6570,6 +7101,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6584,6 +7116,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelArtifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -6592,6 +7126,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6614,10 +7150,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6642,6 +7180,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_artifacts_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -6652,6 +7191,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6666,6 +7206,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelArtifact` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -6674,6 +7216,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6696,10 +7240,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_artifacts_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6719,10 +7265,12 @@ class ModelRegistryServiceApi:
 
     def _get_model_artifacts_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6757,6 +7305,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -6787,6 +7343,8 @@ class ModelRegistryServiceApi:
     async def get_model_version(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6803,6 +7361,10 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6826,6 +7388,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6850,6 +7414,8 @@ class ModelRegistryServiceApi:
     async def get_model_version_with_http_info(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6866,6 +7432,10 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6889,6 +7459,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6913,6 +7485,8 @@ class ModelRegistryServiceApi:
     async def get_model_version_without_preload_content(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6929,6 +7503,10 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6952,6 +7530,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6971,6 +7551,8 @@ class ModelRegistryServiceApi:
     def _get_model_version_serialize(
         self,
         modelversion_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6992,6 +7574,14 @@ class ModelRegistryServiceApi:
         if modelversion_id is not None:
             _path_params["modelversionId"] = modelversion_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -7021,6 +7611,7 @@ class ModelRegistryServiceApi:
     async def get_model_version_artifacts(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -7033,6 +7624,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7047,6 +7639,8 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -7059,6 +7653,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7082,12 +7678,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_artifacts_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7112,6 +7710,7 @@ class ModelRegistryServiceApi:
     async def get_model_version_artifacts_with_http_info(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -7124,6 +7723,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7138,6 +7738,8 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -7150,6 +7752,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7173,12 +7777,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_artifacts_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7203,6 +7809,7 @@ class ModelRegistryServiceApi:
     async def get_model_version_artifacts_without_preload_content(
         self,
         modelversion_id: Annotated[StrictStr, Field(description="A unique identifier for a `ModelVersion`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -7215,6 +7822,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7229,6 +7837,8 @@ class ModelRegistryServiceApi:
 
         :param modelversion_id: A unique identifier for a `ModelVersion`. (required)
         :type modelversion_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -7241,6 +7851,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7264,12 +7876,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_model_version_artifacts_serialize(
             modelversion_id=modelversion_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7289,12 +7903,14 @@ class ModelRegistryServiceApi:
     def _get_model_version_artifacts_serialize(
         self,
         modelversion_id,
+        owner,
         name,
         external_id,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -7340,6 +7956,14 @@ class ModelRegistryServiceApi:
 
             _query_params.append(("nextPageToken", next_page_token))
 
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -7368,6 +7992,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_versions(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -7378,6 +8003,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7392,6 +8018,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelVersion` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -7400,6 +8028,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7422,10 +8052,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_versions_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7448,6 +8080,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_versions_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -7458,6 +8091,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7472,6 +8106,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelVersion` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -7480,6 +8116,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7502,10 +8140,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_versions_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7528,6 +8168,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_model_versions_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -7538,6 +8179,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7552,6 +8194,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ModelVersion` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -7560,6 +8204,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7582,10 +8228,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_model_versions_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7603,10 +8251,12 @@ class ModelRegistryServiceApi:
 
     def _get_model_versions_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -7641,6 +8291,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters
@@ -7671,6 +8329,8 @@ class ModelRegistryServiceApi:
     async def get_registered_model(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7687,6 +8347,10 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7710,6 +8374,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7734,6 +8400,8 @@ class ModelRegistryServiceApi:
     async def get_registered_model_with_http_info(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7750,6 +8418,10 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7773,6 +8445,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7797,6 +8471,8 @@ class ModelRegistryServiceApi:
     async def get_registered_model_without_preload_content(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7813,6 +8489,10 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7836,6 +8516,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7855,6 +8537,8 @@ class ModelRegistryServiceApi:
     def _get_registered_model_serialize(
         self,
         registeredmodel_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -7876,6 +8560,14 @@ class ModelRegistryServiceApi:
         if registeredmodel_id is not None:
             _path_params["registeredmodelId"] = registeredmodel_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -7905,6 +8597,7 @@ class ModelRegistryServiceApi:
     async def get_registered_model_versions(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -7917,6 +8610,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7933,6 +8627,8 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -7945,6 +8641,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7968,12 +8666,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_versions_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7998,6 +8698,7 @@ class ModelRegistryServiceApi:
     async def get_registered_model_versions_with_http_info(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -8010,6 +8711,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8026,6 +8728,8 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -8038,6 +8742,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8061,12 +8767,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_versions_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8091,6 +8799,7 @@ class ModelRegistryServiceApi:
     async def get_registered_model_versions_without_preload_content(
         self,
         registeredmodel_id: Annotated[StrictStr, Field(description="A unique identifier for a `RegisteredModel`.")],
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         name: Annotated[Optional[StrictStr], Field(description="Name of entity to search.")] = None,
         external_id: Annotated[Optional[StrictStr], Field(description="External ID of entity to search.")] = None,
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
@@ -8103,6 +8812,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8119,6 +8829,8 @@ class ModelRegistryServiceApi:
 
         :param registeredmodel_id: A unique identifier for a `RegisteredModel`. (required)
         :type registeredmodel_id: str
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param name: Name of entity to search.
         :type name: str
         :param external_id: External ID of entity to search.
@@ -8131,6 +8843,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8154,12 +8868,14 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_registered_model_versions_serialize(
             registeredmodel_id=registeredmodel_id,
+            owner=owner,
             name=name,
             external_id=external_id,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8179,12 +8895,14 @@ class ModelRegistryServiceApi:
     def _get_registered_model_versions_serialize(
         self,
         registeredmodel_id,
+        owner,
         name,
         external_id,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -8230,6 +8948,14 @@ class ModelRegistryServiceApi:
 
             _query_params.append(("nextPageToken", next_page_token))
 
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -8258,6 +8984,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_registered_models(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -8268,7 +8995,6 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
@@ -8284,6 +9010,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `RegisteredModel` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -8292,8 +9020,6 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
-        :param owner: Owner of the resource.
-        :type owner: str
         :param user_id: User ID of the resource owner.
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -8318,11 +9044,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_registered_models_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
-            owner=owner,
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8346,6 +9072,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_registered_models_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -8356,7 +9083,6 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
@@ -8372,6 +9098,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `RegisteredModel` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -8380,8 +9108,6 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
-        :param owner: Owner of the resource.
-        :type owner: str
         :param user_id: User ID of the resource owner.
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -8406,11 +9132,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_registered_models_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
-            owner=owner,
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8434,6 +9160,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_registered_models_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -8444,7 +9171,6 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="Owner of the resource.")] = None,
         user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
@@ -8460,6 +9186,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `RegisteredModel` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -8468,8 +9196,6 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
-        :param owner: Owner of the resource.
-        :type owner: str
         :param user_id: User ID of the resource owner.
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -8494,11 +9220,11 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_registered_models_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
-            owner=owner,
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8517,11 +9243,11 @@ class ModelRegistryServiceApi:
 
     def _get_registered_models_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
-        owner,
         user_id,
         _request_auth,
         _content_type,
@@ -8597,6 +9323,8 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8613,6 +9341,10 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8636,6 +9368,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_serving_environment_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8662,6 +9396,8 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8678,6 +9414,10 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8701,6 +9441,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_serving_environment_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8727,6 +9469,8 @@ class ModelRegistryServiceApi:
         servingenvironment_id: Annotated[
             StrictStr, Field(description="A unique identifier for a `ServingEnvironment`.")
         ],
+        owner: Annotated[StrictStr, Field(description="The owner of the `RegisteredModel`.")],
+        user_id: Annotated[Optional[StrictStr], Field(description="The userId of the `RegisteredModel`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8743,6 +9487,10 @@ class ModelRegistryServiceApi:
 
         :param servingenvironment_id: A unique identifier for a `ServingEnvironment`. (required)
         :type servingenvironment_id: str
+        :param owner: The owner of the `RegisteredModel`. (required)
+        :type owner: str
+        :param user_id: The userId of the `RegisteredModel`.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8766,6 +9514,8 @@ class ModelRegistryServiceApi:
         """  # noqa: E501
         _param = self._get_serving_environment_serialize(
             servingenvironment_id=servingenvironment_id,
+            owner=owner,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8785,6 +9535,8 @@ class ModelRegistryServiceApi:
     def _get_serving_environment_serialize(
         self,
         servingenvironment_id,
+        owner,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -8806,6 +9558,14 @@ class ModelRegistryServiceApi:
         if servingenvironment_id is not None:
             _path_params["servingenvironmentId"] = servingenvironment_id
         # process the query parameters
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -8834,6 +9594,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_serving_environments(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -8844,6 +9605,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8858,6 +9620,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ServingEnvironment` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -8866,6 +9630,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8888,10 +9654,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_serving_environments_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8914,6 +9682,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_serving_environments_with_http_info(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -8924,6 +9693,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8938,6 +9708,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ServingEnvironment` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -8946,6 +9718,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8968,10 +9742,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_serving_environments_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8994,6 +9770,7 @@ class ModelRegistryServiceApi:
     @validate_call
     async def get_serving_environments_without_preload_content(
         self,
+        owner: Annotated[StrictStr, Field(description="Owner of the resource.")],
         page_size: Annotated[Optional[StrictStr], Field(description="Number of entities in each page.")] = None,
         order_by: Annotated[
             Optional[OrderByField], Field(description="Specifies the order by criteria for listing entities.")
@@ -9004,6 +9781,7 @@ class ModelRegistryServiceApi:
         next_page_token: Annotated[
             Optional[StrictStr], Field(description="Token to use to retrieve next page of results.")
         ] = None,
+        user_id: Annotated[Optional[StrictStr], Field(description="User ID of the resource owner.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9018,6 +9796,8 @@ class ModelRegistryServiceApi:
 
         Gets a list of all `ServingEnvironment` entities.
 
+        :param owner: Owner of the resource. (required)
+        :type owner: str
         :param page_size: Number of entities in each page.
         :type page_size: str
         :param order_by: Specifies the order by criteria for listing entities.
@@ -9026,6 +9806,8 @@ class ModelRegistryServiceApi:
         :type sort_order: SortOrder
         :param next_page_token: Token to use to retrieve next page of results.
         :type next_page_token: str
+        :param user_id: User ID of the resource owner.
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9048,10 +9830,12 @@ class ModelRegistryServiceApi:
         :return: Returns the result object.
         """  # noqa: E501
         _param = self._get_serving_environments_serialize(
+            owner=owner,
             page_size=page_size,
             order_by=order_by,
             sort_order=sort_order,
             next_page_token=next_page_token,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9069,10 +9853,12 @@ class ModelRegistryServiceApi:
 
     def _get_serving_environments_serialize(
         self,
+        owner,
         page_size,
         order_by,
         sort_order,
         next_page_token,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -9107,6 +9893,14 @@ class ModelRegistryServiceApi:
         if next_page_token is not None:
 
             _query_params.append(("nextPageToken", next_page_token))
+
+        if owner is not None:
+
+            _query_params.append(("owner", owner))
+
+        if user_id is not None:
+
+            _query_params.append(("userId", user_id))
 
         # process the header parameters
         # process the form parameters

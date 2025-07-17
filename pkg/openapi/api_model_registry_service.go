@@ -1575,9 +1575,17 @@ func (a *ModelRegistryServiceAPIService) CreateServingEnvironmentExecute(r ApiCr
 type ApiFindArtifactRequest struct {
 	ctx              context.Context
 	ApiService       *ModelRegistryServiceAPIService
+	owner            *string
 	name             *string
 	externalId       *string
 	parentResourceId *string
+	userId           *string
+}
+
+// Owner of the resource.
+func (r ApiFindArtifactRequest) Owner(owner string) ApiFindArtifactRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -1595,6 +1603,12 @@ func (r ApiFindArtifactRequest) ExternalId(externalId string) ApiFindArtifactReq
 // ID of the parent resource to use for search.
 func (r ApiFindArtifactRequest) ParentResourceId(parentResourceId string) ApiFindArtifactRequest {
 	r.parentResourceId = &parentResourceId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindArtifactRequest) UserId(userId string) ApiFindArtifactRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -1638,6 +1652,9 @@ func (a *ModelRegistryServiceAPIService) FindArtifactExecute(r ApiFindArtifactRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -1647,6 +1664,10 @@ func (a *ModelRegistryServiceAPIService) FindArtifactExecute(r ApiFindArtifactRe
 	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parentResourceId", r.parentResourceId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1759,9 +1780,17 @@ func (a *ModelRegistryServiceAPIService) FindArtifactExecute(r ApiFindArtifactRe
 type ApiFindInferenceServiceRequest struct {
 	ctx              context.Context
 	ApiService       *ModelRegistryServiceAPIService
+	owner            *string
 	name             *string
 	externalId       *string
 	parentResourceId *string
+	userId           *string
+}
+
+// Owner of the resource.
+func (r ApiFindInferenceServiceRequest) Owner(owner string) ApiFindInferenceServiceRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -1779,6 +1808,12 @@ func (r ApiFindInferenceServiceRequest) ExternalId(externalId string) ApiFindInf
 // ID of the parent resource to use for search.
 func (r ApiFindInferenceServiceRequest) ParentResourceId(parentResourceId string) ApiFindInferenceServiceRequest {
 	r.parentResourceId = &parentResourceId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindInferenceServiceRequest) UserId(userId string) ApiFindInferenceServiceRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -1822,6 +1857,9 @@ func (a *ModelRegistryServiceAPIService) FindInferenceServiceExecute(r ApiFindIn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -1831,6 +1869,10 @@ func (a *ModelRegistryServiceAPIService) FindInferenceServiceExecute(r ApiFindIn
 	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parentResourceId", r.parentResourceId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1943,9 +1985,17 @@ func (a *ModelRegistryServiceAPIService) FindInferenceServiceExecute(r ApiFindIn
 type ApiFindModelArtifactRequest struct {
 	ctx              context.Context
 	ApiService       *ModelRegistryServiceAPIService
+	owner            *string
 	name             *string
 	externalId       *string
 	parentResourceId *string
+	userId           *string
+}
+
+// Owner of the resource.
+func (r ApiFindModelArtifactRequest) Owner(owner string) ApiFindModelArtifactRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -1963,6 +2013,12 @@ func (r ApiFindModelArtifactRequest) ExternalId(externalId string) ApiFindModelA
 // ID of the parent resource to use for search.
 func (r ApiFindModelArtifactRequest) ParentResourceId(parentResourceId string) ApiFindModelArtifactRequest {
 	r.parentResourceId = &parentResourceId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindModelArtifactRequest) UserId(userId string) ApiFindModelArtifactRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -2006,6 +2062,9 @@ func (a *ModelRegistryServiceAPIService) FindModelArtifactExecute(r ApiFindModel
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -2015,6 +2074,10 @@ func (a *ModelRegistryServiceAPIService) FindModelArtifactExecute(r ApiFindModel
 	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parentResourceId", r.parentResourceId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2127,9 +2190,17 @@ func (a *ModelRegistryServiceAPIService) FindModelArtifactExecute(r ApiFindModel
 type ApiFindModelVersionRequest struct {
 	ctx              context.Context
 	ApiService       *ModelRegistryServiceAPIService
+	owner            *string
 	name             *string
 	externalId       *string
 	parentResourceId *string
+	userId           *string
+}
+
+// Owner of the resource.
+func (r ApiFindModelVersionRequest) Owner(owner string) ApiFindModelVersionRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -2147,6 +2218,12 @@ func (r ApiFindModelVersionRequest) ExternalId(externalId string) ApiFindModelVe
 // ID of the parent resource to use for search.
 func (r ApiFindModelVersionRequest) ParentResourceId(parentResourceId string) ApiFindModelVersionRequest {
 	r.parentResourceId = &parentResourceId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindModelVersionRequest) UserId(userId string) ApiFindModelVersionRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -2190,6 +2267,9 @@ func (a *ModelRegistryServiceAPIService) FindModelVersionExecute(r ApiFindModelV
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -2199,6 +2279,10 @@ func (a *ModelRegistryServiceAPIService) FindModelVersionExecute(r ApiFindModelV
 	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parentResourceId", r.parentResourceId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2311,8 +2395,16 @@ func (a *ModelRegistryServiceAPIService) FindModelVersionExecute(r ApiFindModelV
 type ApiFindRegisteredModelRequest struct {
 	ctx        context.Context
 	ApiService *ModelRegistryServiceAPIService
+	owner      *string
 	name       *string
 	externalId *string
+	userId     *string
+}
+
+// Owner of the resource.
+func (r ApiFindRegisteredModelRequest) Owner(owner string) ApiFindRegisteredModelRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -2324,6 +2416,12 @@ func (r ApiFindRegisteredModelRequest) Name(name string) ApiFindRegisteredModelR
 // External ID of entity to search.
 func (r ApiFindRegisteredModelRequest) ExternalId(externalId string) ApiFindRegisteredModelRequest {
 	r.externalId = &externalId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindRegisteredModelRequest) UserId(userId string) ApiFindRegisteredModelRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -2367,12 +2465,19 @@ func (a *ModelRegistryServiceAPIService) FindRegisteredModelExecute(r ApiFindReg
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	}
 	if r.externalId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "externalId", r.externalId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2474,8 +2579,16 @@ func (a *ModelRegistryServiceAPIService) FindRegisteredModelExecute(r ApiFindReg
 type ApiFindServingEnvironmentRequest struct {
 	ctx        context.Context
 	ApiService *ModelRegistryServiceAPIService
+	owner      *string
 	name       *string
 	externalId *string
+	userId     *string
+}
+
+// Owner of the resource.
+func (r ApiFindServingEnvironmentRequest) Owner(owner string) ApiFindServingEnvironmentRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -2487,6 +2600,12 @@ func (r ApiFindServingEnvironmentRequest) Name(name string) ApiFindServingEnviro
 // External ID of entity to search.
 func (r ApiFindServingEnvironmentRequest) ExternalId(externalId string) ApiFindServingEnvironmentRequest {
 	r.externalId = &externalId
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiFindServingEnvironmentRequest) UserId(userId string) ApiFindServingEnvironmentRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -2530,12 +2649,19 @@ func (a *ModelRegistryServiceAPIService) FindServingEnvironmentExecute(r ApiFind
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	}
 	if r.externalId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "externalId", r.externalId, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2638,6 +2764,20 @@ type ApiGetArtifactRequest struct {
 	ctx        context.Context
 	ApiService *ModelRegistryServiceAPIService
 	id         string
+	owner      *string
+	userId     *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetArtifactRequest) Owner(owner string) ApiGetArtifactRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetArtifactRequest) UserId(userId string) ApiGetArtifactRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetArtifactRequest) Execute() (*Artifact, *http.Response, error) {
@@ -2683,7 +2823,14 @@ func (a *ModelRegistryServiceAPIService) GetArtifactExecute(r ApiGetArtifactRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2795,10 +2942,18 @@ func (a *ModelRegistryServiceAPIService) GetArtifactExecute(r ApiGetArtifactRequ
 type ApiGetArtifactsRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetArtifactsRequest) Owner(owner string) ApiGetArtifactsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -2822,6 +2977,12 @@ func (r ApiGetArtifactsRequest) SortOrder(sortOrder SortOrder) ApiGetArtifactsRe
 // Token to use to retrieve next page of results.
 func (r ApiGetArtifactsRequest) NextPageToken(nextPageToken string) ApiGetArtifactsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetArtifactsRequest) UserId(userId string) ApiGetArtifactsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -2865,6 +3026,9 @@ func (a *ModelRegistryServiceAPIService) GetArtifactsExecute(r ApiGetArtifactsRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -2877,6 +3041,10 @@ func (a *ModelRegistryServiceAPIService) GetArtifactsExecute(r ApiGetArtifactsRe
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2990,12 +3158,20 @@ type ApiGetEnvironmentInferenceServicesRequest struct {
 	ctx                  context.Context
 	ApiService           *ModelRegistryServiceAPIService
 	servingenvironmentId string
+	owner                *string
 	name                 *string
 	externalId           *string
 	pageSize             *string
 	orderBy              *OrderByField
 	sortOrder            *SortOrder
 	nextPageToken        *string
+	userId               *string
+}
+
+// Owner of the resource.
+func (r ApiGetEnvironmentInferenceServicesRequest) Owner(owner string) ApiGetEnvironmentInferenceServicesRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -3031,6 +3207,12 @@ func (r ApiGetEnvironmentInferenceServicesRequest) SortOrder(sortOrder SortOrder
 // Token to use to retrieve next page of results.
 func (r ApiGetEnvironmentInferenceServicesRequest) NextPageToken(nextPageToken string) ApiGetEnvironmentInferenceServicesRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetEnvironmentInferenceServicesRequest) UserId(userId string) ApiGetEnvironmentInferenceServicesRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -3077,6 +3259,9 @@ func (a *ModelRegistryServiceAPIService) GetEnvironmentInferenceServicesExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -3095,6 +3280,10 @@ func (a *ModelRegistryServiceAPIService) GetEnvironmentInferenceServicesExecute(
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3197,6 +3386,20 @@ type ApiGetInferenceServiceRequest struct {
 	ctx                context.Context
 	ApiService         *ModelRegistryServiceAPIService
 	inferenceserviceId string
+	owner              *string
+	userId             *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceRequest) Owner(owner string) ApiGetInferenceServiceRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceRequest) UserId(userId string) ApiGetInferenceServiceRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetInferenceServiceRequest) Execute() (*InferenceService, *http.Response, error) {
@@ -3242,7 +3445,14 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceExecute(r ApiGetInfe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3344,6 +3554,20 @@ type ApiGetInferenceServiceModelRequest struct {
 	ctx                context.Context
 	ApiService         *ModelRegistryServiceAPIService
 	inferenceserviceId string
+	owner              *string
+	userId             *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceModelRequest) Owner(owner string) ApiGetInferenceServiceModelRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceModelRequest) UserId(userId string) ApiGetInferenceServiceModelRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetInferenceServiceModelRequest) Execute() (*RegisteredModel, *http.Response, error) {
@@ -3389,7 +3613,14 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceModelExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3491,12 +3722,20 @@ type ApiGetInferenceServiceServesRequest struct {
 	ctx                context.Context
 	ApiService         *ModelRegistryServiceAPIService
 	inferenceserviceId string
+	owner              *string
 	name               *string
 	externalId         *string
 	pageSize           *string
 	orderBy            *OrderByField
 	sortOrder          *SortOrder
 	nextPageToken      *string
+	userId             *string
+}
+
+// Owner of the resource.
+func (r ApiGetInferenceServiceServesRequest) Owner(owner string) ApiGetInferenceServiceServesRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -3532,6 +3771,12 @@ func (r ApiGetInferenceServiceServesRequest) SortOrder(sortOrder SortOrder) ApiG
 // Token to use to retrieve next page of results.
 func (r ApiGetInferenceServiceServesRequest) NextPageToken(nextPageToken string) ApiGetInferenceServiceServesRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetInferenceServiceServesRequest) UserId(userId string) ApiGetInferenceServiceServesRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -3578,6 +3823,9 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceServesExecute(r ApiG
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -3596,6 +3844,10 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceServesExecute(r ApiG
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3698,6 +3950,20 @@ type ApiGetInferenceServiceVersionRequest struct {
 	ctx                context.Context
 	ApiService         *ModelRegistryServiceAPIService
 	inferenceserviceId string
+	owner              *string
+	userId             *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceVersionRequest) Owner(owner string) ApiGetInferenceServiceVersionRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetInferenceServiceVersionRequest) UserId(userId string) ApiGetInferenceServiceVersionRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetInferenceServiceVersionRequest) Execute() (*ModelVersion, *http.Response, error) {
@@ -3743,7 +4009,14 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceVersionExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3844,10 +4117,18 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServiceVersionExecute(r Api
 type ApiGetInferenceServicesRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetInferenceServicesRequest) Owner(owner string) ApiGetInferenceServicesRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -3871,6 +4152,12 @@ func (r ApiGetInferenceServicesRequest) SortOrder(sortOrder SortOrder) ApiGetInf
 // Token to use to retrieve next page of results.
 func (r ApiGetInferenceServicesRequest) NextPageToken(nextPageToken string) ApiGetInferenceServicesRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetInferenceServicesRequest) UserId(userId string) ApiGetInferenceServicesRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -3914,6 +4201,9 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServicesExecute(r ApiGetInf
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -3926,6 +4216,10 @@ func (a *ModelRegistryServiceAPIService) GetInferenceServicesExecute(r ApiGetInf
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4039,6 +4333,20 @@ type ApiGetModelArtifactRequest struct {
 	ctx             context.Context
 	ApiService      *ModelRegistryServiceAPIService
 	modelartifactId string
+	owner           *string
+	userId          *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetModelArtifactRequest) Owner(owner string) ApiGetModelArtifactRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetModelArtifactRequest) UserId(userId string) ApiGetModelArtifactRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetModelArtifactRequest) Execute() (*ModelArtifact, *http.Response, error) {
@@ -4084,7 +4392,14 @@ func (a *ModelRegistryServiceAPIService) GetModelArtifactExecute(r ApiGetModelAr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4185,10 +4500,18 @@ func (a *ModelRegistryServiceAPIService) GetModelArtifactExecute(r ApiGetModelAr
 type ApiGetModelArtifactsRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetModelArtifactsRequest) Owner(owner string) ApiGetModelArtifactsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -4212,6 +4535,12 @@ func (r ApiGetModelArtifactsRequest) SortOrder(sortOrder SortOrder) ApiGetModelA
 // Token to use to retrieve next page of results.
 func (r ApiGetModelArtifactsRequest) NextPageToken(nextPageToken string) ApiGetModelArtifactsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetModelArtifactsRequest) UserId(userId string) ApiGetModelArtifactsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -4255,6 +4584,9 @@ func (a *ModelRegistryServiceAPIService) GetModelArtifactsExecute(r ApiGetModelA
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -4267,6 +4599,10 @@ func (a *ModelRegistryServiceAPIService) GetModelArtifactsExecute(r ApiGetModelA
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4380,6 +4716,20 @@ type ApiGetModelVersionRequest struct {
 	ctx            context.Context
 	ApiService     *ModelRegistryServiceAPIService
 	modelversionId string
+	owner          *string
+	userId         *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetModelVersionRequest) Owner(owner string) ApiGetModelVersionRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetModelVersionRequest) UserId(userId string) ApiGetModelVersionRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetModelVersionRequest) Execute() (*ModelVersion, *http.Response, error) {
@@ -4425,7 +4775,14 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionExecute(r ApiGetModelVer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4527,12 +4884,20 @@ type ApiGetModelVersionArtifactsRequest struct {
 	ctx            context.Context
 	ApiService     *ModelRegistryServiceAPIService
 	modelversionId string
+	owner          *string
 	name           *string
 	externalId     *string
 	pageSize       *string
 	orderBy        *OrderByField
 	sortOrder      *SortOrder
 	nextPageToken  *string
+	userId         *string
+}
+
+// Owner of the resource.
+func (r ApiGetModelVersionArtifactsRequest) Owner(owner string) ApiGetModelVersionArtifactsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -4568,6 +4933,12 @@ func (r ApiGetModelVersionArtifactsRequest) SortOrder(sortOrder SortOrder) ApiGe
 // Token to use to retrieve next page of results.
 func (r ApiGetModelVersionArtifactsRequest) NextPageToken(nextPageToken string) ApiGetModelVersionArtifactsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetModelVersionArtifactsRequest) UserId(userId string) ApiGetModelVersionArtifactsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -4612,6 +4983,9 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionArtifactsExecute(r ApiGe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -4630,6 +5004,10 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionArtifactsExecute(r ApiGe
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4731,10 +5109,18 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionArtifactsExecute(r ApiGe
 type ApiGetModelVersionsRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetModelVersionsRequest) Owner(owner string) ApiGetModelVersionsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -4758,6 +5144,12 @@ func (r ApiGetModelVersionsRequest) SortOrder(sortOrder SortOrder) ApiGetModelVe
 // Token to use to retrieve next page of results.
 func (r ApiGetModelVersionsRequest) NextPageToken(nextPageToken string) ApiGetModelVersionsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetModelVersionsRequest) UserId(userId string) ApiGetModelVersionsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -4801,6 +5193,9 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionsExecute(r ApiGetModelVe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -4813,6 +5208,10 @@ func (a *ModelRegistryServiceAPIService) GetModelVersionsExecute(r ApiGetModelVe
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4904,6 +5303,20 @@ type ApiGetRegisteredModelRequest struct {
 	ctx               context.Context
 	ApiService        *ModelRegistryServiceAPIService
 	registeredmodelId string
+	owner             *string
+	userId            *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetRegisteredModelRequest) Owner(owner string) ApiGetRegisteredModelRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetRegisteredModelRequest) UserId(userId string) ApiGetRegisteredModelRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetRegisteredModelRequest) Execute() (*RegisteredModel, *http.Response, error) {
@@ -4949,7 +5362,14 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelExecute(r ApiGetRegis
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5051,12 +5471,20 @@ type ApiGetRegisteredModelVersionsRequest struct {
 	ctx               context.Context
 	ApiService        *ModelRegistryServiceAPIService
 	registeredmodelId string
+	owner             *string
 	name              *string
 	externalId        *string
 	pageSize          *string
 	orderBy           *OrderByField
 	sortOrder         *SortOrder
 	nextPageToken     *string
+	userId            *string
+}
+
+// Owner of the resource.
+func (r ApiGetRegisteredModelVersionsRequest) Owner(owner string) ApiGetRegisteredModelVersionsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Name of entity to search.
@@ -5092,6 +5520,12 @@ func (r ApiGetRegisteredModelVersionsRequest) SortOrder(sortOrder SortOrder) Api
 // Token to use to retrieve next page of results.
 func (r ApiGetRegisteredModelVersionsRequest) NextPageToken(nextPageToken string) ApiGetRegisteredModelVersionsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetRegisteredModelVersionsRequest) UserId(userId string) ApiGetRegisteredModelVersionsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -5138,6 +5572,9 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelVersionsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
@@ -5156,6 +5593,10 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelVersionsExecute(r Api
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5257,12 +5698,18 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelVersionsExecute(r Api
 type ApiGetRegisteredModelsRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
-	owner         *string
 	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetRegisteredModelsRequest) Owner(owner string) ApiGetRegisteredModelsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -5286,12 +5733,6 @@ func (r ApiGetRegisteredModelsRequest) SortOrder(sortOrder SortOrder) ApiGetRegi
 // Token to use to retrieve next page of results.
 func (r ApiGetRegisteredModelsRequest) NextPageToken(nextPageToken string) ApiGetRegisteredModelsRequest {
 	r.nextPageToken = &nextPageToken
-	return r
-}
-
-// Owner of the resource.
-func (r ApiGetRegisteredModelsRequest) Owner(owner string) ApiGetRegisteredModelsRequest {
-	r.owner = &owner
 	return r
 }
 
@@ -5341,6 +5782,9 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelsExecute(r ApiGetRegi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -5354,9 +5798,7 @@ func (a *ModelRegistryServiceAPIService) GetRegisteredModelsExecute(r ApiGetRegi
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
 	}
-	if r.owner != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
 	if r.userId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
@@ -5450,6 +5892,20 @@ type ApiGetServingEnvironmentRequest struct {
 	ctx                  context.Context
 	ApiService           *ModelRegistryServiceAPIService
 	servingenvironmentId string
+	owner                *string
+	userId               *string
+}
+
+// The owner of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetServingEnvironmentRequest) Owner(owner string) ApiGetServingEnvironmentRequest {
+	r.owner = &owner
+	return r
+}
+
+// The userId of the &#x60;RegisteredModel&#x60;.
+func (r ApiGetServingEnvironmentRequest) UserId(userId string) ApiGetServingEnvironmentRequest {
+	r.userId = &userId
+	return r
 }
 
 func (r ApiGetServingEnvironmentRequest) Execute() (*ServingEnvironment, *http.Response, error) {
@@ -5495,7 +5951,14 @@ func (a *ModelRegistryServiceAPIService) GetServingEnvironmentExecute(r ApiGetSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5596,10 +6059,18 @@ func (a *ModelRegistryServiceAPIService) GetServingEnvironmentExecute(r ApiGetSe
 type ApiGetServingEnvironmentsRequest struct {
 	ctx           context.Context
 	ApiService    *ModelRegistryServiceAPIService
+	owner         *string
 	pageSize      *string
 	orderBy       *OrderByField
 	sortOrder     *SortOrder
 	nextPageToken *string
+	userId        *string
+}
+
+// Owner of the resource.
+func (r ApiGetServingEnvironmentsRequest) Owner(owner string) ApiGetServingEnvironmentsRequest {
+	r.owner = &owner
+	return r
 }
 
 // Number of entities in each page.
@@ -5623,6 +6094,12 @@ func (r ApiGetServingEnvironmentsRequest) SortOrder(sortOrder SortOrder) ApiGetS
 // Token to use to retrieve next page of results.
 func (r ApiGetServingEnvironmentsRequest) NextPageToken(nextPageToken string) ApiGetServingEnvironmentsRequest {
 	r.nextPageToken = &nextPageToken
+	return r
+}
+
+// User ID of the resource owner.
+func (r ApiGetServingEnvironmentsRequest) UserId(userId string) ApiGetServingEnvironmentsRequest {
+	r.userId = &userId
 	return r
 }
 
@@ -5666,6 +6143,9 @@ func (a *ModelRegistryServiceAPIService) GetServingEnvironmentsExecute(r ApiGetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.owner == nil {
+		return localVarReturnValue, nil, reportError("owner is required and must be specified")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
@@ -5678,6 +6158,10 @@ func (a *ModelRegistryServiceAPIService) GetServingEnvironmentsExecute(r ApiGetS
 	}
 	if r.nextPageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nextPageToken", r.nextPageToken, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "owner", r.owner, "")
+	if r.userId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

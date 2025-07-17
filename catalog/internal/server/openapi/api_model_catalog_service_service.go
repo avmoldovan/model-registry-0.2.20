@@ -25,11 +25,11 @@ func (m *ModelCatalogServiceAPIService) GetAllModelArtifacts(context.Context, st
 	return Response(http.StatusNotImplemented, "Not implemented"), nil
 }
 
-func (m *ModelCatalogServiceAPIService) FindModels(ctx context.Context, source string, q string, pageSize string, orderBy model.OrderByField, sortOder model.SortOrder, nextPageToken string) (ImplResponse, error) {
+func (m *ModelCatalogServiceAPIService) FindModels(ctx context.Context, source string, q string, pageSize string, orderBy model.OrderByField, sortOder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
 	return Response(http.StatusNotImplemented, "Not implemented"), nil
 }
 
-func (m *ModelCatalogServiceAPIService) GetModel(ctx context.Context, sourceID string, name string) (ImplResponse, error) {
+func (m *ModelCatalogServiceAPIService) GetModel(ctx context.Context, sourceID string, name string, owner string, userId string) (ImplResponse, error) {
 	if name, ok := strings.CutSuffix(name, "/artifacts"); ok {
 		return m.GetAllModelArtifacts(ctx, sourceID, name)
 	}

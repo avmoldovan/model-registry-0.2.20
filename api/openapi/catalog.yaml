@@ -37,6 +37,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/CatalogModelListResponse"
@@ -63,6 +65,8 @@ paths:
         - $ref: "#/components/parameters/orderBy"
         - $ref: "#/components/parameters/sortOrder"
         - $ref: "#/components/parameters/nextPageToken"
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/userId"
       responses:
         "200":
           $ref: "#/components/responses/CatalogSourceListResponse"
@@ -106,6 +110,18 @@ paths:
           type: string
         in: path
         required: true
+      - name: owner
+        description: The owner of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: true
+      - name: userId
+        description: The userId of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: false
   /api/model_catalog/v1alpha1/sources/{source_id}/models/{model_name}/artifacts:
     description: >-
       The REST endpoint/path used to list `CatalogModelArtifacts`.
@@ -136,6 +152,18 @@ paths:
           type: string
         in: path
         required: true
+      - name: owner
+        description: The owner of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: true
+      - name: userId
+        description: The userId of the `RegisteredModel`.
+        schema:
+          type: string
+        in: query
+        required: false
 components:
   schemas:
     BaseModel:
@@ -601,7 +629,7 @@ components:
       schema:
         type: string
       in: query
-      required: false
+      required: true
     userId:
       name: userId
       description: User ID of the resource owner.

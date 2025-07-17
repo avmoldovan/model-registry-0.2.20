@@ -307,84 +307,82 @@ type PutArtifactsRequest struct {
 	// If `update_mask` is not empty, only update fields or properties specified
 	// in `update_mask`.
 	// Example request protos:
-	//  1. Examples that update `properties` / `custom_properties`:
-	//     1.1 Add a <'key', 'val'> pair into `custom_properties`:
-	//     {
-	//     artifacts {
-	//     id: 1234
-	//     type_id: 5678
-	//     custom_properties {
-	//     key: "key"
-	//     value: {
-	//     string_value: "val"
-	//     }
-	//     }
-	//     }
-	//     update_mask {
-	//     paths: "custom_properties.key"
-	//     }
-	//     }
-	//     1.2 Set `custom_properties['key'].bool_value` to true:
-	//     {
-	//     artifacts {
-	//     id: 1234
-	//     type_id: 5678
-	//     custom_properties {
-	//     key: "key"
-	//     value: {
-	//     bool_value: true
-	//     }
-	//     }
-	//     }
-	//     update_mask {
-	//     paths: "custom_properties.key"
-	//     }
-	//     }
-	//     1.3 Delete the complete <'key', 'val'> pair from `custom_properties`:
-	//     {
-	//     artifacts {
-	//     id: 1234
-	//     type_id: 5678
-	//     custom_properties {}
-	//     }
-	//     update_mask {
-	//     paths: "custom_properties.key"
-	//     }
-	//     }
-	//  2. Examples that update fields such as `uri`, `external_id`, etc:
-	//     2.1 Update `external_id` field:
-	//     {
-	//     artifacts {
-	//     id: 1234
-	//     type_id: 5678
-	//     external_id: "new_value"
-	//     }
-	//     update_mask {
-	//     paths: "external_id"
-	//     }
-	//     }
-	//     2.2 Set `uri` field:
-	//     {
-	//     artifacts {
-	//     id: 1234
-	//     type_id: 5678
-	//     uri: "set_value"
-	//     }
-	//     update_mask {
-	//     paths: "uri"
-	//     }
-	//     }
-	//
+	// 1. Examples that update `properties` / `custom_properties`:
+	//   1.1 Add a <'key', 'val'> pair into `custom_properties`:
+	//      {
+	//        artifacts {
+	//          id: 1234
+	//          type_id: 5678
+	//          custom_properties {
+	//            key: "key"
+	//            value: {
+	//              string_value: "val"
+	//            }
+	//          }
+	//        }
+	//        update_mask {
+	//          paths: "custom_properties.key"
+	//        }
+	//      }
+	//   1.2 Set `custom_properties['key'].bool_value` to true:
+	//      {
+	//        artifacts {
+	//          id: 1234
+	//          type_id: 5678
+	//          custom_properties {
+	//            key: "key"
+	//            value: {
+	//              bool_value: true
+	//            }
+	//          }
+	//        }
+	//        update_mask {
+	//          paths: "custom_properties.key"
+	//        }
+	//      }
+	//   1.3 Delete the complete <'key', 'val'> pair from `custom_properties`:
+	//      {
+	//        artifacts {
+	//          id: 1234
+	//          type_id: 5678
+	//          custom_properties {}
+	//        }
+	//        update_mask {
+	//          paths: "custom_properties.key"
+	//        }
+	//      }
+	// 2. Examples that update fields such as `uri`, `external_id`, etc:
+	//   2.1 Update `external_id` field:
+	//      {
+	//        artifacts {
+	//          id: 1234
+	//          type_id: 5678
+	//          external_id: "new_value"
+	//        }
+	//        update_mask {
+	//          paths: "external_id"
+	//        }
+	//      }
+	//   2.2 Set `uri` field:
+	//      {
+	//        artifacts {
+	//          id: 1234
+	//          type_id: 5678
+	//          uri: "set_value"
+	//        }
+	//        update_mask {
+	//          paths: "uri"
+	//        }
+	//      }
 	// If `paths: "properties"` or `paths: "custom_properties"` are added to
 	// `update_mask`, the key-level updates will be ignored and we only perform
 	// field-level updates on the all `properties`/`custom_properties`.
 	// For example:
-	//
-	//	If the mask is: {"properties", "properties.key1"}, the field path
-	//	"properties.key1" will be ignored and all `properties` will be updated.
-	//	(Do not suggest)
-	//	If the mask is {"properties", "external_id"}, all
-	//	`properties` and field `external_id` will be updated. (Do not suggest)
+	//   If the mask is: {"properties", "properties.key1"}, the field path
+	//   "properties.key1" will be ignored and all `properties` will be updated.
+	//   (Do not suggest)
+	//   If the mask is {"properties", "external_id"}, all
+	//   `properties` and field `external_id` will be updated. (Do not suggest)
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,4,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
 
@@ -669,34 +667,33 @@ type PutExecutionsRequest struct {
 	// If `update_mask` is not empty, only update fields or properties specified
 	// in `update_mask`.
 	// Example request protos:
-	//  1. Add a <'key', 'val'> pair into `custom_properties`:
-	//     {
-	//     executions {
-	//     id: 1234
-	//     type_id: 5678
-	//     custom_properties {
-	//     key: "key"
-	//     value: {
-	//     string_value: "val"
-	//     }
-	//     }
-	//     }
-	//     update_mask {
-	//     paths: "custom_properties.key"
-	//     }
-	//     }
-	//  2. Set `last_known_state` field:
-	//     {
-	//     executions {
-	//     id: 1234
-	//     type_id: 5678
-	//     last_known_state: CACHED
-	//     }
-	//     update_mask {
-	//     paths: "last_known_state"
-	//     }
-	//     }
-	//
+	//   1. Add a <'key', 'val'> pair into `custom_properties`:
+	//      {
+	//        executions {
+	//          id: 1234
+	//          type_id: 5678
+	//          custom_properties {
+	//            key: "key"
+	//            value: {
+	//              string_value: "val"
+	//            }
+	//          }
+	//        }
+	//        update_mask {
+	//          paths: "custom_properties.key"
+	//        }
+	//      }
+	//   2. Set `last_known_state` field:
+	//      {
+	//        executions {
+	//          id: 1234
+	//          type_id: 5678
+	//          last_known_state: CACHED
+	//        }
+	//        update_mask {
+	//          paths: "last_known_state"
+	//        }
+	//      }
 	// Please refer to `PutArtifactsRequest` for more details.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
@@ -1725,34 +1722,33 @@ type PutContextsRequest struct {
 	// If `update_mask` is not empty, only update fields or properties specified
 	// in `update_mask`.
 	// Example request protos:
-	//  1. Add a <'key', 'val'> pair into `custom_properties`:
-	//     {
-	//     contexts {
-	//     id: 1234
-	//     type_id: 5678
-	//     custom_properties {
-	//     key: "key"
-	//     value: {
-	//     string_value: "val"
-	//     }
-	//     }
-	//     }
-	//     update_mask {
-	//     paths: "custom_properties.key"
-	//     }
-	//     }
-	//  2. Set `name` field:
-	//     {
-	//     contexts {
-	//     id: 1234
-	//     type_id: 5678
-	//     name: "set_name"
-	//     }
-	//     update_mask {
-	//     paths: "name"
-	//     }
-	//     }
-	//
+	//   1. Add a <'key', 'val'> pair into `custom_properties`:
+	//      {
+	//        contexts {
+	//          id: 1234
+	//          type_id: 5678
+	//          custom_properties {
+	//            key: "key"
+	//            value: {
+	//              string_value: "val"
+	//            }
+	//          }
+	//        }
+	//        update_mask {
+	//          paths: "custom_properties.key"
+	//        }
+	//      }
+	//   2. Set `name` field:
+	//      {
+	//        contexts {
+	//          id: 1234
+	//          type_id: 5678
+	//          name: "set_name"
+	//        }
+	//        update_mask {
+	//          paths: "name"
+	//        }
+	//      }
 	// Please refer to `PutArtifactsRequest` for more details.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
 }
@@ -2064,15 +2060,12 @@ type GetArtifactsByTypeRequest struct {
 	TypeVersion *string `protobuf:"bytes,2,opt,name=type_version,json=typeVersion" json:"type_version,omitempty"`
 	// Specify List options.
 	// Currently supports:
-	//  1. Field to order the results.
-	//  2. Page size.
-	//
+	//   1. Field to order the results.
+	//   2. Page size.
 	// If set, the request will
-	//
-	//	first fetch all artifacts with specified `type_name` and `type_version`,
-	//	then order by a specifield field
-	//	finally find the correct page and return #Artifacts of the page size.
-	//
+	//   first fetch all artifacts with specified `type_name` and `type_version`,
+	//   then order by a specifield field
+	//   finally find the correct page and return #Artifacts of the page size.
 	// Higher-level APIs may only use the functionalies partially.
 	// Please reference the API documentation for the API behaviors.
 	Options *ListOperationOptions `protobuf:"bytes,3,opt,name=options" json:"options,omitempty"`
@@ -2330,13 +2323,12 @@ type GetArtifactsByIDRequest struct {
 	// matched by type_ids.
 	// If false, returns only the retrieved Artifacts.
 	// Example request proto:
-	//
-	//	{
-	//	  artifact_ids: 101,
-	//	  populate_artifact_types: true,
-	//	}
-	//	The response will contain an artifact with id = 101 and an artifact type
-	//	with id = artifact.type_id().
+	//   {
+	//     artifact_ids: 101,
+	//     populate_artifact_types: true,
+	//   }
+	//   The response will contain an artifact with id = 101 and an artifact type
+	//   with id = artifact.type_id().
 	PopulateArtifactTypes *bool `protobuf:"varint,3,opt,name=populate_artifact_types,json=populateArtifactTypes,def=0" json:"populate_artifact_types,omitempty"`
 	// Options regarding transactions.
 	TransactionOptions *TransactionOptions `protobuf:"bytes,2,opt,name=transaction_options,json=transactionOptions" json:"transaction_options,omitempty"`
@@ -3827,15 +3819,12 @@ type GetExecutionsByTypeRequest struct {
 	TypeVersion *string `protobuf:"bytes,2,opt,name=type_version,json=typeVersion" json:"type_version,omitempty"`
 	// Specify List options.
 	// Currently supports:
-	//  1. Field to order the results.
-	//  2. Page size.
-	//
+	//   1. Field to order the results.
+	//   2. Page size.
 	// If set, the request will
-	//
-	//	first fetch all executions with specified `type_name` and `type_version`,
-	//	then order by a specifield field
-	//	finally find the correct page and return #Executions of the page size.
-	//
+	//   first fetch all executions with specified `type_name` and `type_version`,
+	//   then order by a specifield field
+	//   finally find the correct page and return #Executions of the page size.
 	// Higher-level APIs may only use the functionalies partially.
 	// Please reference the API documentation for the API behaviors.
 	Options *ListOperationOptions `protobuf:"bytes,3,opt,name=options" json:"options,omitempty"`
@@ -5062,15 +5051,12 @@ type GetContextsByTypeRequest struct {
 	TypeName *string `protobuf:"bytes,1,opt,name=type_name,json=typeName" json:"type_name,omitempty"`
 	// Specify options.
 	// Currently supports:
-	//  1. Field to order the results.
-	//  2. Page size.
-	//
+	//   1. Field to order the results.
+	//   2. Page size.
 	// If set, the request will
-	//
-	//	first fetch all contexts with specified `type_name` and `type_version`,
-	//	then order by a specifield field
-	//	finally find the correct page and return #Contexts of the page size.
-	//
+	//   first fetch all contexts with specified `type_name` and `type_version`,
+	//   then order by a specifield field
+	//   finally find the correct page and return #Contexts of the page size.
 	// Higher-level APIs may only use the functionalies partially.
 	// Please reference the API documentation for the API behaviors.
 	Options *ListOperationOptions `protobuf:"bytes,2,opt,name=options" json:"options,omitempty"`
@@ -6051,8 +6037,8 @@ type GetArtifactsByContextRequest struct {
 	ContextId *int64 `protobuf:"varint,1,opt,name=context_id,json=contextId" json:"context_id,omitempty"`
 	// Specify List options.
 	// Currently supports:
-	//  1. Field to order the results.
-	//  2. Page size.
+	//   1. Field to order the results.
+	//   2. Page size.
 	Options *ListOperationOptions `protobuf:"bytes,2,opt,name=options" json:"options,omitempty"`
 	// Options regarding transactions.
 	TransactionOptions *TransactionOptions `protobuf:"bytes,3,opt,name=transaction_options,json=transactionOptions" json:"transaction_options,omitempty"`
@@ -6176,8 +6162,8 @@ type GetExecutionsByContextRequest struct {
 	ContextId *int64 `protobuf:"varint,1,opt,name=context_id,json=contextId" json:"context_id,omitempty"`
 	// Specify List options.
 	// Currently supports:
-	//  1. Field to order the results.
-	//  2. Page size.
+	//   1. Field to order the results.
+	//   2. Page size.
 	Options *ListOperationOptions `protobuf:"bytes,2,opt,name=options" json:"options,omitempty"`
 	// Options regarding transactions.
 	TransactionOptions *TransactionOptions `protobuf:"bytes,3,opt,name=transaction_options,json=transactionOptions" json:"transaction_options,omitempty"`
@@ -6424,24 +6410,23 @@ type GetLineageSubgraphRequest struct {
 	LineageSubgraphQueryOptions *LineageSubgraphQueryOptions `protobuf:"bytes,1,opt,name=lineage_subgraph_query_options,json=lineageSubgraphQueryOptions" json:"lineage_subgraph_query_options,omitempty"`
 	// `read_mask` contains user specified paths of fields that should be included
 	// in the returned lineage subgraph.
-	//
-	//	Supported field paths are: 'artifacts', 'executions', 'contexts',
-	//	'artifact_types', 'execution_types', 'context_types', and 'events'.
-	//	TODO(b/283852485): Include 'associations' or 'attributions' in the
-	//	  returned graph.
-	//	If 'artifacts', 'executions', or 'contexts' is specified in `read_mask`,
-	//	  the dehydrated nodes will be included.
-	//	  Note: A dehydrated node means a node containing only its id and no
-	//	  other information. User should call GetNodesByID or other APIs to get
-	//	  node details later on.
-	//	If 'artifact_types', 'execution_types', or 'context_types' is specified
-	//	  in `read_mask`, all the node types will be included.
-	//	If 'events' is specified in `read_mask`, the events will be included.
-	//	If `read_mask` is not set, the API will return all the fields in
-	//	  the returned graph.
-	//	Note: Only paths of fields in LineageGraph message are supported. Paths
-	//	of fields in the submessage, such as "artifacts.id", "contexts.name" are
-	//	not acknowledged.
+	//   Supported field paths are: 'artifacts', 'executions', 'contexts',
+	//   'artifact_types', 'execution_types', 'context_types', and 'events'.
+	//   TODO(b/283852485): Include 'associations' or 'attributions' in the
+	//     returned graph.
+	//   If 'artifacts', 'executions', or 'contexts' is specified in `read_mask`,
+	//     the dehydrated nodes will be included.
+	//     Note: A dehydrated node means a node containing only its id and no
+	//     other information. User should call GetNodesByID or other APIs to get
+	//     node details later on.
+	//   If 'artifact_types', 'execution_types', or 'context_types' is specified
+	//     in `read_mask`, all the node types will be included.
+	//   If 'events' is specified in `read_mask`, the events will be included.
+	//   If `read_mask` is not set, the API will return all the fields in
+	//     the returned graph.
+	//   Note: Only paths of fields in LineageGraph message are supported. Paths
+	//   of fields in the submessage, such as "artifacts.id", "contexts.name" are
+	//   not acknowledged.
 	ReadMask           *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=read_mask,json=readMask" json:"read_mask,omitempty"`
 	TransactionOptions *TransactionOptions    `protobuf:"bytes,2,opt,name=transaction_options,json=transactionOptions" json:"transaction_options,omitempty"`
 }
