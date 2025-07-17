@@ -20,7 +20,7 @@ func (b *ModelRegistryService) UpsertInferenceService(inferenceService *openapi.
 	}
 
 	if inferenceService.Id != nil {
-		existing, err := b.GetInferenceServiceById(*inferenceService.Id)
+		existing, err := b.GetInferenceServiceById(*inferenceService.Id, "", "")
 		if err != nil {
 			return nil, err
 		}
@@ -68,8 +68,10 @@ func (b *ModelRegistryService) UpsertInferenceService(inferenceService *openapi.
 	return toReturn, nil
 }
 
-func (b *ModelRegistryService) GetInferenceServiceById(id string) (*openapi.InferenceService, error) {
+func (b *ModelRegistryService) GetInferenceServiceById(id string, owner string, userId string) (*openapi.InferenceService, error) {
 	glog.Infof("Getting InferenceService by id %s", id)
+
+	//TODO: add extra filtering params
 
 	convertedId, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {

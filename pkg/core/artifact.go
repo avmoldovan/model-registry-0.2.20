@@ -93,7 +93,7 @@ func (serv *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, mod
 			glog.Info("Creating doc artifact")
 		} else {
 			glog.Info("Updating doc artifact")
-			existing, err := serv.GetArtifactById(*da.Id)
+			existing, err := serv.GetArtifactById(*da.Id, "", "")
 			if err != nil {
 				return nil, err
 			}
@@ -127,7 +127,7 @@ func (serv *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, mod
 	}
 
 	idAsString := converter.Int64ToString(&artifactsResp.ArtifactIds[0])
-	return serv.GetArtifactById(*idAsString)
+	return serv.GetArtifactById(*idAsString, "", "")
 }
 
 // UpsertArtifact creates a new artifact if the provided artifact's ID is nil, or updates an existing artifact if the
@@ -136,7 +136,7 @@ func (serv *ModelRegistryService) UpsertArtifact(artifact *openapi.Artifact) (*o
 	return serv.upsertArtifact(artifact, nil)
 }
 
-func (serv *ModelRegistryService) GetArtifactById(id string) (*openapi.Artifact, error) {
+func (serv *ModelRegistryService) GetArtifactById(id string, owner string, userId string) (*openapi.Artifact, error) {
 	idAsInt, err := converter.StringToInt64(&id)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
@@ -270,7 +270,7 @@ func (serv *ModelRegistryService) UpsertModelArtifact(modelArtifact *openapi.Mod
 
 // GetModelArtifactById retrieves a model artifact by its unique identifier (ID).
 func (serv *ModelRegistryService) GetModelArtifactById(id string) (*openapi.ModelArtifact, error) {
-	art, err := serv.GetArtifactById(id)
+	art, err := serv.GetArtifactById(id, "", "")
 	if err != nil {
 		return nil, err
 	}

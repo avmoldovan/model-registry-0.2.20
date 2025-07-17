@@ -165,6 +165,8 @@ func TestUpsertArtifact(t *testing.T) {
 			Name:        apiutils.Of(unicodeName),
 			Description: apiutils.Of("Test model artifact with unicode characters"),
 			Uri:         apiutils.Of("s3://bucket/unicode-model.pkl"),
+			Owner:       apiutils.Of("tenant"),
+			UserId:      apiutils.Of("user@example.com"),
 		}
 
 		artifact := &openapi.Artifact{
@@ -179,10 +181,12 @@ func TestUpsertArtifact(t *testing.T) {
 		assert.Equal(t, unicodeName, *result.ModelArtifact.Name)
 		assert.Equal(t, "Test model artifact with unicode characters", *result.ModelArtifact.Description)
 		assert.Equal(t, "s3://bucket/unicode-model.pkl", *result.ModelArtifact.Uri)
+		assert.Equal(t, "tensnt", *result.ModelArtifact.Owner)
+		assert.Equal(t, "user@example.com", *result.ModelArtifact.UserId)
 		assert.NotNil(t, result.ModelArtifact.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id, "tenant", "user@example.com")
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Equal(t, unicodeName, *retrieved.ModelArtifact.Name)
@@ -195,6 +199,8 @@ func TestUpsertArtifact(t *testing.T) {
 			Name:        apiutils.Of(specialName),
 			Description: apiutils.Of("Test model artifact with special characters"),
 			Uri:         apiutils.Of("s3://bucket/special-model.pkl"),
+			Owner:       apiutils.Of("tenant"),
+			UserId:      apiutils.Of("user@example.com"),
 		}
 
 		artifact := &openapi.Artifact{
@@ -208,10 +214,12 @@ func TestUpsertArtifact(t *testing.T) {
 		require.NotNil(t, result.ModelArtifact)
 		assert.Equal(t, specialName, *result.ModelArtifact.Name)
 		assert.Equal(t, "Test model artifact with special characters", *result.ModelArtifact.Description)
+		assert.Equal(t, "tenant", *result.ModelArtifact.Owner)
+		assert.Equal(t, "user@example.com", *result.ModelArtifact.UserId)
 		assert.NotNil(t, result.ModelArtifact.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id, "tenant", "user@example.com")
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Equal(t, specialName, *retrieved.ModelArtifact.Name)
@@ -224,6 +232,8 @@ func TestUpsertArtifact(t *testing.T) {
 			Name:        apiutils.Of(mixedName),
 			Description: apiutils.Of("Test doc artifact with mixed unicode and special characters"),
 			Uri:         apiutils.Of("s3://bucket/mixed-doc.pdf"),
+			Owner:       apiutils.Of("tenant"),
+			UserId:      apiutils.Of("user@example.com"),
 		}
 
 		artifact := &openapi.Artifact{
@@ -238,9 +248,11 @@ func TestUpsertArtifact(t *testing.T) {
 		assert.Equal(t, mixedName, *result.DocArtifact.Name)
 		assert.Equal(t, "Test doc artifact with mixed unicode and special characters", *result.DocArtifact.Description)
 		assert.NotNil(t, result.DocArtifact.Id)
+		assert.Equal(t, result.DocArtifact.Owner, "tenant")
+		assert.Equal(t, result.DocArtifact.UserId, "user@example.com")
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.DocArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.DocArtifact.Id, *result.DocArtifact.Owner, *result.DocArtifact.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.DocArtifact)
 		assert.Equal(t, mixedName, *retrieved.DocArtifact.Name)
@@ -476,6 +488,8 @@ func TestUpsertModelVersionArtifact(t *testing.T) {
 			Name:        apiutils.Of(unicodeName),
 			Description: apiutils.Of("Test model version artifact with unicode characters"),
 			Uri:         apiutils.Of("s3://bucket/unicode-version-model.pkl"),
+			Owner:       apiutils.Of("tenant"),
+			UserId:      apiutils.Of("user@example.com"),
 		}
 
 		artifact := &openapi.Artifact{
@@ -491,9 +505,11 @@ func TestUpsertModelVersionArtifact(t *testing.T) {
 		assert.Equal(t, "Test model version artifact with unicode characters", *result.ModelArtifact.Description)
 		assert.Equal(t, "s3://bucket/unicode-version-model.pkl", *result.ModelArtifact.Uri)
 		assert.NotNil(t, result.ModelArtifact.Id)
+		assert.Equal(t, result.ModelArtifact.Owner, "tenant")
+		assert.Equal(t, result.ModelArtifact.UserId, "user@example.com")
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id, *result.ModelArtifact.Owner, *result.ModelArtifact.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Contains(t, *retrieved.ModelArtifact.Name, unicodeName)
@@ -535,7 +551,7 @@ func TestUpsertModelVersionArtifact(t *testing.T) {
 		assert.NotNil(t, result.ModelArtifact.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id, *result.ModelArtifact.Owner, *result.ModelArtifact.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Contains(t, *retrieved.ModelArtifact.Name, specialName)
@@ -577,7 +593,7 @@ func TestUpsertModelVersionArtifact(t *testing.T) {
 		assert.NotNil(t, result.ModelArtifact.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*result.ModelArtifact.Id, *result.ModelArtifact.Owner, *result.ModelArtifact.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Contains(t, *retrieved.ModelArtifact.Name, mixedName)
@@ -748,7 +764,7 @@ func TestGetArtifactById(t *testing.T) {
 		require.NotNil(t, created.ModelArtifact.Id)
 
 		// Get the artifact by ID
-		result, err := service.GetArtifactById(*created.ModelArtifact.Id)
+		result, err := service.GetArtifactById(*created.ModelArtifact.Id, *created.ModelArtifact.Owner, *created.ModelArtifact.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -776,7 +792,7 @@ func TestGetArtifactById(t *testing.T) {
 		require.NotNil(t, created.DocArtifact.Id)
 
 		// Get the artifact by ID
-		result, err := service.GetArtifactById(*created.DocArtifact.Id)
+		result, err := service.GetArtifactById(*created.DocArtifact.Id, *created.DocArtifact.Owner, *created.DocArtifact.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -788,7 +804,7 @@ func TestGetArtifactById(t *testing.T) {
 	})
 
 	t.Run("invalid id", func(t *testing.T) {
-		result, err := service.GetArtifactById("invalid")
+		result, err := service.GetArtifactById("invalid", "non-tenant", "	non-user@example.com")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -796,7 +812,7 @@ func TestGetArtifactById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetArtifactById("99999")
+		result, err := service.GetArtifactById("99999", "non-tenant", "	non-user@example.com")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -1035,7 +1051,7 @@ func TestUpsertModelArtifact(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelArtifactById(*result.Id)
+		retrieved, err := service.GetModelArtifactById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, unicodeName, *retrieved.Name)
 		assert.Equal(t, "2.8-测试", *retrieved.ModelFormatVersion)
@@ -1064,7 +1080,7 @@ func TestUpsertModelArtifact(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelArtifactById(*result.Id)
+		retrieved, err := service.GetModelArtifactById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, specialName, *retrieved.Name)
 		assert.Equal(t, "format@#$%", *retrieved.ModelFormatName)
@@ -1093,7 +1109,7 @@ func TestUpsertModelArtifact(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelArtifactById(*result.Id)
+		retrieved, err := service.GetModelArtifactById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, mixedName, *retrieved.Name)
 		assert.Equal(t, "tensorflow@#$%-测试", *retrieved.ModelFormatName)
@@ -1161,7 +1177,7 @@ func TestGetModelArtifactById(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		result, err := service.GetModelArtifactById(*created.Id)
+		result, err := service.GetModelArtifactById(*created.Id, *created.Owner, *created.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -1186,7 +1202,7 @@ func TestGetModelArtifactById(t *testing.T) {
 		require.NotNil(t, created.DocArtifact.Id)
 
 		// Try to get as model artifact
-		result, err := service.GetModelArtifactById(*created.DocArtifact.Id)
+		result, err := service.GetModelArtifactById(*created.DocArtifact.Id, *created.DocArtifact.Owner, *created.DocArtifact.UserId)
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -1194,7 +1210,7 @@ func TestGetModelArtifactById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetModelArtifactById("99999")
+		result, err := service.GetModelArtifactById("99999", "non-tenant", "non-user@example.com")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -1465,7 +1481,7 @@ func TestArtifactRoundTrip(t *testing.T) {
 		require.NotNil(t, created.ModelArtifact.Id)
 
 		// Get by ID
-		retrieved, err := service.GetArtifactById(*created.ModelArtifact.Id)
+		retrieved, err := service.GetArtifactById(*created.ModelArtifact.Id, *created.ModelArtifact.Owner, *created.ModelArtifact.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.ModelArtifact)
 		assert.Equal(t, *created.ModelArtifact.Id, *retrieved.ModelArtifact.Id)
@@ -1539,7 +1555,7 @@ func TestArtifactRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Verify custom properties
-		retrieved, err := service.GetModelArtifactById(*created.Id)
+		retrieved, err := service.GetModelArtifactById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 		require.NotNil(t, retrieved.CustomProperties)
 

@@ -223,6 +223,8 @@ func TestUpsertInferenceService(t *testing.T) {
 			Name:                 apiutils.Of("nil-state-inference-service"),
 			Description:          apiutils.Of("Test inference service with nil desired state"),
 			ExternalId:           apiutils.Of("nil-state-ext-123"),
+			Owner:                apiutils.Of("tenant"),
+			UserId:               apiutils.Of("user@example.com"),
 			ServingEnvironmentId: *createdEnv.Id,
 			RegisteredModelId:    *createdModel.Id,
 			Runtime:              apiutils.Of("tensorflow"),
@@ -230,12 +232,15 @@ func TestUpsertInferenceService(t *testing.T) {
 		}
 
 		result, err := service.UpsertInferenceService(input)
+		//TODO: check the full test for owner and userId
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
 		assert.NotNil(t, result.Id)
 		assert.Equal(t, "nil-state-inference-service", *result.Name)
 		assert.Equal(t, "nil-state-ext-123", *result.ExternalId)
+		assert.Equal(t, "tenant", *result.Owner)
+		assert.Equal(t, "user@example.com", *result.UserId)
 		assert.Equal(t, "Test inference service with nil desired state", *result.Description)
 		assert.Equal(t, *createdEnv.Id, result.ServingEnvironmentId)
 		assert.Equal(t, *createdModel.Id, result.RegisteredModelId)
@@ -280,7 +285,7 @@ func TestUpsertInferenceService(t *testing.T) {
 		assert.NotNil(t, result.LastUpdateTimeSinceEpoch)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetInferenceServiceById(*result.Id)
+		retrieved, err := service.GetInferenceServiceById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, unicodeName, *retrieved.Name)
 	})
@@ -318,7 +323,7 @@ func TestUpsertInferenceService(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetInferenceServiceById(*result.Id)
+		retrieved, err := service.GetInferenceServiceById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, specialName, *retrieved.Name)
 	})
@@ -356,7 +361,7 @@ func TestUpsertInferenceService(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetInferenceServiceById(*result.Id)
+		retrieved, err := service.GetInferenceServiceById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, mixedName, *retrieved.Name)
 	})
@@ -509,6 +514,8 @@ func TestGetInferenceServiceById(t *testing.T) {
 			Name:                 apiutils.Of("get-test-inference-service"),
 			Description:          apiutils.Of("Test description"),
 			ExternalId:           apiutils.Of("get-ext-123"),
+			Owner:                apiutils.Of("tenant"),
+			UserId:               apiutils.Of("user@example.com"),
 			ServingEnvironmentId: *createdEnv.Id,
 			RegisteredModelId:    *createdModel.Id,
 			Runtime:              apiutils.Of("tensorflow"),
@@ -519,7 +526,7 @@ func TestGetInferenceServiceById(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get the inference service by ID
-		result, err := service.GetInferenceServiceById(*created.Id)
+		result, err := service.GetInferenceServiceById(*created.Id, *created.Owner, *created.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -528,10 +535,12 @@ func TestGetInferenceServiceById(t *testing.T) {
 		assert.Equal(t, "get-ext-123", *result.ExternalId)
 		assert.Equal(t, "Test description", *result.Description)
 		assert.Equal(t, "tensorflow", *result.Runtime)
+		assert.Equal(t, "tenant", *result.Owner)
+		assert.Equal(t, "user@example.com", *result.UserId)
 	})
 
 	t.Run("invalid id", func(t *testing.T) {
-		result, err := service.GetInferenceServiceById("invalid")
+		result, err := service.GetInferenceServiceById("invalid", "tenant", "user@example.com")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -539,7 +548,7 @@ func TestGetInferenceServiceById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetInferenceServiceById("99999")
+		result, err := service.GetInferenceServiceById("99999", "tenant", "non-user")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -910,6 +919,8 @@ func TestInferenceServiceRoundTrip(t *testing.T) {
 			Name:                 apiutils.Of("roundtrip-inference-service"),
 			Description:          apiutils.Of("Roundtrip test description"),
 			ExternalId:           apiutils.Of("roundtrip-ext-123"),
+			Owner:                apiutils.Of("tenant"),
+			UserId:               apiutils.Of("user@example.com"),
 			ServingEnvironmentId: *createdEnv.Id,
 			RegisteredModelId:    *createdModel.Id,
 			Runtime:              apiutils.Of("tensorflow"),
@@ -921,7 +932,7 @@ func TestInferenceServiceRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetInferenceServiceById(*created.Id)
+		retrieved, err := service.GetInferenceServiceById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify all fields match
@@ -929,6 +940,8 @@ func TestInferenceServiceRoundTrip(t *testing.T) {
 		assert.Equal(t, *original.Name, *retrieved.Name)
 		assert.Equal(t, *original.Description, *retrieved.Description)
 		assert.Equal(t, *original.ExternalId, *retrieved.ExternalId)
+		assert.Equal(t, *original.Owner, *retrieved.Owner)
+		assert.Equal(t, *original.UserId, *retrieved.UserId)
 		assert.Equal(t, original.ServingEnvironmentId, retrieved.ServingEnvironmentId)
 		assert.Equal(t, original.RegisteredModelId, retrieved.RegisteredModelId)
 		assert.Equal(t, *original.Runtime, *retrieved.Runtime)
@@ -946,7 +959,7 @@ func TestInferenceServiceRoundTrip(t *testing.T) {
 		assert.Equal(t, "pytorch", *updated.Runtime)
 
 		// Get again to verify persistence
-		final, err := service.GetInferenceServiceById(*created.Id)
+		final, err := service.GetInferenceServiceById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, "Updated description", *final.Description)
 		assert.Equal(t, "pytorch", *final.Runtime)
@@ -992,7 +1005,7 @@ func TestInferenceServiceRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetInferenceServiceById(*created.Id)
+		retrieved, err := service.GetInferenceServiceById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify custom properties

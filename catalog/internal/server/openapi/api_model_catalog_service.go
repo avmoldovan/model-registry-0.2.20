@@ -99,14 +99,14 @@ func (c *ModelCatalogServiceAPIController) FindModels(w http.ResponseWriter, r *
 // FindSources - List All CatalogSources
 func (c *ModelCatalogServiceAPIController) FindSources(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	ownerParam := query.Get("owner")
+	//ownerParam := query.Get("owner")
 	nameParam := query.Get("name")
 	pageSizeParam := query.Get("pageSize")
 	orderByParam := query.Get("orderBy")
 	sortOrderParam := query.Get("sortOrder")
 	nextPageTokenParam := query.Get("nextPageToken")
-	userIdParam := query.Get("userId")
-	result, err := c.service.FindSources(r.Context(), ownerParam, nameParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam, userIdParam)
+	//userIdParam := query.Get("userId")
+	result, err := c.service.FindSources(r.Context(), nameParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

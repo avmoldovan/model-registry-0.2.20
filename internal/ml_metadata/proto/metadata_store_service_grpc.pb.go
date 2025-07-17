@@ -110,12 +110,12 @@ type MetadataStoreServiceClient interface {
 	//
 	// Backwards compatibility is violated iff:
 	//
-	//   a) there is a property where the request type and stored_type have
-	//      different value type (e.g., int vs. string)
-	//   b) `can_add_fields = false` and the request type has a new property that
-	//      is not stored.
-	//   c) `can_omit_fields = false` and stored_type has an existing property
-	//      that is not provided in the request type.
+	//	a) there is a property where the request type and stored_type have
+	//	   different value type (e.g., int vs. string)
+	//	b) `can_add_fields = false` and the request type has a new property that
+	//	   is not stored.
+	//	c) `can_omit_fields = false` and stored_type has an existing property
+	//	   that is not provided in the request type.
 	//
 	// If non-backward type change is required in the application, e.g.,
 	// deprecate properties, re-purpose property name, change value types,
@@ -124,23 +124,26 @@ type MetadataStoreServiceClient interface {
 	// is treated as unset.
 	//
 	// Args:
-	//   artifact_type: the type to be inserted or updated.
-	//   can_add_fields:
-	//     when set to true, new properties can be added;
-	//     when set to false, returns ALREADY_EXISTS if the request type has
-	//     properties that are not in stored_type.
-	//   can_omit_fields:
-	//     when set to true, stored properties can be omitted in the request type;
-	//     when set to false, returns ALREADY_EXISTS if the stored_type has
-	//     properties not in the request type.
+	//
+	//	artifact_type: the type to be inserted or updated.
+	//	can_add_fields:
+	//	  when set to true, new properties can be added;
+	//	  when set to false, returns ALREADY_EXISTS if the request type has
+	//	  properties that are not in stored_type.
+	//	can_omit_fields:
+	//	  when set to true, stored properties can be omitted in the request type;
+	//	  when set to false, returns ALREADY_EXISTS if the stored_type has
+	//	  properties not in the request type.
 	//
 	// Returns:
-	//   The type_id of the stored type.
+	//
+	//	The type_id of the stored type.
 	//
 	// Raises:
-	//   ALREADY_EXISTS error in the case listed above.
-	//   INVALID_ARGUMENT error, if the given type has no name, or any
-	//     property value type is unknown.
+	//
+	//	ALREADY_EXISTS error in the case listed above.
+	//	INVALID_ARGUMENT error, if the given type has no name, or any
+	//	  property value type is unknown.
 	PutArtifactType(ctx context.Context, in *PutArtifactTypeRequest, opts ...grpc.CallOption) (*PutArtifactTypeResponse, error)
 	// Inserts or updates an ExecutionType. Please refer to PutArtifactType for
 	// type upsert API description.
@@ -162,10 +165,12 @@ type MetadataStoreServiceClient interface {
 	// timestamps.
 	//
 	// Args:
-	//   artifacts: A list of artifacts to insert or update.
+	//
+	//	artifacts: A list of artifacts to insert or update.
 	//
 	// Returns:
-	//   A list of artifact ids index-aligned with the input.
+	//
+	//	A list of artifact ids index-aligned with the input.
 	PutArtifacts(ctx context.Context, in *PutArtifactsRequest, opts ...grpc.CallOption) (*PutArtifactsResponse, error)
 	// Inserts or updates executions in the database.
 	//
@@ -179,11 +184,12 @@ type MetadataStoreServiceClient interface {
 	// timestamps.
 	//
 	// Args:
-	//   executions: A list of executions to insert or update.
+	//
+	//	executions: A list of executions to insert or update.
 	//
 	// Returns:
-	//   A list of execution ids index-aligned with the input.
 	//
+	//	A list of execution ids index-aligned with the input.
 	PutExecutions(ctx context.Context, in *PutExecutionsRequest, opts ...grpc.CallOption) (*PutExecutionsResponse, error)
 	// Inserts events in the database.
 	//
@@ -195,7 +201,8 @@ type MetadataStoreServiceClient interface {
 	// same `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   events: A list of events to insert or update.
+	//
+	//	events: A list of events to insert or update.
 	PutEvents(ctx context.Context, in *PutEventsRequest, opts ...grpc.CallOption) (*PutEventsResponse, error)
 	// Inserts or updates an Execution and its input and output artifacts and
 	// related contexts atomically. The `artifact_event_pairs` include the state
@@ -215,13 +222,15 @@ type MetadataStoreServiceClient interface {
 	// `last_update_time_since_epoch`, or `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   execution: An execution to insert or update.
-	//   artifact_event_pairs: Artifacts to insert or update and events to insert.
-	//   contexts: The contexts that the execution and the artifacts belong to.
+	//
+	//	execution: An execution to insert or update.
+	//	artifact_event_pairs: Artifacts to insert or update and events to insert.
+	//	contexts: The contexts that the execution and the artifacts belong to.
 	//
 	// Returns:
-	//   An execution id and a list of artifacts and contexts ids index-aligned
-	//   with the input.
+	//
+	//	An execution id and a list of artifacts and contexts ids index-aligned
+	//	with the input.
 	PutExecution(ctx context.Context, in *PutExecutionRequest, opts ...grpc.CallOption) (*PutExecutionResponse, error)
 	// Inserts or updates a lineage subgraph (i.e. a collection of event edges
 	// and its executions, artifacts, and related contexts) atomically. The
@@ -241,17 +250,19 @@ type MetadataStoreServiceClient interface {
 	// `last_update_time_since_epoch`, or `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   executions: A list of executions to insert or update.
-	//   artifacts: A list of artifacts to insert or update.
-	//   contexts: A list of contexts to insert and/or create associations and
-	//       attributions with.
-	//   event_edges: A list of events to insert with the indices of the
-	//       corresponding execution and artifact from the input lists of
-	//       executions and artifacts.
+	//
+	//	executions: A list of executions to insert or update.
+	//	artifacts: A list of artifacts to insert or update.
+	//	contexts: A list of contexts to insert and/or create associations and
+	//	    attributions with.
+	//	event_edges: A list of events to insert with the indices of the
+	//	    corresponding execution and artifact from the input lists of
+	//	    executions and artifacts.
 	//
 	// Returns:
-	//   Lists of execution, artifact, and context ids index-aligned with the
-	//   inputs.
+	//
+	//	Lists of execution, artifact, and context ids index-aligned with the
+	//	inputs.
 	PutLineageSubgraph(ctx context.Context, in *PutLineageSubgraphRequest, opts ...grpc.CallOption) (*PutLineageSubgraphResponse, error)
 	// Inserts or updates contexts in database and returns a list of context ids.
 	//
@@ -265,10 +276,12 @@ type MetadataStoreServiceClient interface {
 	// timestamps.
 	//
 	// Args:
-	//   contexts: A list of contexts to insert or update.
+	//
+	//	contexts: A list of contexts to insert or update.
 	//
 	// Returns:
-	//   A list of context ids index-aligned with the input.
+	//
+	//	A list of context ids index-aligned with the input.
 	PutContexts(ctx context.Context, in *PutContextsRequest, opts ...grpc.CallOption) (*PutContextsResponse, error)
 	// Inserts attribution and association relationships in the database.
 	// The context_id, artifact_id, and execution_id must already exist.
@@ -276,15 +289,17 @@ type MetadataStoreServiceClient interface {
 	// relationships cannot be modified.
 	//
 	// Args:
-	//   attributions: A list of attributions to insert.
-	//   associations: A list of associations to insert.
+	//
+	//	attributions: A list of attributions to insert.
+	//	associations: A list of associations to insert.
 	PutAttributionsAndAssociations(ctx context.Context, in *PutAttributionsAndAssociationsRequest, opts ...grpc.CallOption) (*PutAttributionsAndAssociationsResponse, error)
 	// Inserts parental context relationships in the database.
 	// The ParentContext relationship has direction. The call fails if cycles are
 	// detected.
 	//
 	// Args:
-	//   parent_contexts: A list of parent contexts to insert.
+	//
+	//	parent_contexts: A list of parent contexts to insert.
 	PutParentContexts(ctx context.Context, in *PutParentContextsRequest, opts ...grpc.CallOption) (*PutParentContextsResponse, error)
 	// Gets an artifact type. Returns a NOT_FOUND error if the type does not
 	// exist.
@@ -319,24 +334,28 @@ type MetadataStoreServiceClient interface {
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   artifact_ids: A list of artifact ids to retrieve.
+	//
+	//	artifact_ids: A list of artifact ids to retrieve.
 	//
 	// Returns:
-	//   Artifacts with matching ids.
+	//
+	//	Artifacts with matching ids.
 	GetArtifactsByID(ctx context.Context, in *GetArtifactsByIDRequest, opts ...grpc.CallOption) (*GetArtifactsByIDResponse, error)
 	// Gets all executions with matching ids.
 	//
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   execution_ids: A list of execution ids to retrieve.
+	//
+	//	execution_ids: A list of execution ids to retrieve.
 	GetExecutionsByID(ctx context.Context, in *GetExecutionsByIDRequest, opts ...grpc.CallOption) (*GetExecutionsByIDResponse, error)
 	// Gets all contexts with matching ids.
 	//
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   context_ids: A list of context ids to retrieve.
+	//
+	//	context_ids: A list of context ids to retrieve.
 	GetContextsByID(ctx context.Context, in *GetContextsByIDRequest, opts ...grpc.CallOption) (*GetContextsByIDResponse, error)
 	// Gets all the artifacts of a given type.
 	GetArtifactsByType(ctx context.Context, in *GetArtifactsByTypeRequest, opts ...grpc.CallOption) (*GetArtifactsByTypeResponse, error)
@@ -896,12 +915,12 @@ type MetadataStoreServiceServer interface {
 	//
 	// Backwards compatibility is violated iff:
 	//
-	//   a) there is a property where the request type and stored_type have
-	//      different value type (e.g., int vs. string)
-	//   b) `can_add_fields = false` and the request type has a new property that
-	//      is not stored.
-	//   c) `can_omit_fields = false` and stored_type has an existing property
-	//      that is not provided in the request type.
+	//	a) there is a property where the request type and stored_type have
+	//	   different value type (e.g., int vs. string)
+	//	b) `can_add_fields = false` and the request type has a new property that
+	//	   is not stored.
+	//	c) `can_omit_fields = false` and stored_type has an existing property
+	//	   that is not provided in the request type.
 	//
 	// If non-backward type change is required in the application, e.g.,
 	// deprecate properties, re-purpose property name, change value types,
@@ -910,23 +929,26 @@ type MetadataStoreServiceServer interface {
 	// is treated as unset.
 	//
 	// Args:
-	//   artifact_type: the type to be inserted or updated.
-	//   can_add_fields:
-	//     when set to true, new properties can be added;
-	//     when set to false, returns ALREADY_EXISTS if the request type has
-	//     properties that are not in stored_type.
-	//   can_omit_fields:
-	//     when set to true, stored properties can be omitted in the request type;
-	//     when set to false, returns ALREADY_EXISTS if the stored_type has
-	//     properties not in the request type.
+	//
+	//	artifact_type: the type to be inserted or updated.
+	//	can_add_fields:
+	//	  when set to true, new properties can be added;
+	//	  when set to false, returns ALREADY_EXISTS if the request type has
+	//	  properties that are not in stored_type.
+	//	can_omit_fields:
+	//	  when set to true, stored properties can be omitted in the request type;
+	//	  when set to false, returns ALREADY_EXISTS if the stored_type has
+	//	  properties not in the request type.
 	//
 	// Returns:
-	//   The type_id of the stored type.
+	//
+	//	The type_id of the stored type.
 	//
 	// Raises:
-	//   ALREADY_EXISTS error in the case listed above.
-	//   INVALID_ARGUMENT error, if the given type has no name, or any
-	//     property value type is unknown.
+	//
+	//	ALREADY_EXISTS error in the case listed above.
+	//	INVALID_ARGUMENT error, if the given type has no name, or any
+	//	  property value type is unknown.
 	PutArtifactType(context.Context, *PutArtifactTypeRequest) (*PutArtifactTypeResponse, error)
 	// Inserts or updates an ExecutionType. Please refer to PutArtifactType for
 	// type upsert API description.
@@ -948,10 +970,12 @@ type MetadataStoreServiceServer interface {
 	// timestamps.
 	//
 	// Args:
-	//   artifacts: A list of artifacts to insert or update.
+	//
+	//	artifacts: A list of artifacts to insert or update.
 	//
 	// Returns:
-	//   A list of artifact ids index-aligned with the input.
+	//
+	//	A list of artifact ids index-aligned with the input.
 	PutArtifacts(context.Context, *PutArtifactsRequest) (*PutArtifactsResponse, error)
 	// Inserts or updates executions in the database.
 	//
@@ -965,11 +989,12 @@ type MetadataStoreServiceServer interface {
 	// timestamps.
 	//
 	// Args:
-	//   executions: A list of executions to insert or update.
+	//
+	//	executions: A list of executions to insert or update.
 	//
 	// Returns:
-	//   A list of execution ids index-aligned with the input.
 	//
+	//	A list of execution ids index-aligned with the input.
 	PutExecutions(context.Context, *PutExecutionsRequest) (*PutExecutionsResponse, error)
 	// Inserts events in the database.
 	//
@@ -981,7 +1006,8 @@ type MetadataStoreServiceServer interface {
 	// same `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   events: A list of events to insert or update.
+	//
+	//	events: A list of events to insert or update.
 	PutEvents(context.Context, *PutEventsRequest) (*PutEventsResponse, error)
 	// Inserts or updates an Execution and its input and output artifacts and
 	// related contexts atomically. The `artifact_event_pairs` include the state
@@ -1001,13 +1027,15 @@ type MetadataStoreServiceServer interface {
 	// `last_update_time_since_epoch`, or `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   execution: An execution to insert or update.
-	//   artifact_event_pairs: Artifacts to insert or update and events to insert.
-	//   contexts: The contexts that the execution and the artifacts belong to.
+	//
+	//	execution: An execution to insert or update.
+	//	artifact_event_pairs: Artifacts to insert or update and events to insert.
+	//	contexts: The contexts that the execution and the artifacts belong to.
 	//
 	// Returns:
-	//   An execution id and a list of artifacts and contexts ids index-aligned
-	//   with the input.
+	//
+	//	An execution id and a list of artifacts and contexts ids index-aligned
+	//	with the input.
 	PutExecution(context.Context, *PutExecutionRequest) (*PutExecutionResponse, error)
 	// Inserts or updates a lineage subgraph (i.e. a collection of event edges
 	// and its executions, artifacts, and related contexts) atomically. The
@@ -1027,17 +1055,19 @@ type MetadataStoreServiceServer interface {
 	// `last_update_time_since_epoch`, or `milliseconds_since_epoch` timestamps.
 	//
 	// Args:
-	//   executions: A list of executions to insert or update.
-	//   artifacts: A list of artifacts to insert or update.
-	//   contexts: A list of contexts to insert and/or create associations and
-	//       attributions with.
-	//   event_edges: A list of events to insert with the indices of the
-	//       corresponding execution and artifact from the input lists of
-	//       executions and artifacts.
+	//
+	//	executions: A list of executions to insert or update.
+	//	artifacts: A list of artifacts to insert or update.
+	//	contexts: A list of contexts to insert and/or create associations and
+	//	    attributions with.
+	//	event_edges: A list of events to insert with the indices of the
+	//	    corresponding execution and artifact from the input lists of
+	//	    executions and artifacts.
 	//
 	// Returns:
-	//   Lists of execution, artifact, and context ids index-aligned with the
-	//   inputs.
+	//
+	//	Lists of execution, artifact, and context ids index-aligned with the
+	//	inputs.
 	PutLineageSubgraph(context.Context, *PutLineageSubgraphRequest) (*PutLineageSubgraphResponse, error)
 	// Inserts or updates contexts in database and returns a list of context ids.
 	//
@@ -1051,10 +1081,12 @@ type MetadataStoreServiceServer interface {
 	// timestamps.
 	//
 	// Args:
-	//   contexts: A list of contexts to insert or update.
+	//
+	//	contexts: A list of contexts to insert or update.
 	//
 	// Returns:
-	//   A list of context ids index-aligned with the input.
+	//
+	//	A list of context ids index-aligned with the input.
 	PutContexts(context.Context, *PutContextsRequest) (*PutContextsResponse, error)
 	// Inserts attribution and association relationships in the database.
 	// The context_id, artifact_id, and execution_id must already exist.
@@ -1062,15 +1094,17 @@ type MetadataStoreServiceServer interface {
 	// relationships cannot be modified.
 	//
 	// Args:
-	//   attributions: A list of attributions to insert.
-	//   associations: A list of associations to insert.
+	//
+	//	attributions: A list of attributions to insert.
+	//	associations: A list of associations to insert.
 	PutAttributionsAndAssociations(context.Context, *PutAttributionsAndAssociationsRequest) (*PutAttributionsAndAssociationsResponse, error)
 	// Inserts parental context relationships in the database.
 	// The ParentContext relationship has direction. The call fails if cycles are
 	// detected.
 	//
 	// Args:
-	//   parent_contexts: A list of parent contexts to insert.
+	//
+	//	parent_contexts: A list of parent contexts to insert.
 	PutParentContexts(context.Context, *PutParentContextsRequest) (*PutParentContextsResponse, error)
 	// Gets an artifact type. Returns a NOT_FOUND error if the type does not
 	// exist.
@@ -1105,24 +1139,28 @@ type MetadataStoreServiceServer interface {
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   artifact_ids: A list of artifact ids to retrieve.
+	//
+	//	artifact_ids: A list of artifact ids to retrieve.
 	//
 	// Returns:
-	//   Artifacts with matching ids.
+	//
+	//	Artifacts with matching ids.
 	GetArtifactsByID(context.Context, *GetArtifactsByIDRequest) (*GetArtifactsByIDResponse, error)
 	// Gets all executions with matching ids.
 	//
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   execution_ids: A list of execution ids to retrieve.
+	//
+	//	execution_ids: A list of execution ids to retrieve.
 	GetExecutionsByID(context.Context, *GetExecutionsByIDRequest) (*GetExecutionsByIDResponse, error)
 	// Gets all contexts with matching ids.
 	//
 	// The result is not index-aligned: if an id is not found, it is not returned.
 	//
 	// Args:
-	//   context_ids: A list of context ids to retrieve.
+	//
+	//	context_ids: A list of context ids to retrieve.
 	GetContextsByID(context.Context, *GetContextsByIDRequest) (*GetContextsByIDResponse, error)
 	// Gets all the artifacts of a given type.
 	GetArtifactsByType(context.Context, *GetArtifactsByTypeRequest) (*GetArtifactsByTypeResponse, error)

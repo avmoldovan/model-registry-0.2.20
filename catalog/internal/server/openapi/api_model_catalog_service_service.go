@@ -21,17 +21,17 @@ type ModelCatalogServiceAPIService struct {
 	sources map[string]catalog.CatalogSource
 }
 
-func (m *ModelCatalogServiceAPIService) GetAllModelArtifacts(context.Context, string, string) (ImplResponse, error) {
+func (m *ModelCatalogServiceAPIService) GetAllModelArtifacts(context.Context, string, string, string, string) (ImplResponse, error) {
 	return Response(http.StatusNotImplemented, "Not implemented"), nil
 }
 
-func (m *ModelCatalogServiceAPIService) FindModels(ctx context.Context, source string, q string, pageSize string, orderBy model.OrderByField, sortOder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (m *ModelCatalogServiceAPIService) FindModels(ctx context.Context, owner string, source string, q string, pageSize string, orderBy model.OrderByField, sortOder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	return Response(http.StatusNotImplemented, "Not implemented"), nil
 }
 
 func (m *ModelCatalogServiceAPIService) GetModel(ctx context.Context, sourceID string, name string, owner string, userId string) (ImplResponse, error) {
 	if name, ok := strings.CutSuffix(name, "/artifacts"); ok {
-		return m.GetAllModelArtifacts(ctx, sourceID, name)
+		return m.GetAllModelArtifacts(ctx, sourceID, name, owner, userId)
 	}
 
 	source, ok := m.sources[sourceID]
