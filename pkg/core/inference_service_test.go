@@ -295,7 +295,7 @@ func (suite *CoreTestSuite) TestGetInferenceServiceById() {
 	suite.NotNilf(createdEntity.Id, "created eut should not have nil Id")
 	createdEntityId, _ := converter.StringToInt64(createdEntity.Id)
 
-	getById, err := service.GetInferenceServiceById(*createdEntity.Id)
+	getById, err := service.GetInferenceServiceById(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting model version with id %d", *createdEntityId)
 
 	ctxById, err := suite.mlmdClient.GetContextsByID(context.Background(), &proto.GetContextsByIDRequest{
@@ -336,7 +336,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelByInferenceServiceId() {
 	suite.Nilf(err, "error creating new eut for %s", parentResourceId)
 	suite.NotNilf(createdEntity.Id, "created eut should not have nil Id")
 
-	getRM, err := service.GetRegisteredModelByInferenceService(*createdEntity.Id)
+	getRM, err := service.GetRegisteredModelByInferenceService(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting using id %s", *createdEntity.Id)
 
 	suite.Equal(registeredModelId, *getRM.Id, "returned id should match the original registeredModelId")
@@ -378,7 +378,7 @@ func (suite *CoreTestSuite) TestGetModelVersionByInferenceServiceId() {
 	createdEntity, err := service.UpsertInferenceService(eut)
 	suite.Nilf(err, "error creating new eut for %s", parentResourceId)
 
-	getVModel, err := service.GetModelVersionByInferenceService(*createdEntity.Id)
+	getVModel, err := service.GetModelVersionByInferenceService(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting using id %s", *createdEntity.Id)
 	suite.Equal(createdVersion2Id, *getVModel.Id, "returned id shall be the latest ModelVersion by creation order")
 
@@ -387,7 +387,7 @@ func (suite *CoreTestSuite) TestGetModelVersionByInferenceServiceId() {
 	_, err = service.UpsertInferenceService(createdEntity)
 	suite.Nilf(err, "error updating eut for %s", parentResourceId)
 
-	getVModel, err = service.GetModelVersionByInferenceService(*createdEntity.Id)
+	getVModel, err = service.GetModelVersionByInferenceService(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting using id %s", *createdEntity.Id)
 	suite.Equal(createdVersion1Id, *getVModel.Id, "returned id shall be the specified one")
 }
@@ -431,7 +431,7 @@ func (suite *CoreTestSuite) TestGetModelArtifactByInferenceServiceId() {
 	createdEntity, err := service.UpsertInferenceService(eut)
 	suite.Nilf(err, "error creating new eut for %s", parentResourceId)
 
-	getModelArt, err := service.GetModelArtifactByInferenceService(*createdEntity.Id)
+	getModelArt, err := service.GetModelArtifactByInferenceService(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting using id %s", *createdEntity.Id)
 	suite.Equal(*ma2.Id, *getModelArt.Id, "returned id shall be the latest ModelVersion by creation order")
 
@@ -440,7 +440,7 @@ func (suite *CoreTestSuite) TestGetModelArtifactByInferenceServiceId() {
 	_, err = service.UpsertInferenceService(createdEntity)
 	suite.Nilf(err, "error updating eut for %s", parentResourceId)
 
-	getModelArt, err = service.GetModelArtifactByInferenceService(*createdEntity.Id)
+	getModelArt, err = service.GetModelArtifactByInferenceService(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting using id %s", *createdEntity.Id)
 	suite.Equal(*ma1.Id, *getModelArt.Id, "returned id shall be the specified one")
 }

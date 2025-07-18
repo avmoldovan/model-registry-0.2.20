@@ -315,11 +315,13 @@ func TestFindSources(t *testing.T) {
 			// Call FindSources
 			resp, err := service.FindSources(
 				context.Background(),
+				"", //Owner is not used in this test
 				tc.nameFilter,
 				tc.pageSize,
 				tc.orderBy,
 				tc.sortOrder,
 				tc.nextPageToken,
+				"", // UserId is not used in this test
 			)
 
 			// Check response status
@@ -479,6 +481,9 @@ func TestGetModel(t *testing.T) {
 				context.Background(),
 				tc.sourceID,
 				tc.modelName,
+				//TODO: Add owner and userId if needed
+				"", // Owner is not used in this test
+				"", // UserId is not used in this test
 			)
 
 			// Check response status

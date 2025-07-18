@@ -239,7 +239,7 @@ func TestUpsertModelVersion(t *testing.T) {
 		assert.NotNil(t, result.LastUpdateTimeSinceEpoch)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelVersionById(*result.Id)
+		retrieved, err := service.GetModelVersionById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, unicodeName, retrieved.Name)
 		assert.Equal(t, "测试作者-тестовый автор-テスト作者", *retrieved.Author)
@@ -272,7 +272,7 @@ func TestUpsertModelVersion(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelVersionById(*result.Id)
+		retrieved, err := service.GetModelVersionById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, specialName, retrieved.Name)
 		assert.Equal(t, "author@#$%^&*()", *retrieved.Author)
@@ -305,7 +305,7 @@ func TestUpsertModelVersion(t *testing.T) {
 		assert.NotNil(t, result.Id)
 
 		// Verify we can retrieve it by ID
-		retrieved, err := service.GetModelVersionById(*result.Id)
+		retrieved, err := service.GetModelVersionById(*result.Id, *result.Owner, *result.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, mixedName, retrieved.Name)
 		assert.Equal(t, "作者@#$%-автор!@#-作者()🚀", *retrieved.Author)
@@ -455,7 +455,7 @@ func TestGetModelVersionById(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get the version by ID
-		result, err := service.GetModelVersionById(*created.Id)
+		result, err := service.GetModelVersionById(*created.Id, *created.Owner, *created.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -468,7 +468,7 @@ func TestGetModelVersionById(t *testing.T) {
 	})
 
 	t.Run("invalid id", func(t *testing.T) {
-		result, err := service.GetModelVersionById("invalid")
+		result, err := service.GetModelVersionById("invalid", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -476,7 +476,7 @@ func TestGetModelVersionById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetModelVersionById("99999")
+		result, err := service.GetModelVersionById("99999", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -522,7 +522,7 @@ func TestGetModelVersionByInferenceService(t *testing.T) {
 		require.NoError(t, err)
 
 		// Get model version by inference service
-		result, err := service.GetModelVersionByInferenceService(*createdInference.Id)
+		result, err := service.GetModelVersionByInferenceService(*createdInference.Id, *createdInference.Owner, *createdInference.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -571,7 +571,7 @@ func TestGetModelVersionByInferenceService(t *testing.T) {
 		require.NoError(t, err)
 
 		// Get model version by inference service (should return latest)
-		result, err := service.GetModelVersionByInferenceService(*createdInference.Id)
+		result, err := service.GetModelVersionByInferenceService(*createdInference.Id, *createdInference.Owner, *createdInference.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -581,7 +581,7 @@ func TestGetModelVersionByInferenceService(t *testing.T) {
 	})
 
 	t.Run("invalid inference service id", func(t *testing.T) {
-		result, err := service.GetModelVersionByInferenceService("invalid")
+		result, err := service.GetModelVersionByInferenceService("invalid", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -589,7 +589,7 @@ func TestGetModelVersionByInferenceService(t *testing.T) {
 	})
 
 	t.Run("non-existent inference service", func(t *testing.T) {
-		result, err := service.GetModelVersionByInferenceService("99999")
+		result, err := service.GetModelVersionByInferenceService("99999", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -831,7 +831,7 @@ func TestModelVersionRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetModelVersionById(*created.Id)
+		retrieved, err := service.GetModelVersionById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify all fields match
@@ -856,7 +856,7 @@ func TestModelVersionRoundTrip(t *testing.T) {
 		assert.Equal(t, openapi.MODELVERSIONSTATE_ARCHIVED, *updated.State)
 
 		// Get again to verify persistence
-		final, err := service.GetModelVersionById(*created.Id)
+		final, err := service.GetModelVersionById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, "Updated description", *final.Description)
 		assert.Equal(t, openapi.MODELVERSIONSTATE_ARCHIVED, *final.State)

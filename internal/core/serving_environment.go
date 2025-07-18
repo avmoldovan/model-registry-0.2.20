@@ -19,7 +19,7 @@ func (b *ModelRegistryService) UpsertServingEnvironment(servingEnvironment *open
 	}
 
 	if servingEnvironment.Id != nil {
-		existing, err := b.GetServingEnvironmentById(*servingEnvironment.Id)
+		existing, err := b.GetServingEnvironmentById(*servingEnvironment.Id, *servingEnvironment.Owner, *servingEnvironment.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -53,7 +53,7 @@ func (b *ModelRegistryService) UpsertServingEnvironment(servingEnvironment *open
 	return toReturn, nil
 }
 
-func (b *ModelRegistryService) GetServingEnvironmentById(id string) (*openapi.ServingEnvironment, error) {
+func (b *ModelRegistryService) GetServingEnvironmentById(id string, owner string, userId string) (*openapi.ServingEnvironment, error) {
 	convertedId, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)

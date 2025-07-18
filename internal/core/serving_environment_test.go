@@ -312,7 +312,7 @@ func TestGetServingEnvironmentById(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get the serving environment by ID
-		result, err := service.GetServingEnvironmentById(*created.Id)
+		result, err := service.GetServingEnvironmentById(*created.Id, *created.Owner, *created.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -323,7 +323,7 @@ func TestGetServingEnvironmentById(t *testing.T) {
 	})
 
 	t.Run("invalid id", func(t *testing.T) {
-		result, err := service.GetServingEnvironmentById("invalid")
+		result, err := service.GetServingEnvironmentById("invalid", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -331,7 +331,7 @@ func TestGetServingEnvironmentById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetServingEnvironmentById("99999")
+		result, err := service.GetServingEnvironmentById("99999", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -490,7 +490,7 @@ func TestServingEnvironmentRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetServingEnvironmentById(*created.Id)
+		retrieved, err := service.GetServingEnvironmentById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify all fields match
@@ -512,7 +512,7 @@ func TestServingEnvironmentRoundTrip(t *testing.T) {
 		assert.Equal(t, "updated-ext-456", *updated.ExternalId)
 
 		// Get again to verify persistence
-		final, err := service.GetServingEnvironmentById(*created.Id)
+		final, err := service.GetServingEnvironmentById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, "Updated description", *final.Description)
 		assert.Equal(t, "updated-ext-456", *final.ExternalId)
@@ -543,7 +543,7 @@ func TestServingEnvironmentRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetServingEnvironmentById(*created.Id)
+		retrieved, err := service.GetServingEnvironmentById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify custom properties

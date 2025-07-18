@@ -43,7 +43,7 @@ type ModelRegistryApi interface {
 	GetModelVersionById(id string, owner string, userId string) (*openapi.ModelVersion, error)
 
 	// GetModelVersionByInferenceService retrieve a ModelVersion by inference service id
-	GetModelVersionByInferenceService(inferenceServiceId string) (*openapi.ModelVersion, error)
+	GetModelVersionByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelVersion, error)
 
 	// GetModelVersionByParams find ModelVersion instances that match the provided optional params
 	GetModelVersionByParams(versionName *string, registeredModelId *string, externalId *string) (*openapi.ModelVersion, error)

@@ -28,7 +28,7 @@ func (serv *ModelRegistryService) UpsertInferenceService(inferenceService *opena
 	if inferenceService.Id == nil {
 		// create
 		glog.Info("Creating new InferenceService")
-		servingEnvironment, err = serv.GetServingEnvironmentById(inferenceService.ServingEnvironmentId)
+		servingEnvironment, err = serv.GetServingEnvironmentById(inferenceService.ServingEnvironmentId, *inferenceService.Owner, *inferenceService.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -36,7 +36,7 @@ func (serv *ModelRegistryService) UpsertInferenceService(inferenceService *opena
 		// update
 		glog.Infof("Updating InferenceService %s", *inferenceService.Id)
 
-		existing, err = serv.GetInferenceServiceById(*inferenceService.Id)
+		existing, err = serv.GetInferenceServiceById(*inferenceService.Id, *inferenceService.Owner, *inferenceService.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -53,8 +53,9 @@ func (serv *ModelRegistryService) UpsertInferenceService(inferenceService *opena
 		}
 	}
 
+	//TODO: validate if this parameter passing is correct
 	// validate RegisteredModelId is also valid
-	if _, err := serv.GetRegisteredModelById(inferenceService.RegisteredModelId); err != nil {
+	if _, err := serv.GetRegisteredModelById(inferenceService.RegisteredModelId, *inferenceService.Owner, *inferenceService.UserId); err != nil {
 		return nil, err
 	}
 
@@ -99,7 +100,7 @@ func (serv *ModelRegistryService) UpsertInferenceService(inferenceService *opena
 	}
 
 	idAsString := converter.Int64ToString(inferenceServiceId)
-	toReturn, err := serv.GetInferenceServiceById(*idAsString)
+	toReturn, err := serv.GetInferenceServiceById(*idAsString, *inferenceService.Owner, *inferenceService.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +141,7 @@ func (serv *ModelRegistryService) getServingEnvironmentByInferenceServiceId(id s
 }
 
 // GetInferenceServiceById retrieves an inference service by its unique identifier (ID).
-func (serv *ModelRegistryService) GetInferenceServiceById(id string) (*openapi.InferenceService, error) {
+func (serv *ModelRegistryService) GetInferenceServiceById(id string, owner string, userId string) (*openapi.InferenceService, error) {
 	glog.Infof("Getting InferenceService by id %s", id)
 
 	idAsInt, err := converter.StringToInt64(&id)

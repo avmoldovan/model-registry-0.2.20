@@ -33,7 +33,7 @@ type ModelCatalogServiceAPIRouter interface {
 // and updated with the logic required for the API.
 type ModelCatalogServiceAPIServicer interface {
 	FindModels(context.Context, string, string, string, string, model.OrderByField, model.SortOrder, string, string) (ImplResponse, error)
-	FindSources(context.Context, string, string, model.OrderByField, model.SortOrder, string) (ImplResponse, error)
+	FindSources(context.Context, string, string, string, model.OrderByField, model.SortOrder, string, string) (ImplResponse, error)
 	GetModel(context.Context, string, string, string, string) (ImplResponse, error)
 	GetAllModelArtifacts(context.Context, string, string, string, string) (ImplResponse, error)
 }

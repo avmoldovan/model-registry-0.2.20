@@ -19,7 +19,7 @@ func (b *ModelRegistryService) UpsertRegisteredModel(registeredModel *openapi.Re
 	}
 
 	if registeredModel.Id != nil {
-		existing, err := b.GetRegisteredModelById(*registeredModel.Id)
+		existing, err := b.GetRegisteredModelById(*registeredModel.Id, *registeredModel.Owner, *registeredModel.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -48,7 +48,7 @@ func (b *ModelRegistryService) UpsertRegisteredModel(registeredModel *openapi.Re
 	return b.mapper.MapToRegisteredModel(savedModel)
 }
 
-func (b *ModelRegistryService) GetRegisteredModelById(id string) (*openapi.RegisteredModel, error) {
+func (b *ModelRegistryService) GetRegisteredModelById(id string, owner string, userId string) (*openapi.RegisteredModel, error) {
 	convertedId, err := strconv.ParseInt(id, 10, 32)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
@@ -62,7 +62,7 @@ func (b *ModelRegistryService) GetRegisteredModelById(id string) (*openapi.Regis
 	return b.mapper.MapToRegisteredModel(model)
 }
 
-func (b *ModelRegistryService) GetRegisteredModelByInferenceService(inferenceServiceId string) (*openapi.RegisteredModel, error) {
+func (b *ModelRegistryService) GetRegisteredModelByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.RegisteredModel, error) {
 	convertedId, err := strconv.ParseInt(inferenceServiceId, 10, 32)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)

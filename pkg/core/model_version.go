@@ -31,14 +31,14 @@ func (serv *ModelRegistryService) UpsertModelVersion(modelVersion *openapi.Model
 		if registeredModelId == nil {
 			return nil, fmt.Errorf("missing registered model id, cannot create model version without registered model: %w", api.ErrBadRequest)
 		}
-		registeredModel, err = serv.GetRegisteredModelById(*registeredModelId)
+		registeredModel, err = serv.GetRegisteredModelById(*registeredModelId, *modelVersion.Owner, *modelVersion.UserId)
 		if err != nil {
 			return nil, err
 		}
 	} else {
 		// update
 		glog.Infof("Updating model version %s", *modelVersion.Id)
-		existing, err = serv.GetModelVersionById(*modelVersion.Id)
+		existing, err = serv.GetModelVersionById(*modelVersion.Id, *modelVersion.Owner, *modelVersion.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -89,7 +89,8 @@ func (serv *ModelRegistryService) UpsertModelVersion(modelVersion *openapi.Model
 	}
 
 	idAsString := converter.Int64ToString(modelId)
-	model, err := serv.GetModelVersionById(*idAsString)
+	//TODO: check here which is the entity that needs to be used
+	model, err := serv.GetModelVersionById(*idAsString, *modelVersion.Owner, *modelVersion.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +99,8 @@ func (serv *ModelRegistryService) UpsertModelVersion(modelVersion *openapi.Model
 }
 
 // GetModelVersionById retrieves a model version by its unique identifier (ID).
-func (serv *ModelRegistryService) GetModelVersionById(id string) (*openapi.ModelVersion, error) {
+func (serv *ModelRegistryService) GetModelVersionById(id string, owner string, userId string) (*openapi.ModelVersion, error) {
+	//TODO: add fields for filtering
 	idAsInt, err := converter.StringToInt64(&id)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
@@ -128,18 +130,18 @@ func (serv *ModelRegistryService) GetModelVersionById(id string) (*openapi.Model
 }
 
 // GetModelVersionByInferenceService retrieves the model version associated with the specified inference service ID.
-func (serv *ModelRegistryService) GetModelVersionByInferenceService(inferenceServiceId string) (*openapi.ModelVersion, error) {
-	is, err := serv.GetInferenceServiceById(inferenceServiceId)
+func (serv *ModelRegistryService) GetModelVersionByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelVersion, error) {
+	is, err := serv.GetInferenceServiceById(inferenceServiceId, owner, userId)
 	if err != nil {
 		return nil, err
 	}
 	if is.ModelVersionId != nil {
-		return serv.GetModelVersionById(*is.ModelVersionId)
+		return serv.GetModelVersionById(*is.ModelVersionId, *is.Owner, *is.UserId)
 	}
 	// modelVersionId: ID of the ModelVersion to serve. If it's unspecified, then the latest ModelVersion by creation order will be served.
 	orderByCreateTime := "CREATE_TIME"
 	sortOrderDesc := "DESC"
-	versions, err := serv.GetModelVersions(api.ListOptions{OrderBy: &orderByCreateTime, SortOrder: &sortOrderDesc}, &is.RegisteredModelId)
+	versions, err := serv.GetModelVersions(api.ListOptions{OrderBy: &orderByCreateTime, SortOrder: &sortOrderDesc, Owner: &owner, UserId: &userId}, &is.RegisteredModelId)
 	if err != nil {
 		return nil, err
 	}

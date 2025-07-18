@@ -368,13 +368,16 @@ func (b *ModelRegistryService) GetModelArtifactById(id string, owner string, use
 	return art.ModelArtifact, nil
 }
 
-func (b *ModelRegistryService) GetModelArtifactByInferenceService(inferenceServiceId string) (*openapi.ModelArtifact, error) {
-	mv, err := b.GetModelVersionByInferenceService(inferenceServiceId)
+func (b *ModelRegistryService) GetModelArtifactByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelArtifact, error) {
+	mv, err := b.GetModelVersionByInferenceService(inferenceServiceId, owner, userId)
 	if err != nil {
 		return nil, err
 	}
 
-	artifactList, err := b.GetArtifacts(api.ListOptions{}, mv.Id)
+	artifactList, err := b.GetArtifacts(api.ListOptions{
+		Owner:  &owner,
+		UserId: &userId,
+	}, mv.Id)
 	if err != nil {
 		return nil, err
 	}

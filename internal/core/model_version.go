@@ -20,7 +20,7 @@ func (b *ModelRegistryService) UpsertModelVersion(modelVersion *openapi.ModelVer
 	}
 
 	if modelVersion.Id != nil {
-		existing, err := b.GetModelVersionById(*modelVersion.Id)
+		existing, err := b.GetModelVersionById(*modelVersion.Id, *modelVersion.Owner, *modelVersion.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -60,7 +60,7 @@ func (b *ModelRegistryService) UpsertModelVersion(modelVersion *openapi.ModelVer
 	return toReturn, nil
 }
 
-func (b *ModelRegistryService) GetModelVersionById(id string) (*openapi.ModelVersion, error) {
+func (b *ModelRegistryService) GetModelVersionById(id string, owner string, userId string) (*openapi.ModelVersion, error) {
 	glog.Infof("Getting ModelVersion by id %s", id)
 
 	convertedId, err := strconv.ParseInt(id, 10, 32)
@@ -81,7 +81,7 @@ func (b *ModelRegistryService) GetModelVersionById(id string) (*openapi.ModelVer
 	return toReturn, nil
 }
 
-func (b *ModelRegistryService) GetModelVersionByInferenceService(inferenceServiceId string) (*openapi.ModelVersion, error) {
+func (b *ModelRegistryService) GetModelVersionByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelVersion, error) {
 	convertedId, err := strconv.ParseInt(inferenceServiceId, 10, 32)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
@@ -108,7 +108,7 @@ func (b *ModelRegistryService) GetModelVersionByInferenceService(inferenceServic
 	}
 
 	if modelVersionID != 0 {
-		return b.GetModelVersionById(strconv.Itoa(int(modelVersionID)))
+		return b.GetModelVersionById(strconv.Itoa(int(modelVersionID)), owner, userId)
 	}
 
 	registeredModelID := ""
@@ -122,7 +122,7 @@ func (b *ModelRegistryService) GetModelVersionByInferenceService(inferenceServic
 	// modelVersionId: ID of the ModelVersion to serve. If it's unspecified, then the latest ModelVersion by creation order will be served.
 	orderByCreateTime := "CREATE_TIME"
 	sortOrderDesc := "DESC"
-	versions, err := b.GetModelVersions(api.ListOptions{OrderBy: &orderByCreateTime, SortOrder: &sortOrderDesc}, &registeredModelID)
+	versions, err := b.GetModelVersions(api.ListOptions{OrderBy: &orderByCreateTime, SortOrder: &sortOrderDesc, Owner: &owner, UserId: &userId}, &registeredModelID)
 	if err != nil {
 		return nil, err
 	}
@@ -188,6 +188,8 @@ func (b *ModelRegistryService) GetModelVersions(listOptions api.ListOptions, reg
 			SortOrder:     listOptions.SortOrder,
 			NextPageToken: listOptions.NextPageToken,
 		},
+		Owner:            listOptions.Owner,
+		UserId:           listOptions.UserId,
 		ParentResourceID: parentResourceID,
 	})
 	if err != nil {

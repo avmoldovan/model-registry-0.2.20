@@ -50,7 +50,7 @@ func (m *ModelCatalogServiceAPIService) GetModel(ctx context.Context, sourceID s
 	return Response(http.StatusOK, model), nil
 }
 
-func (m *ModelCatalogServiceAPIService) FindSources(ctx context.Context, name string, strPageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string) (ImplResponse, error) {
+func (m *ModelCatalogServiceAPIService) FindSources(ctx context.Context, owner string, name string, strPageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	// TODO: Implement real pagination in here by reusing the nextPageToken
 	// code from https://github.com/kubeflow/model-registry/pull/1205.
 

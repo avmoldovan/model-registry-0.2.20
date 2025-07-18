@@ -633,7 +633,7 @@ func (c *ModelRegistryServiceAPIController) GetArtifacts(w http.ResponseWriter, 
 	sortOrderParam := query.Get("sortOrder")
 	nextPageTokenParam := query.Get("nextPageToken")
 	userIdParam := query.Get("userId")
-	result, err := c.service.GetArtifacts(r.Context(), pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam, ownerParam, userIdParam)
+	result, err := c.service.GetArtifacts(r.Context(), ownerParam, pageSizeParam, model.OrderByField(orderByParam), model.SortOrder(sortOrderParam), nextPageTokenParam, userIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

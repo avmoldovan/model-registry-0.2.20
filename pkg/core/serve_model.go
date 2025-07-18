@@ -29,7 +29,7 @@ func (serv *ModelRegistryService) UpsertServeModel(serveModel *openapi.ServeMode
 		if inferenceServiceId == nil {
 			return nil, fmt.Errorf("missing inferenceServiceId, cannot create ServeModel without parent resource InferenceService: %w", api.ErrBadRequest)
 		}
-		_, err = serv.GetInferenceServiceById(*inferenceServiceId)
+		_, err = serv.GetInferenceServiceById(*inferenceServiceId, *serveModel.Owner, *serveModel.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -53,7 +53,7 @@ func (serv *ModelRegistryService) UpsertServeModel(serveModel *openapi.ServeMode
 			return nil, err
 		}
 	}
-	_, err = serv.GetModelVersionById(serveModel.ModelVersionId)
+	_, err = serv.GetModelVersionById(serveModel.ModelVersionId, *serveModel.Owner, *serveModel.UserId)
 	if err != nil {
 		return nil, err
 	}

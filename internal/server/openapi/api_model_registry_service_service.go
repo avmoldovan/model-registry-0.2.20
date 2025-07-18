@@ -224,7 +224,8 @@ func (s *ModelRegistryServiceAPIService) FindServingEnvironment(ctx context.Cont
 }
 
 // GetEnvironmentInferenceServices - List All ServingEnvironment&#39;s InferenceServices
-func (s *ModelRegistryServiceAPIService) GetEnvironmentInferenceServices(ctx context.Context, servingenvironmentId string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetEnvironmentInferenceServices(ctx context.Context, servingenvironmentId string, owner string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
+	//TODO: use the owner and userid here
 	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
@@ -255,8 +256,8 @@ func (s *ModelRegistryServiceAPIService) GetInferenceServiceModel(ctx context.Co
 }
 
 // GetInferenceServiceServes - List All InferenceService&#39;s ServeModel actions
-func (s *ModelRegistryServiceAPIService) GetInferenceServiceServes(ctx context.Context, inferenceserviceId string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
-	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
+func (s *ModelRegistryServiceAPIService) GetInferenceServiceServes(ctx context.Context, inferenceserviceId string, owner string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
+	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -269,7 +270,7 @@ func (s *ModelRegistryServiceAPIService) GetInferenceServiceServes(ctx context.C
 
 // GetInferenceServiceVersion - Get InferenceService&#39;s ModelVersion
 func (s *ModelRegistryServiceAPIService) GetInferenceServiceVersion(ctx context.Context, inferenceserviceId string, owner string, userId string) (ImplResponse, error) {
-	result, err := s.coreApi.GetModelVersionByInferenceService(inferenceserviceId)
+	result, err := s.coreApi.GetModelVersionByInferenceService(inferenceserviceId, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -277,8 +278,8 @@ func (s *ModelRegistryServiceAPIService) GetInferenceServiceVersion(ctx context.
 }
 
 // GetInferenceServices - List All InferenceServices
-func (s *ModelRegistryServiceAPIService) GetInferenceServices(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
-	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
+func (s *ModelRegistryServiceAPIService) GetInferenceServices(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
+	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -299,7 +300,7 @@ func (s *ModelRegistryServiceAPIService) GetArtifact(ctx context.Context, artifa
 }
 
 // GetArtifacts - List All Artifacts
-func (s *ModelRegistryServiceAPIService) GetArtifacts(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetArtifacts(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
@@ -321,8 +322,8 @@ func (s *ModelRegistryServiceAPIService) GetModelArtifact(ctx context.Context, m
 }
 
 // GetModelArtifacts - List All ModelArtifacts
-func (s *ModelRegistryServiceAPIService) GetModelArtifacts(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
-	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
+func (s *ModelRegistryServiceAPIService) GetModelArtifacts(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
+	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -343,7 +344,7 @@ func (s *ModelRegistryServiceAPIService) GetModelVersion(ctx context.Context, mo
 }
 
 // GetModelVersionArtifacts - List All ModelVersion&#39;s artifacts
-func (s *ModelRegistryServiceAPIService) GetModelVersionArtifacts(ctx context.Context, modelversionId string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetModelVersionArtifacts(ctx context.Context, modelversionId string, owner string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	// TODO name unused
 	// TODO externalID unused
 	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
@@ -358,7 +359,7 @@ func (s *ModelRegistryServiceAPIService) GetModelVersionArtifacts(ctx context.Co
 }
 
 // GetModelVersions - List All ModelVersions
-func (s *ModelRegistryServiceAPIService) GetModelVersions(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetModelVersions(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
@@ -380,10 +381,10 @@ func (s *ModelRegistryServiceAPIService) GetRegisteredModel(ctx context.Context,
 }
 
 // GetRegisteredModelVersions - List All RegisteredModel&#39;s ModelVersions
-func (s *ModelRegistryServiceAPIService) GetRegisteredModelVersions(ctx context.Context, registeredmodelId string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetRegisteredModelVersions(ctx context.Context, registeredmodelId string, owner string, name string, externalID string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
 	// TODO name unused
 	// TODO externalID unused
-	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
+	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -395,7 +396,7 @@ func (s *ModelRegistryServiceAPIService) GetRegisteredModelVersions(ctx context.
 }
 
 // GetRegisteredModels - List All RegisteredModels
-func (s *ModelRegistryServiceAPIService) GetRegisteredModels(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userid string) (ImplResponse, error) {
+func (s *ModelRegistryServiceAPIService) GetRegisteredModels(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userid string) (ImplResponse, error) {
 	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userid)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
@@ -417,8 +418,8 @@ func (s *ModelRegistryServiceAPIService) GetServingEnvironment(ctx context.Conte
 }
 
 // GetServingEnvironments - List All ServingEnvironments
-func (s *ModelRegistryServiceAPIService) GetServingEnvironments(ctx context.Context, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, owner string, userId string) (ImplResponse, error) {
-	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, "", "")
+func (s *ModelRegistryServiceAPIService) GetServingEnvironments(ctx context.Context, owner string, pageSize string, orderBy model.OrderByField, sortOrder model.SortOrder, nextPageToken string, userId string) (ImplResponse, error) {
+	listOpts, err := apiutils.BuildListOption(pageSize, orderBy, sortOrder, nextPageToken, owner, userId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -436,7 +437,7 @@ func (s *ModelRegistryServiceAPIService) UpdateInferenceService(ctx context.Cont
 		return ErrorResponse(http.StatusBadRequest, err), err
 	}
 	entity.Id = &inferenceserviceId
-	existing, err := s.coreApi.GetInferenceServiceById(inferenceserviceId, "", "")
+	existing, err := s.coreApi.GetInferenceServiceById(inferenceserviceId, *inferenceServiceUpdate.Owner, *inferenceServiceUpdate.UserId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -485,7 +486,7 @@ func (s *ModelRegistryServiceAPIService) UpdateModelArtifact(ctx context.Context
 		return ErrorResponse(http.StatusBadRequest, err), err
 	}
 	modelArtifact.Id = &modelartifactId
-	existing, err := s.coreApi.GetModelArtifactById(modelartifactId, "", "")
+	existing, err := s.coreApi.GetModelArtifactById(modelartifactId, *modelArtifactUpdate.Owner, *modelArtifactUpdate.UserId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -507,7 +508,7 @@ func (s *ModelRegistryServiceAPIService) UpdateModelVersion(ctx context.Context,
 		return ErrorResponse(http.StatusBadRequest, err), err
 	}
 	modelVersion.Id = &modelversionId
-	existing, err := s.coreApi.GetModelVersionById(modelversionId, "", "")
+	existing, err := s.coreApi.GetModelVersionById(modelversionId, *modelVersion.Owner, *modelVersion.UserId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -529,7 +530,7 @@ func (s *ModelRegistryServiceAPIService) UpdateRegisteredModel(ctx context.Conte
 		return ErrorResponse(http.StatusBadRequest, err), err
 	}
 	registeredModel.Id = &registeredmodelId
-	existing, err := s.coreApi.GetRegisteredModelById(registeredmodelId, "", "")
+	existing, err := s.coreApi.GetRegisteredModelById(registeredmodelId, *registeredModel.Owner, *registeredModel.UserId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}
@@ -551,7 +552,7 @@ func (s *ModelRegistryServiceAPIService) UpdateServingEnvironment(ctx context.Co
 		return ErrorResponse(http.StatusBadRequest, err), err
 	}
 	entity.Id = &servingenvironmentId
-	existing, err := s.coreApi.GetServingEnvironmentById(servingenvironmentId, "", "")
+	existing, err := s.coreApi.GetServingEnvironmentById(servingenvironmentId, *servingEnvironmentUpdate.Owner, *servingEnvironmentUpdate.UserId)
 	if err != nil {
 		return ErrorResponse(api.ErrToStatus(err), err), err
 	}

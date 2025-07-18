@@ -237,7 +237,7 @@ func (suite *CoreTestSuite) TestGetModelVersionById() {
 	suite.NotNilf(createdVersion.Id, "created model version should not have nil Id")
 	createdVersionId, _ := converter.StringToInt64(createdVersion.Id)
 
-	getById, err := service.GetModelVersionById(*createdVersion.Id)
+	getById, err := service.GetModelVersionById(*createdVersion.Id, *createdVersion.Owner, *createdVersion.UserId)
 	suite.Nilf(err, "error getting model version with id %d", *createdVersionId)
 
 	ctxById, err := suite.mlmdClient.GetContextsByID(context.Background(), &proto.GetContextsByIDRequest{
@@ -448,6 +448,7 @@ func (suite *CoreTestSuite) TestGetModelVersions() {
 
 	// order by last update time, expecting last created as first
 	orderByLastUpdate := "LAST_UPDATE_TIME"
+	//TODO: check how to pass owner and userid
 	getAllByRegModel, err = service.GetModelVersions(api.ListOptions{
 		OrderBy:   &orderByLastUpdate,
 		SortOrder: &descOrderDirection,
@@ -467,6 +468,7 @@ func (suite *CoreTestSuite) TestGetModelVersions() {
 
 	suite.Equal(newVersionExternalId, *createdVersion2.ExternalId)
 
+	//TODO: check how to pass owner and userid
 	getAllByRegModel, err = service.GetModelVersions(api.ListOptions{
 		OrderBy:   &orderByLastUpdate,
 		SortOrder: &descOrderDirection,

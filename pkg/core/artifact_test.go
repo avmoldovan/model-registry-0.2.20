@@ -428,7 +428,7 @@ func (suite *CoreTestSuite) TestGetArtifactById() {
 
 	createdArtifactId, _ := converter.StringToInt64(createdArtifact.DocArtifact.Id)
 
-	getById, err := service.GetArtifactById(*createdArtifact.DocArtifact.Id)
+	getById, err := service.GetArtifactById(*createdArtifact.DocArtifact.Id, *createdArtifact.DocArtifact.Owner, *createdArtifact.DocArtifact.UserId)
 	suite.Nilf(err, "error getting artifact by id %s: %v", *createdArtifactId, err)
 
 	state, _ := openapi.NewArtifactStateFromValue(artifactState)
@@ -674,7 +674,7 @@ func (suite *CoreTestSuite) TestGetModelArtifactById() {
 
 	createdArtifactId, _ := converter.StringToInt64(createdArtifact.Id)
 
-	getById, err := service.GetModelArtifactById(*createdArtifact.Id)
+	getById, err := service.GetModelArtifactById(*createdArtifact.Id, *createdArtifact.Owner, *createdArtifact.UserId)
 	suite.Nilf(err, "error getting model artifact by id %s: %v", *createdArtifactId, err)
 
 	state, _ := openapi.NewArtifactStateFromValue(artifactState)

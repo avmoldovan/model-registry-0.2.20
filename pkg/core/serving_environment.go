@@ -24,7 +24,7 @@ func (serv *ModelRegistryService) UpsertServingEnvironment(servingEnvironment *o
 		glog.Info("Creating new serving environment")
 	} else {
 		glog.Infof("Updating serving environment %s", *servingEnvironment.Id)
-		existing, err = serv.GetServingEnvironmentById(*servingEnvironment.Id)
+		existing, err = serv.GetServingEnvironmentById(*servingEnvironment.Id, *servingEnvironment.Owner, *servingEnvironment.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -51,7 +51,7 @@ func (serv *ModelRegistryService) UpsertServingEnvironment(servingEnvironment *o
 	}
 
 	idAsString := converter.Int64ToString(&protoCtxResp.ContextIds[0])
-	openapiModel, err := serv.GetServingEnvironmentById(*idAsString)
+	openapiModel, err := serv.GetServingEnvironmentById(*idAsString, *servingEnvironment.Owner, *servingEnvironment.UserId)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", err, api.ErrBadRequest)
 	}
@@ -60,7 +60,7 @@ func (serv *ModelRegistryService) UpsertServingEnvironment(servingEnvironment *o
 }
 
 // GetServingEnvironmentById retrieves a serving environment by its unique identifier (ID).
-func (serv *ModelRegistryService) GetServingEnvironmentById(id string) (*openapi.ServingEnvironment, error) {
+func (serv *ModelRegistryService) GetServingEnvironmentById(id string, owner string, userId string) (*openapi.ServingEnvironment, error) {
 	glog.Infof("Getting serving environment %s", id)
 
 	idAsInt, err := converter.StringToInt64(&id)

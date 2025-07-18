@@ -206,7 +206,7 @@ func (suite *CoreTestSuite) TestGetRegisteredModelById() {
 	// checks
 	suite.Nilf(err, "error creating registered model: %v", err)
 
-	getModelById, err := service.GetRegisteredModelById(*createdModel.Id)
+	getModelById, err := service.GetRegisteredModelById(*createdModel.Id, *createdModel.Owner, *createdModel.UserId)
 	suite.Nilf(err, "error getting registered model by id %s: %v", *createdModel.Id, err)
 
 	// checks created model matches original one except for Id

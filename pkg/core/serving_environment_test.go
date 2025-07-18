@@ -200,7 +200,7 @@ func (suite *CoreTestSuite) TestGetServingEnvironmentById() {
 	// checks
 	suite.Nilf(err, "error creating eut: %v", err)
 
-	getEntityById, err := service.GetServingEnvironmentById(*createdEntity.Id)
+	getEntityById, err := service.GetServingEnvironmentById(*createdEntity.Id, *createdEntity.Owner, *createdEntity.UserId)
 	suite.Nilf(err, "error getting eut by id %s: %v", *createdEntity.Id, err)
 
 	// checks created entity matches original one except for Id

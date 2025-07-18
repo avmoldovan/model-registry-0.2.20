@@ -340,7 +340,7 @@ func TestGetRegisteredModelById(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get the model by ID
-		result, err := service.GetRegisteredModelById(*created.Id)
+		result, err := service.GetRegisteredModelById(*created.Id, *created.Owner, *created.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -352,7 +352,7 @@ func TestGetRegisteredModelById(t *testing.T) {
 	})
 
 	t.Run("invalid id", func(t *testing.T) {
-		result, err := service.GetRegisteredModelById("invalid")
+		result, err := service.GetRegisteredModelById("invalid", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -360,7 +360,7 @@ func TestGetRegisteredModelById(t *testing.T) {
 	})
 
 	t.Run("non-existent id", func(t *testing.T) {
-		result, err := service.GetRegisteredModelById("99999")
+		result, err := service.GetRegisteredModelById("99999", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -397,7 +397,7 @@ func TestGetRegisteredModelByInferenceService(t *testing.T) {
 		require.NoError(t, err)
 
 		// Get registered model by inference service
-		result, err := service.GetRegisteredModelByInferenceService(*createdInference.Id)
+		result, err := service.GetRegisteredModelByInferenceService(*createdInference.Id, *createdInference.Owner, *createdInference.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -406,7 +406,7 @@ func TestGetRegisteredModelByInferenceService(t *testing.T) {
 	})
 
 	t.Run("invalid inference service id", func(t *testing.T) {
-		result, err := service.GetRegisteredModelByInferenceService("invalid")
+		result, err := service.GetRegisteredModelByInferenceService("invalid", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -414,7 +414,7 @@ func TestGetRegisteredModelByInferenceService(t *testing.T) {
 	})
 
 	t.Run("non-existent inference service", func(t *testing.T) {
-		result, err := service.GetRegisteredModelByInferenceService("99999")
+		result, err := service.GetRegisteredModelByInferenceService("99999", "invalid", "invalid")
 
 		assert.Error(t, err)
 		assert.Nil(t, result)
@@ -590,7 +590,7 @@ func TestRegisteredModelRoundTrip(t *testing.T) {
 		require.NotNil(t, created.Id)
 
 		// Get by ID
-		retrieved, err := service.GetRegisteredModelById(*created.Id)
+		retrieved, err := service.GetRegisteredModelById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 
 		// Verify all fields match
@@ -614,7 +614,7 @@ func TestRegisteredModelRoundTrip(t *testing.T) {
 		assert.Equal(t, openapi.REGISTEREDMODELSTATE_ARCHIVED, *updated.State)
 
 		// Get again to verify persistence
-		final, err := service.GetRegisteredModelById(*created.Id)
+		final, err := service.GetRegisteredModelById(*created.Id, *created.Owner, *created.UserId)
 		require.NoError(t, err)
 		assert.Equal(t, "Updated description", *final.Description)
 		assert.Equal(t, openapi.REGISTEREDMODELSTATE_ARCHIVED, *final.State)

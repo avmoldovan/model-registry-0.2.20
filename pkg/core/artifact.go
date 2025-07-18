@@ -77,7 +77,7 @@ func (serv *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, mod
 			glog.Info("Creating model artifact")
 		} else {
 			glog.Info("Updating model artifact")
-			existing, err := serv.GetModelArtifactById(*ma.Id)
+			existing, err := serv.GetModelArtifactById(*ma.Id, *ma.Owner, *ma.UserId)
 			if err != nil {
 				return nil, fmt.Errorf("mismatched types, artifact with id %s is not a model artifact: %w", *ma.Id, api.ErrBadRequest)
 			}
@@ -111,7 +111,8 @@ func (serv *ModelRegistryService) upsertArtifact(artifact *openapi.Artifact, mod
 		return nil, fmt.Errorf("invalid artifact type, must be either ModelArtifact or DocArtifact: %w", api.ErrBadRequest)
 	}
 	if modelVersionId != nil {
-		if _, err := serv.GetModelVersionById(*modelVersionId); err != nil {
+		//TODO: here we need to pull the owner and userid from the DocArtifact or ModelArtifact
+		if _, err := serv.GetModelVersionById(*modelVersionId, "", ""); err != nil {
 			return nil, fmt.Errorf("no model version found for id %s: %w", *modelVersionId, api.ErrNotFound)
 		}
 	}
@@ -269,8 +270,8 @@ func (serv *ModelRegistryService) UpsertModelArtifact(modelArtifact *openapi.Mod
 }
 
 // GetModelArtifactById retrieves a model artifact by its unique identifier (ID).
-func (serv *ModelRegistryService) GetModelArtifactById(id string) (*openapi.ModelArtifact, error) {
-	art, err := serv.GetArtifactById(id, "", "")
+func (serv *ModelRegistryService) GetModelArtifactById(id string, owner string, userId string) (*openapi.ModelArtifact, error) {
+	art, err := serv.GetArtifactById(id, owner, userId)
 	if err != nil {
 		return nil, err
 	}
@@ -282,13 +283,16 @@ func (serv *ModelRegistryService) GetModelArtifactById(id string) (*openapi.Mode
 }
 
 // GetModelArtifactByInferenceService retrieves the model artifact associated with the specified inference service ID.
-func (serv *ModelRegistryService) GetModelArtifactByInferenceService(inferenceServiceId string) (*openapi.ModelArtifact, error) {
-	mv, err := serv.GetModelVersionByInferenceService(inferenceServiceId)
+func (serv *ModelRegistryService) GetModelArtifactByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.ModelArtifact, error) {
+	mv, err := serv.GetModelVersionByInferenceService(inferenceServiceId, owner, userId)
 	if err != nil {
 		return nil, err
 	}
 
-	artifactList, err := serv.GetModelArtifacts(api.ListOptions{}, mv.Id)
+	artifactList, err := serv.GetModelArtifacts(api.ListOptions{
+		Owner:  &owner,
+		UserId: &userId,
+	}, mv.Id)
 	if err != nil {
 		return nil, err
 	}

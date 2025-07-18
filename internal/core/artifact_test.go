@@ -1264,7 +1264,7 @@ func TestGetModelArtifactByInferenceService(t *testing.T) {
 		require.NoError(t, err)
 
 		// Get model artifact by inference service
-		result, err := service.GetModelArtifactByInferenceService(*createdInference.Id)
+		result, err := service.GetModelArtifactByInferenceService(*createdInference.Id, *createdInference.Owner, *createdInference.UserId)
 
 		require.NoError(t, err)
 		require.NotNil(t, result)
@@ -1303,7 +1303,7 @@ func TestGetModelArtifactByInferenceService(t *testing.T) {
 		require.NoError(t, err)
 
 		// Try to get model artifact
-		result, err := service.GetModelArtifactByInferenceService(*createdInference.Id)
+		result, err := service.GetModelArtifactByInferenceService(*createdInference.Id, *createdInference.Owner, *createdInference.UserId)
 
 		assert.Error(t, err)
 		assert.Nil(t, result)

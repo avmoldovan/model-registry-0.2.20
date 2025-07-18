@@ -20,7 +20,7 @@ func (b *ModelRegistryService) UpsertInferenceService(inferenceService *openapi.
 	}
 
 	if inferenceService.Id != nil {
-		existing, err := b.GetInferenceServiceById(*inferenceService.Id, "", "")
+		existing, err := b.GetInferenceServiceById(*inferenceService.Id, *inferenceService.Owner, *inferenceService.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -32,7 +32,7 @@ func (b *ModelRegistryService) UpsertInferenceService(inferenceService *openapi.
 		inferenceService = &withNotEditable
 	}
 
-	_, err := b.GetServingEnvironmentById(inferenceService.ServingEnvironmentId)
+	_, err := b.GetServingEnvironmentById(inferenceService.ServingEnvironmentId, *inferenceService.Owner, *inferenceService.UserId)
 	if err != nil {
 		return nil, fmt.Errorf("no serving environment found for id %s: %w", inferenceService.ServingEnvironmentId, api.ErrNotFound)
 	}

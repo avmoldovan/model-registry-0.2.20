@@ -24,7 +24,7 @@ func (serv *ModelRegistryService) UpsertRegisteredModel(registeredModel *openapi
 		glog.Info("Creating new registered model")
 	} else {
 		glog.Infof("Updating registered model %s", *registeredModel.Id)
-		existing, err = serv.GetRegisteredModelById(*registeredModel.Id)
+		existing, err = serv.GetRegisteredModelById(*registeredModel.Id, *registeredModel.Owner, *registeredModel.UserId)
 		if err != nil {
 			return nil, err
 		}
@@ -51,7 +51,7 @@ func (serv *ModelRegistryService) UpsertRegisteredModel(registeredModel *openapi
 	}
 
 	idAsString := converter.Int64ToString(&modelCtxResp.ContextIds[0])
-	model, err := serv.GetRegisteredModelById(*idAsString)
+	model, err := serv.GetRegisteredModelById(*idAsString, *registeredModel.Owner, *registeredModel.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (serv *ModelRegistryService) UpsertRegisteredModel(registeredModel *openapi
 }
 
 // GetRegisteredModelById retrieves a registered model by its unique identifier (ID).
-func (serv *ModelRegistryService) GetRegisteredModelById(id string) (*openapi.RegisteredModel, error) {
+func (serv *ModelRegistryService) GetRegisteredModelById(id string, owner string, userId string) (*openapi.RegisteredModel, error) {
 	glog.Infof("Getting registered model %s", id)
 
 	idAsInt, err := converter.StringToInt64(&id)
@@ -92,12 +92,12 @@ func (serv *ModelRegistryService) GetRegisteredModelById(id string) (*openapi.Re
 }
 
 // GetRegisteredModelByInferenceService retrieves a registered model associated with the specified inference service ID.
-func (serv *ModelRegistryService) GetRegisteredModelByInferenceService(inferenceServiceId string) (*openapi.RegisteredModel, error) {
-	is, err := serv.GetInferenceServiceById(inferenceServiceId)
+func (serv *ModelRegistryService) GetRegisteredModelByInferenceService(inferenceServiceId string, owner string, userId string) (*openapi.RegisteredModel, error) {
+	is, err := serv.GetInferenceServiceById(inferenceServiceId, owner, userId)
 	if err != nil {
 		return nil, err
 	}
-	return serv.GetRegisteredModelById(is.RegisteredModelId)
+	return serv.GetRegisteredModelById(is.RegisteredModelId, owner, userId)
 }
 
 // getRegisteredModelByVersionId retrieves a registered model associated with the specified model version ID.
