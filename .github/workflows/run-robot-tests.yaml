@@ -29,7 +29,7 @@ jobs:
     # Define steps of job
     steps:
       # Get checkout action to get this repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # Install defined Python version to run Robot Framework tests
       - name: Install Python 3.9.x
         # Get setup-python action to install Python
